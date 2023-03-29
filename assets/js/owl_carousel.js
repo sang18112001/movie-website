@@ -53,20 +53,26 @@ $(document).ready(function () {
     $('.owl-carousel.casts-content',).owlCarousel({
         responsive: {
             0: {
-                items: 3,
+                items: 2,
             },
             600: {
+                items: 3,
+            },
+            800: {
+                items: 4,
+            },
+            1005: {
                 items: 5,
             },
-            1000: {
-                items: 7,
+            1200: {
+                items: 6,
             },
         },
     });
 });
 
 $('.owl-carousel.normal').owlCarousel({
-    margin: 10,
+    margin: 30,
     responsive: {
         0: {
             items: 2,
@@ -83,11 +89,14 @@ $('.owl-carousel.normal').owlCarousel({
 $('.owl-carousel.especial').owlCarousel({
     margin: 10,
     responsive: {
-        600: {
+        300: {
+            items: 1,
+        },
+        800: {
             items: 1,
         },
         1000: {
-            items: 2,
+            items: 3,
         },
     },
 });
