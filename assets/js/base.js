@@ -8,7 +8,6 @@ const GENRES_API = `https://api.themoviedb.org/3/genre/movie/list?api_key=3fd2be
 const SEARCH_API = "https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=";
 const typeMovies = [`now_playing`, `popularity`, `top_rated`, `up_coming`]
 const uid = new URLSearchParams(window.location.search).get("uid");
-console.log(uid)
 
 // Creating logo button
 function changeLogoLink() {
@@ -124,7 +123,6 @@ search_box();
 async function your_account_modify() {
     const res = await fetch(`https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${uid}.json`);
     const data = await res.json();
-    console.log(data)
     const log_account = document.querySelector(".account-log");
     const logged_account = document.querySelector(".account-logged");
     const all_links = document.querySelectorAll("body a");

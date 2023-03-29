@@ -19,7 +19,7 @@ async function mainEmbeding() {
     const casts_info = await castsAPI.json()
     const genres = movie_info.genres.map(genre => genre.name).join(', ')
     const casts = casts_info.cast.slice(0, 5).map(cast => cast.original_name).join(', ')
-    console.log(genres)
+    const detailLink = !uid ? `watchingMovie.html` : `watchingMovie.html?uid=${uid}&id=${needed_id}`
     movieContainer.innerHTML = `
         <img src="${IMG_PATH + movie_info.backdrop_path}">
         <div class="movie-content">
@@ -48,10 +48,13 @@ async function mainEmbeding() {
                 <span class="title-info">Diễn viên: </span> ${casts},...
               </div>
             </div>
-            <button>
+            <a href="${detailLink}">
+                <button>
               <i class="fa-solid fa-play"></i>
               PLAY
             </button>
+            </a>
+            
           </div>
         </div>
     `
@@ -133,6 +136,7 @@ const addCmt = (user, cmt, imgPath, time) => {
     else {
         avatar = IMG_PATH + imgPath
     }
+    const new_time = time === null ? 'none' : time.slice(0, 10)
     commentBox.innerHTML += `
         <div class="comment-personal">
             <div class="comment">
@@ -142,7 +146,7 @@ const addCmt = (user, cmt, imgPath, time) => {
                         ${user}
                     </div>
                     <div class="comment-info">
-                        Updated at: ${time.slice(0, 10)}
+                        Updated at: ${new_time}
                     </div>
                 </div>
             </div>
@@ -178,7 +182,7 @@ const uploadCmtToAPI = () => {
         if (data_comments != null && data_comments[needed_id] != null) {
             allComments = data_comments[needed_id].comment
             allComments.forEach((comment) => {
-                addCmt(comment.user, comment.cmt, null)
+                addCmt(comment.user, comment.cmt, null, null)
             })
         } else {
             allComments = []
@@ -213,6 +217,6 @@ function upCmtWithExistedID(cmt, user) {
         },
         body: stringNewComment
     })
-    addCmt(user, cmt, null)
+    addCmt(user, cmt, null, null)
 }
 // Extra information

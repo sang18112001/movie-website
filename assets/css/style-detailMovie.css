@@ -27,7 +27,7 @@ li {
 
 .movie-content {
     display: flex;
-    padding: 3% 5%;
+    padding: 3% 10%;
     position: relative;
 }
 
@@ -125,7 +125,7 @@ li {
 
 /* More information */
 .movie-information {
-    padding: 20px 5%;
+    padding: 20px 10%;
     display: flex;
     gap: 20px
 }
@@ -139,7 +139,6 @@ li {
 .casts-content {
     padding: 20px 0px;
     border-bottom: 1px solid #eee;
-    border-top: 1px solid #eee;
 }
 
 .cast {
@@ -345,7 +344,7 @@ li {
     }
 }
 
-@media (max-width: 1090px) {
+@media (max-width: 1245px) {
     .movie-content .detail h2 {
         font-size: 30px;
     }
@@ -363,7 +362,15 @@ li {
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 800px) {
+
+    .movie-content,
+    .movie-information {
+        padding: 3% 5%;
+    }
+}
+
+@media (max-width: 990px) {
     .movie-content .sub-title {
         font-size: 14px;
     }

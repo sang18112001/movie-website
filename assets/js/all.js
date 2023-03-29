@@ -29,10 +29,6 @@ async function getMovies(API_URL, typeOfMovies, page) {
 }
 var t = 6
 
-// valuesArray = Object.values(dictMovies)
-// console.log(valuesArray)
-// test = [...valuesArray]
-// console.log(test[0])
 for (i = 1; i < typeMovies.length; i++) {
     const loadMoreBtn = document.querySelector(`.load-more.btn-${typeMovies[i]}`)
     loadMoreBtn.addEventListener('click', () => {
@@ -87,8 +83,7 @@ moviesBanner(NOW_PLAYING)
 function show_movie_slider(movies) {
     const needed_movies = document.querySelector('.main-movies')
     movies.forEach((movie, index) => {
-        const img_path = movie.backdrop_path
-        const overview = movie.overview.length > 200 ? movie.overview.slice(0, 200) + "..." : movie.overview
+        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${movie.id}`
         const movieElement = `
         <div class="movie movie-${index}">
             <div class="movie-main">
@@ -98,7 +93,7 @@ function show_movie_slider(movies) {
                     <span class="movie-vote">${movie.vote_average}</span>
                 </div>
                 <div class="movie-detail">
-                    <a href="watchingMovie.html">
+                    <a href="${detailLink}">
                         <button class="btn">
                             <span class="movie-watch"><i class="fa-solid fa-caret-right"></i></span>
                             <span>Watch Now</span>

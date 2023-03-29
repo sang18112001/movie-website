@@ -1,18 +1,20 @@
-var id_movie = 804150
-const VIDEOS_API = `https://api.themoviedb.org/3/movie/${id_movie}/videos?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
+const urlParams = new URLSearchParams(window.location.search);
+const needed_id = urlParams.get('id');
+const VIDEOS_API = `https://api.themoviedb.org/3/movie/${needed_id}/videos?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
 
 // Get videos from Youtube following the key of each video
 const getVideos = async () => {
     const response = await fetch(VIDEOS_API)
     const data = await response.json()
     const videos_list = data.results
-    showVideos(videos_list)
+    console.log(videos_list)
+    // showVideos(videos_list)
 }
 getVideos()
 
 // Show video
 const showVideos = (videos_list) => {
-    const videoContainer = document.getElementById('watching-player')
+    const videoContainer = document.querySelector('.player-movie')
     console.log(videoContainer)
     const embedVideos = []
     videos_list.forEach((video) => {
