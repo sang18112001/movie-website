@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"
+      integrity="sha512-C8Movfk6DU/H5PzarG0+Dv9MA9IZzvmQpO/3cIlGIflmtY3vIud07myMu4M/NTPJl8jmZtt/4mC9bAioMZBBdA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Import fontawesome -->
+    <link rel="stylesheet" href="./lib/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="./lib/fontawesome/css/brands.min.css">
+    <link rel="stylesheet" href="./lib/fontawesome/css/solid.min.css">
+
+    <!-- Import bootstrap CSS core-->
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/style-all.css" />
+    <title>ALL</title>
+  </head>
+
+  <body>
+    <div id="web" class="">
+      <header>
+        <div id="menu-icon">
+          <div class="bar1 bar"></div>
+          <div class="bar2 bar"></div>
+          <div class="bar3 bar"></div>
+        </div>
+        <butto class="web-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="50" viewBox="0 0 500 200">
+            <path fill="var(--main-color)" d="M0 0h500v200H0z" />
+            <path
+              d="M423.12 46.619V15.991h-85.706l-14.11 102.282-13.94-102.282h-30.908l3.454 27.312c-3.563-7-16.211-27.312-44.061-27.312-.185-.012-30.945 0-30.945 0l-.128 149.084-22.523-149.084-40.484-.012-23.304 154.467.013-154.455H81.726l-13.965 86.768-13.604-86.768H15.399v167.932h30.523v-80.944l13.886 80.944h16.224l13.69-80.944v80.944h58.838l3.558-25.83h23.688l3.558 25.83 57.771.037h.042v-.037H237.249v-54.504l7.074-1.024 14.661 55.565h29.883l-.012-.037H288.94l-19.238-65.11c9.741-7.179 20.752-25.379 17.822-42.798v-.006c.036.226 18.164 108.026 18.164 108.026l35.534-.11 24.279-152.203v152.203h57.617v-30.199h-27.344v-38.507h27.344v-30.66h-27.344v-37.94h27.346zM155.713 131.47l8.387-71.802 8.69 71.802h-17.077zm88.708-33.155c-2.344 1.123-4.784 1.685-7.172 1.691v-54.01c.037 0 .093-.006.153-.006 2.38-.018 20.203.714 20.203 26.709 0 13.598-6.06 22.174-13.184 25.616zm240.186 55.383v30.188h-56.214V15.967h30.272v137.731h25.942z"
+              fill="#fff" />
+          </svg>
+        </butto>
+        <!-- Menu -->
+        <ul class="header-navbar">
+          <div class="header-search">
+            <input type="text" placeholder="Search">
+            <ul class="header-search-items">
+            </ul>
+          </div>
+          <ul class="header-menu">
+          </ul>
+        </ul>
+        <div class="header-account account-log">
+          <div class="account-log-logo">
+            <i class="account-icon fa-solid fa-user"></i>
+          </div>
+          <div class="account-log-button">
+            <div class="log-box">
+              <a href="sign-in.html" class="btn"><i class="fa-solid fa-user-plus"></i>Sign In</a>
+              <a href="#" class="btn"><i class="fa-solid fa-right-to-bracket"></i>Sign Up</a>
+            </div>
+          </div>
+        </div>
+        <div class="header-account account-logged active-hidden">
+          <div class="account-logged-logo">
+            <img src="./assets/image/man.png" alt="" class="logged-icon">
+          </div>
+          <div class="account-logged-button">
+            <div class="logged-box">
+              <div class="logged_account">
+                <i class="account_avt fa-regular fa-circle-user"></i>
+                <p class="account_name"></p>
+              </div>
+              <a href="index.html" class="btn log-out">
+                <svg class="svg-icon"
+                  style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                  viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M768 106V184c97.2 76 160 194.8 160 328 0 229.6-186.4 416-416 416S96 741.6 96 512c0-133.2 62.8-251.6 160-328V106C121.6 190.8 32 341.2 32 512c0 265.2 214.8 480 480 480s480-214.8 480-480c0-170.8-89.6-321.2-224-406z"
+                    fill="" />
+                  <path
+                    d="M512 32c-17.6 0-32 14.4-32 32v448c0 17.6 14.4 32 32 32s32-14.4 32-32V64c0-17.6-14.4-32-32-32z"
+                    fill="" />
+                </svg>
+                <p>Log out</p>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </header>
+      <div class="owl-carousel home-slider">
+        <div class="home-image">
+          <img src="https://image.tmdb.org/t/p/w1280/6eFDnvpsgPMrxcVnLCM12rBv8Fk.jpg" alt="">
+          <div class="home-text">
+            <a href="detailMovie.html?id=640146" class="play">
+              <i class='bx bx-play'></i>
+            </a>
+          </div>
+        </div>
+        <div class="home-image">
+          <img src="https://image.tmdb.org/t/p/w1280/icUSGFn22cP2BQ0tXCIsykWVCQ.jpg" alt="">
+          <div class="home-text">
+            <a href="detailMovie.html?id=299536" class="play">
+              <i class='bx bx-play'></i>
+            </a>
+          </div>
+        </div>
+        <div class="home-image">
+          <img src="https://image.tmdb.org/t/p/w1280/yaRps1bMQLyz54M8ib5YdA2a2RZ.jpg" alt="">
+          <div class="home-text">
+            <a href="detailMovie.html?id=634649" class="play">
+              <i class='bx bx-play'></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="web_body">
+        <div class="mavel-type type">
+          <h2 class="type-title">Marvel Universe</h2>
+          <div class="marvel owl-carousel">
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\spiderman1.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\ant-man.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\avenger.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\hulk.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\thor.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\doctor_strange.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\blackpanther.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\ironman.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\marvel\galaxy.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="anime-type type">
+          <h2 class="type-title">Anime</h2>
+          <div class="marvel owl-carousel">
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\anime\naruto.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\anime\onepiece.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\anime\dragonball.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\anime\doraemon.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\anime\conan.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\anime\titan.png" alt="">
+            </div>
+            <div class="logo-movie-container">
+              <img class="logo-movie" src="assets\image\anime\pokemon.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="movies-container">
+          <div class="typeOfMovies-header">
+            <h2 class="type-movie-title">NOW PLAYING</h2>
+            <a href="typeOfMovies.html?type=now_playing">SEE ALL</a>
+          </div>
+          <div class="owl-carousel movie-slider">
+          </div>
+          <div class="main-movies">
+            <img src="" alt="">
+          </div>
+        </div>
+        <div class="typeOfMovies">
+          <div>
+            <div class="typeOfMovies-header">
+              <h2 class="type-movie-title">POPULARITY</h2>
+              <a href="typeOfMovies.html?type=popularity">SEE ALL</a>
+            </div>
+            <div class="container movie-type">
+              <div class="row movie-body popularity"></div>
+              <div class="load-more-btn">
+                <button id="popularity" class="load-more btn-popularity btn">
+                  Load More
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="typeOfMovies-header">
+              <h2 class="type-movie-title">TOP-RATED</h2>
+              <a href="typeOfMovies.html?type=top_rated">SEE ALL</a>
+            </div>
+            <div class="container movie-type">
+              <div class="row movie-body top_rated"></div>
+              <div class="load-more-btn">
+                <button id="top_rated" class="load-more btn-top_rated btn">
+                  Load More
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="typeOfMovies-header">
+              <h2 class="type-movie-title">UPCOMING</h2>
+              <a href="typeOfMovies.html?type=up_coming">SEE ALL</a>
+            </div>
+            <div class="container movie-type">
+              <div class="row movie-body up_coming"></div>
+              <div class="load-more-btn">
+                <button id="up_coming" class="load-more btn-up_coming btn">
+                  Load More
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer id="web_footer">
+      </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/assets/js/owl_carousel.js"></script>
+    <script src="/assets/js/base.js"></script>
+    <script src="/assets/js/all.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Import owl-carousel -->
+
+    <link rel="stylesheet" href="/lib/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/lib/owlcarousel/assets/owl.theme.default.min.css">
+    <!-- Import fontawesome -->
+    <link rel="stylesheet" href="./lib/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="./lib/fontawesome/css/brands.min.css">
+    <link rel="stylesheet" href="./lib/fontawesome/css/solid.min.css">
+
+    <!-- Import bootstrap CSS core-->
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/style-detailMovie.css" />
+    <title>Movie Detail</title>
+  </head>
+
+  <body>
+    <header class="shadow">
+      <div id="menu-icon">
+        <div class="bar1 bar"></div>
+        <div class="bar2 bar"></div>
+        <div class="bar3 bar"></div>
+      </div>
+      <butto class="web-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="50" viewBox="0 0 500 200">
+          <path fill="var(--main-color)" d="M0 0h500v200H0z" />
+          <path
+            d="M423.12 46.619V15.991h-85.706l-14.11 102.282-13.94-102.282h-30.908l3.454 27.312c-3.563-7-16.211-27.312-44.061-27.312-.185-.012-30.945 0-30.945 0l-.128 149.084-22.523-149.084-40.484-.012-23.304 154.467.013-154.455H81.726l-13.965 86.768-13.604-86.768H15.399v167.932h30.523v-80.944l13.886 80.944h16.224l13.69-80.944v80.944h58.838l3.558-25.83h23.688l3.558 25.83 57.771.037h.042v-.037H237.249v-54.504l7.074-1.024 14.661 55.565h29.883l-.012-.037H288.94l-19.238-65.11c9.741-7.179 20.752-25.379 17.822-42.798v-.006c.036.226 18.164 108.026 18.164 108.026l35.534-.11 24.279-152.203v152.203h57.617v-30.199h-27.344v-38.507h27.344v-30.66h-27.344v-37.94h27.346zM155.713 131.47l8.387-71.802 8.69 71.802h-17.077zm88.708-33.155c-2.344 1.123-4.784 1.685-7.172 1.691v-54.01c.037 0 .093-.006.153-.006 2.38-.018 20.203.714 20.203 26.709 0 13.598-6.06 22.174-13.184 25.616zm240.186 55.383v30.188h-56.214V15.967h30.272v137.731h25.942z"
+            fill="#fff" />
+        </svg>
+      </butto>
+      <!-- Menu -->
+      <ul class="header-navbar">
+        <div class="header-search">
+          <input type="text" placeholder="Search">
+          <ul class="header-search-items">
+          </ul>
+        </div>
+        <ul class="header-menu">
+        </ul>
+      </ul>
+      <div class="header-account account-log">
+        <div class="account-log-logo">
+          <i class="account-icon fa-solid fa-user"></i>
+        </div>
+        <div class="account-log-button">
+          <div class="log-box">
+            <a href="sign-in.html" class="btn"><i class="fa-solid fa-user-plus"></i>Sign In</a>
+            <a href="#" class="btn"><i class="fa-solid fa-right-to-bracket"></i>Sign Up</a>
+          </div>
+        </div>
+      </div>
+      <div class="header-account account-logged active-hidden">
+        <div class="account-logged-logo">
+          <img src="./assets/image/man.png" alt="" class="logged-icon">
+        </div>
+        <div class="account-logged-button">
+          <div class="logged-box">
+            <div class="logged_account">
+              <i class="account_avt fa-regular fa-circle-user"></i>
+              <p class="account_name"></p>
+            </div>
+            <a href="index.html" class="btn log-out">
+              <svg class="svg-icon"
+                style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M768 106V184c97.2 76 160 194.8 160 328 0 229.6-186.4 416-416 416S96 741.6 96 512c0-133.2 62.8-251.6 160-328V106C121.6 190.8 32 341.2 32 512c0 265.2 214.8 480 480 480s480-214.8 480-480c0-170.8-89.6-321.2-224-406z"
+                  fill="" />
+                <path d="M512 32c-17.6 0-32 14.4-32 32v448c0 17.6 14.4 32 32 32s32-14.4 32-32V64c0-17.6-14.4-32-32-32z"
+                  fill="" />
+              </svg>
+              <p>Log out</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </header>
+    <div class="web-body">
+      <div class="movie-container">
+        <div class="movie-background">
+          <img src="//cfm.yidio.com/images/movie/207537/backdrop-1280x720.jpg" width="100%"
+            alt="Black Panther: Wakanda Forever" crossorigin="anonymous">
+        </div>
+        <div class="movie-content">
+          <div class="main-content">
+            <div class="poster movie">
+              <img src="//cfm.yidio.com/images/movie/207537/poster-180x270.jpg"
+                srcset="//cfm.yidio.com/images/movie/207537/poster-180x270.jpg 1x, //cfm.yidio.com/images/movie/207537/poster-360x540.jpg 2x"
+                alt="Black Panther: Wakanda Forever" crossorigin="anonymous">
+            </div>
+            <div class="detail">
+              <div class="sub-title">
+                <span class="free-icon">
+                  <i class="fa-solid fa-chess-queen"></i>
+                </span>
+                <span class="free">Free .</span>
+                <span>Feature film .</span>
+                <span> 2002 .</span>
+              </div>
+              <h2>Watch Black Panther: Wakanda Forever</h2>
+              <p class="overview">
+                Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening
+                world powers in the wake of King T’Challa’s death. As the Wakandans strive to embrace their next
+                chapter, the heroes
+                must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom
+                of Wakanda.
+              </p>
+              <button>
+                <i class="fa-solid fa-play"></i>
+                PLAY
+              </button>
+              <div class="attributes">
+                <div class="movie-info">
+                  <p><span class="title-info">Thời lượng:</span> 2 giờ 41 phút</p>
+                  <p><span class="title-info">Quốc gia:</span> Mỹ</p>
+                  <p><span class="title-info">Thể loại:</span> Phim lẻ, Phim Hành Động, Phim Phiêu Lưu, Phim Viễn Tưỡng
+                  </p>
+                  <p><span class="title-info">Phát hành:</span> 2022</p>
+                  <p class="metascore">
+                    IMDB: 7.2
+                  </p>
+                </div>
+                <div class="movie-cast">
+                  <span class="title-info">Diễn viên: </span> Letitia Wright, Lupita Nyong*o, Danai Gurira, Winston
+                  Duke,
+                  Dominique Thorne, Tenoch Huerta
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="movie-information">
+        <div class="main-info">
+          <div class="main-item movie-casts">
+            <h4>Casts Of Movie</h4>
+            <div class="casts-content owl-carousel"></div>
+          </div>
+          <div class="main-item movie-media">
+            <ul class="media">
+              <li class="media-title">
+                <h4>Media</h4>
+              </li>
+              <li class="">
+                <p class="button-media active-media">Backdrops</p>
+              </li>
+              <li class="">
+                <p class="button-media">Posters</p>
+              </li>
+              <li class="">
+                <p class="button-media">Videos</p>
+              </li>
+            </ul>
+            <div class="media-box">
+              <div class="media-content">
+                <div class="sub-media backdrops owl-carousel especial"></div>
+                <div class="sub-media posters normal owl-carousel active-block"></div>
+                <div class="sub-media logos normal owl-carousel"></div>
+              </div>
+            </div>
+          </div>
+          <div class="main-item movie-comments">
+            <h4>Comments</h4>
+            <div class="comment-main">
+              <div class="comment-box"></div>
+              <div class="comment-me">
+                <img src="./assets/image/man.png" alt="" class="logged-icon">
+                <div class="text">
+                  <input type="text" placeholder="Add comments">
+                  <div class="comment-upload">
+                    <button>Comment</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="main-item movie-recommendations">
+            <h4>Recommendations</h4>
+          </div>
+          <div class="main-item"></div>
+        </div>
+        <div class="extra-info">
+          fdsfdsa
+        </div>
+      </div>
+    </div>
+    <script src="/lib/owlcarousel/jquery.min.js"></script>
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/assets/js/base.js"></script>
+    <script src="/assets/js/owl_carousel.js"></script>
+    <script src="/assets/js/detailMovie.js"></script>
+  </body>
+
+</html

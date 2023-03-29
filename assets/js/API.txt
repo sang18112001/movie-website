@@ -1,0 +1,35 @@
+const NOW_PLAYING = `https://api.themoviedb.org/3/movie/now_playing?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
+const POPULAR_API = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=`
+const TOP_RATED_API = `https://api.themoviedb.org/3/movie/top_rated?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US&page=`
+const UP_COMING_API = `https://api.themoviedb.org/3/movie/upcoming?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US&page=`
+const DETAILS = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=`
+const DETAILS_EACH_MOVIE = `https://api.themoviedb.org/3/movie/315162?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US`
+
+const RECOMMENDATIONS = `https://api.themoviedb.org/3/movie/505642/recommendations?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US&page=1`
+const WATCH_PROVIDER = `https://api.themoviedb.org/3/movie/505642/watch/providers?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
+const IMAGES_MOVIES = `https://api.themoviedb.org/3/movie/505642/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US&include_image_language=en`
+
+const ALL_GENRE = https://api.themoviedb.org/3/genre/movie/list?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US
+const GENRE_FILTER = https://api.themoviedb.org/3/movie/now_playing?api_key=3fd2be6f0c70a2a598f084ddfb75487c&with_genres=28,12,14
+const YEAR_FILTER = https://api.themoviedb.org/3/discover/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&primary_release_year=2013
+const NATIONS_FILTER = https://api.themoviedb.org/3/discover/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&with_original_language=en
+const VOTE_RANGE = https://api.themoviedb.org/3/discover/movie?api_key=YOUR_API_KEY&language=en-US&sort_by=vote_average.desc
+
+const API_FILTER = `https://api.themoviedb.org/3/discover/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&sort_by=vote_count.desc&vote_average.gte=7&vote_average.lte=8&with_genres=28&with_original_language=en&primary_release_year=2020`
+sort parameter: {
+    popularity.asc
+    popularity.desc
+    vote_average.asc
+    vote_average.desc
+    vote_count.asc
+    vote_count.desc
+    release_date.asc
+    release_date.desc
+    revenue.asc
+    revenue.desc
+    primary_release_date.asc
+    primary_release_date.desc
+    original_title.asc
+    original_title.desc
+}
+

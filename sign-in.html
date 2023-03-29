@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Signin</title>
+		<!-- Import fontawesome -->
+
+		<link rel="stylesheet" type="text/css"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+		<link rel="stylesheet" href="./lib/fontawesome/css/fontawesome.min.css">
+		<link rel="stylesheet" href="./lib/fontawesome/css/brands.min.css">
+		<link rel="stylesheet" href="./lib/fontawesome/css/solid.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/base.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/sign-in.css">
+	</head>
+
+	<body>
+		<div class="web-body">
+			<div class="container_image">
+				<img src="https://wallpaper.dog/large/20493446.jpg" alt="">
+			</div>
+			<div class="container_sign">
+				<div class="sign-in-wrong-container active-hidden">
+					<div class="sign-in-wrong">
+						<i class="fa-solid fa-triangle-exclamation"></i>
+						<div class="wrong-notice">
+							<div class="notice-title">There was a problem</div>
+							<div class="notice-content">We cannot find an account with that email address</div>
+						</div>
+					</div>
+				</div>
+				<div class="sign-title">
+					<div class="sign-in-title">
+						Sign in
+					</div>
+					<div class="sign-up-title active-sign">
+						Sign up
+					</div>
+				</div>
+				<form class="sign-in-body">
+					<label>Email:</label>
+					<input name="email" type="email" placeholder="Email">
+					<label>Password:</label>
+					<input name="password" type="password" placeholder="Password">
+					<button type="submit">Sign in </button>
+					<div class="anotherSignIn">
+						<p>or Continue with</p>
+					</div>
+					<div class="sign-in-social">
+						<div class="box-icon">
+							<i class="fa-brands fa-facebook" style="color: #007bff;"></i>
+						</div>
+						<div class="box-icon">
+							<i class="fa-brands fa-google" style="color: #ff7b00;"></i>
+						</div>
+					</div>
+					<div class="sign-converting">
+						Not a member?
+						<span>Sign up</span>
+					</div>
+				</form>
+				<form class="sign-up-body active-hidden">
+					<label>First Name: </label>
+					<input name="firstName" type="type" placeholder="Fist Name">
+					<label>Last Name: </label>
+					<input name="lastName" type="type" placeholder="Last Name">
+					<label>Email:</label>
+					<input class="email" name="email" type="email" placeholder="Email">
+					<p class="checkEmail active-hidden">This account existed</p>
+					<label>Password:</label>
+					<input name="password" type="password" placeholder="Password">
+					<label>Re-enter password:</label>
+					<input class="retype" name="retype" type="password" placeholder="Re-enter password">
+					<p class="checkPassword active-hidden">Passwords don't match</p>
+					<div class="licence">
+						<input name="checkLincence" type="checkbox">
+						<span>I agree with terms and conditions</span><br>
+					</div>
+					<p class="checkAllow active-hidden">You do not allow to the terms</p>
+					<button type="submit">Sign up</button>
+					<div class="sign-converting">
+						Already have an account?
+						<span>Sign in</span>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript" src="assets/js/sign-in.js"></script>
+
+	</body>
+
+</html>
