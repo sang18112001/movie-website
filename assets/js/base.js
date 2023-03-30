@@ -19,7 +19,8 @@ function headerResponsive() {
         searchMain.classList.toggle('active-block')
         headerLogo.classList.toggle('active-hidden')
         headerMenu.classList.toggle('active-hidden')
-        show_menu.classList.toggle("change");
+        headerMenu.classList.remove('navbar-active')
+        show_menu.classList.remove("change");
     })
 }
 headerResponsive()
@@ -57,6 +58,8 @@ function scrollHeader() {
 // Responsive function for header
 function responsive_header() {
     const show_menu = document.querySelector("#menu-icon");
+    const searchMain = document.querySelector('.header-search');
+    const headerLogo = document.querySelector('.web-logo')
     const header_navbar = document.querySelector(".header-menu");
     const log_account = document.querySelector(".account-log-button");
     const show_log_account = document.querySelector(".account-log-logo");
@@ -66,6 +69,8 @@ function responsive_header() {
         header_navbar.classList.toggle("navbar-active");
         header_navbar.classList.remove("active-hidden");
         show_menu.classList.toggle("change");
+        searchMain.classList.remove('active-block')
+        headerLogo.classList.remove('active-hidden')
     });
     show_log_account.addEventListener("click", () => {
         log_account.classList.toggle("active-block");
