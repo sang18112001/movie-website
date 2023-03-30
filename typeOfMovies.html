@@ -93,13 +93,11 @@
     </header>
     <div id="web-body-movies">
       <div class="web-function">
+        <div class="filter-responsive">
+          <span class="fa-sharp fa-solid fa-filter"></span>
+        </div>
         <div class="function-content">
           <div class="function-title">
-            <label class="container-checkbox">
-              <input type="checkbox" checked="checked">
-              <div class="line line-indicator"></div>
-              <div class="line "></div>
-            </label>
             <h5 class="filter-title">Genres</h5>
           </div>
           <ul class="genres function-select">
@@ -107,11 +105,6 @@
         </div>
         <div class="function-content">
           <div class="function-title">
-            <label class="container-checkbox">
-              <input type="checkbox" checked="checked">
-              <div class="line"></div>
-              <div class="line line-indicator"></div>
-            </label>
             <h5 class="filter-title">Languages</h5>
           </div>
           <ul class="languages function-select">
@@ -139,11 +132,6 @@
         </div>
         <div class="function-content">
           <div class="function-title">
-            <label class="container-checkbox">
-              <input type="checkbox" checked="checked">
-              <div class="line"></div>
-              <div class="line line-indicator"></div>
-            </label>
             <h5 class="filter-title">Years</h5>
           </div>
           <ul class="years function-select">
@@ -173,19 +161,24 @@
             </div>
           </ul>
         </div>
-        <button class="btn filter-perform">Filter</button>
-        <button class="btn filter-remove">Remove filter</button>
+        <div class="button-filter">
+          <div class="filter-remove"><span class="icon fa-solid fa-filter-circle-xmark"></span>Remove filter</div>
+          <div class="filter-perform"><i class="icon fa-solid fa-filter"></i>Filter</div>
+        </div>
+
       </div>
       <div class="web-movies">
         <div class="movies-title">
-          <a href="#">Movies</a>
-          <select class="sort-function"> Sort by:
+          <span>
+            Movies
+          </span>
+          <!-- <select class="sort-function"> Sort by:
             <option>Default</option>
             <option value="vote_average-desc">Vote: High to Low</option>
             <option value="vote_average-asc">Vote: Low to High</option>
             <option value="release_date-desc">Release Date: High to Low</option>
             <option value="release_date-asc">Release Date: Low to High</option>
-          </select>
+          </select> -->
         </div>
         <div class="container movies">
           <div class="row body-cards"></div>

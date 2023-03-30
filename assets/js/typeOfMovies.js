@@ -137,6 +137,9 @@ function show_movies(movies_info) {
   const numOfPages = movies_info.total_pages;
   const all_cards = document.querySelector(".body-cards");
   all_cards.id = numOfPages;
+  if (screen.width < 1000) {
+    console.log(false)
+  }
   movies.forEach((movie) => {
     const title = movie.title, path = movie.poster_path, vote = movie.vote_average;
     // if the image don't have its link, I will replace it with another photo.
@@ -145,7 +148,7 @@ function show_movies(movies_info) {
         ? "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/495px-No-Image-Placeholder.svg.png?20200912122019"
         : IMG_PATH + path;
     // if the length of each movie title is more than 30, I will only show the first 30 characters. 
-    const new_name = title.length > 30 ? `${title.slice(0, 30)}...` : title;
+    const new_name = title.length > 20 ? `${title.slice(0, 20)}...` : title;
     // If uid exists, I will assign to detailMovie as an logged user. Else assigning to sign-in website
     const detailLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${movie.id}`
     fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=3fd2be6f0c70a2a598f084ddfb75487c`)
@@ -153,7 +156,7 @@ function show_movies(movies_info) {
       .then(specificMovie => {
         runtime = specificMovie.runtime === 0 ? NaN : specificMovie.runtime
         all_cards.innerHTML += `
-      <div class="each-col col-12 col-sm-6 col-md-4 col-lg-3" data-vote="${vote}">
+      <div class="each-col col-6 col-md-4 col-xl-3" data-vote="${vote}">
         <a href="${detailLink}">
           <div class="body-card">
             <div class="image-box">
@@ -162,17 +165,14 @@ function show_movies(movies_info) {
             <div class="card-content">
                 <div class="content-main">
                   <div class="content-name">${new_name}</div>
-                  <span>${movie.release_date.slice(0, 4)}</span>
                 </div>
                 
                 <div class="content-info">
-                  <div class="info-lang">
-                    <span class="language">${movie.original_language}</span>
-                  </div>
+                  <span class="content-year">${movie.release_date.slice(0, 4)}</span>
                   <div class="info-year-runtime">
                     <span class="content-runtime">
                       <span class="icon fa-regular fa-clock"></span>
-                      <span>${specificMovie.runtime} min</span>
+                      <span class="content-time">${specificMovie.runtime}m</span>
                     </span>
                     
                     <span class="content-vote">
@@ -191,20 +191,17 @@ function show_movies(movies_info) {
 }
 
 // Function
-
-// Show all selections for each type of filters.
-function showSelections() {
-  const function_titles = document.querySelectorAll('.function-title input')
-  const selectionBox = document.querySelectorAll('.function-select')
-  function_titles.forEach((function_title, index) => {
-    function_title.addEventListener("change", (event) => {
-      event.preventDefault()
-      selectionBox[index].classList.toggle('active-block')
-    })
+// Show filter responsive 
+function filterResponsive() {
+  const webFunction = document.querySelector('.web-function')
+  const btnFilter = document.querySelector('.filter-responsive')
+  btnFilter.addEventListener('click', (event) => {
+    event.preventDefault()
+    webFunction.classList.toggle('active-filter')
+    btnFilter.classList.toggle('active-filter-button')
   })
 }
-showSelections()
-
+filterResponsive()
 // filter
 async function filterFunction() {
   const res_all_genres = await fetch(GENRES_API);
@@ -297,4 +294,4 @@ getMovies(currentAPI);
 numOfPages();
 changePage();
 filterFunction();
-sortPerforming()
+// sortPerforming()

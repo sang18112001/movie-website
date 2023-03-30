@@ -8,7 +8,21 @@ const GENRES_API = `https://api.themoviedb.org/3/genre/movie/list?api_key=3fd2be
 const SEARCH_API = "https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=";
 const typeMovies = [`now_playing`, `popularity`, `top_rated`, `up_coming`]
 const uid = new URLSearchParams(window.location.search).get("uid");
-
+// Header responsive 
+function headerResponsive() {
+    const searchBtn = document.querySelector('.icon-search')
+    const searchMain = document.querySelector('.header-search')
+    const headerMenu = document.querySelector('.header-menu')
+    const headerLogo = document.querySelector('.web-logo')
+    const show_menu = document.querySelector("#menu-icon");
+    searchBtn.addEventListener('click', () => {
+        searchMain.classList.toggle('active-block')
+        headerLogo.classList.toggle('active-hidden')
+        headerMenu.classList.toggle('active-hidden')
+        show_menu.classList.toggle("change");
+    })
+}
+headerResponsive()
 // Creating logo button
 function changeLogoLink() {
     const web_logo = document.querySelector('.web-logo');
@@ -50,6 +64,7 @@ function responsive_header() {
     const show_logged_account = document.querySelector(".account-logged-logo");
     show_menu.addEventListener("click", () => {
         header_navbar.classList.toggle("navbar-active");
+        header_navbar.classList.remove("active-hidden");
         show_menu.classList.toggle("change");
     });
     show_log_account.addEventListener("click", () => {

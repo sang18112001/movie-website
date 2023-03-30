@@ -215,6 +215,14 @@ header.shadow .responsive-account {
     border: 1px solid #d3d3d3;
 }
 
+.header-search i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--changeText-color)
+}
+
 .header-search-items {
     position: absolute;
     top: 40px;
@@ -308,6 +316,14 @@ header.shadow .responsive-account {
     position: relative;
 }
 
+.web-logo {
+    width: 100px;
+}
+
+.web-logo>img {
+    width: 100px;
+}
+
 /* Log Account  */
 .header-account.account-log {}
 
@@ -377,6 +393,18 @@ header.shadow .responsive-account {
     gap: 15px;
 }
 
+.icon-search {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: none;
+}
+
+
 /* Responsive */
 @media (max-width: 1300px) {
     .header-navbar li {
@@ -389,19 +417,55 @@ header.shadow .responsive-account {
         gap: 20px;
     }
 
-    #web_body {}
-
-    #menu-icon {
-        display: block;
-        color: var(--bg-color);
-        z-index: 1000000000;
-    }
-
     header.shadow #menu-icon,
     header.shadow .account-icon,
     header.shadow .responsive-account {
         color: var(--changeText-color);
         border-color: var(--changeText-color)
+    }
+
+    .header-navbar {
+        justify-content: space-between;
+    }
+
+    .header-menu {
+        width: 100%;
+    }
+
+    .header-account .btn {
+        padding: 0.3rem 0.8rem;
+        font-size: 14px;
+    }
+
+    #navbar-icon {
+        display: flex;
+    }
+
+    .header-search-items {
+        left: 0;
+        right: 0;
+        width: auto;
+    }
+
+    .header-search {
+        display: none;
+    }
+
+    .icon-search {
+        display: flex;
+        width: 30px !important;
+    }
+}
+
+@media (max-width: 1020px) {
+    .header {
+        gap: 30px;
+    }
+
+    #menu-icon {
+        display: block;
+        color: var(--bg-color);
+        z-index: 1000000000;
     }
 
     .header-menu {
@@ -433,7 +497,6 @@ header.shadow .responsive-account {
     }
 
     .header-navbar {
-        padding-left: 30px;
         justify-content: center;
         align-items: center;
     }
@@ -451,32 +514,24 @@ header.shadow .responsive-account {
         display: none;
     }
 
-
-    .header-account .btn {
-        padding: 0.3rem 0.8rem;
-        font-size: 14px;
+    .web-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
-    #navbar-icon {
-        display: flex;
-    }
-
-    .header-search-items {
-        left: 0;
-        right: 0;
-        width: auto;
-    }
 }
 
 @media (max-width: 905px) {
     .item-title {
         font-size: 15px !important;
     }
+
 }
 
 @media (max-width: 800px) {
     .header-navbar {
-        padding-left: 10px;
         justify-content: center;
     }
 
