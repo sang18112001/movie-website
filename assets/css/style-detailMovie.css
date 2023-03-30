@@ -102,6 +102,10 @@ li {
     margin-bottom: 30px;
 }
 
+.movie-content .detail a {
+    width: 125px;
+}
+
 .movie-content .detail button {
     width: 125px;
     padding: 8px 25px;
@@ -337,6 +341,50 @@ li {
     display: inline !important;
 }
 
+/* Recommendations */
+.movie-recommendations img {
+    width: 100%;
+}
+
+.movie-recommendations {
+    margin-top: 20px;
+}
+
+.movie-recommendations .recommend-main {
+    padding: 20px 0px;
+}
+
+.recommend-item {
+    position: relative;
+}
+
+.recommend-item .item-vote {
+    position: absolute;
+    padding: 5px 10px;
+    top: 5px;
+    left: 5px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: hsl(57, 97%, 45%)
+}
+
+.recommend-item .item-name {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    font-size: 18px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
 /* Responsive */
 @media (max-width: 1455px) {
     .casts-content {
@@ -362,14 +410,6 @@ li {
     }
 }
 
-@media (max-width: 800px) {
-
-    .movie-content,
-    .movie-information {
-        padding: 3% 5%;
-    }
-}
-
 @media (max-width: 990px) {
     .movie-content .sub-title {
         font-size: 14px;
@@ -390,6 +430,24 @@ li {
 
     .movie-content .detail .attributes .movie-cast {
         width: 70%
+    }
+}
+
+@media (max-width: 800px) {
+
+    .movie-content,
+    .movie-information {
+        padding: 3% 5%;
+    }
+}
+
+@media (max-width: 860px) {
+    .recommend-item .item-name {
+        font-size: 14px;
+    }
+
+    .recommend-item .item-vote {
+        font-size: 12px;
     }
 }
 

@@ -50,9 +50,9 @@ async function mainEmbeding() {
             </div>
             <a href="${detailLink}">
                 <button>
-              <i class="fa-solid fa-play"></i>
-              PLAY
-            </button>
+                    <i class="fa-solid fa-play"></i>
+                    PLAY
+                </button>
             </a>
             
           </div>
@@ -219,4 +219,33 @@ function upCmtWithExistedID(cmt, user) {
     })
     addCmt(user, cmt, null, null)
 }
-// Extra information
+// Recommendations
+async function recommendations() {
+    const owl_carousel = $(`.owl-carousel.recommend-main`);
+    const recommend = await fetch(RECOMMENDATION)
+    const recommend_info = await recommend.json()
+    const recommender = recommend_info.results
+    for (i = 0; i < recommender.length; i += 1) {
+        if (recommender[i].backdrop_path === null) {
+            continue
+        }
+        const newName = recommender[i].original_title.length > 20
+            ? recommender[i].original_title.slice(0, 20) + '...'
+            : recommender[i].original_title
+        const recommendOwl = `
+            <div class="recommend-item">
+                <img src="${IMG_PATH + recommender[i].backdrop_path}" alt="">
+                <div class="item-vote">
+                  <span class=" icon fa fa-star checked"></span>
+                  <span>${recommender[i].vote_average}</span>
+                </div>
+                <div class="item-name">
+                  ${newName}
+                </div>
+              </div>
+        `
+        owl_carousel.owlCarousel("add", recommendOwl);
+    }
+    owl_carousel.owlCarousel("update");
+}
+recommendations()

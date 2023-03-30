@@ -70,6 +70,22 @@ $(document).ready(function () {
         },
     });
 });
+$(document).ready(function () {
+    $('.owl-carousel.recommend-main',).owlCarousel({
+        margin: 20,
+        responsive: {
+            0: {
+                items: 2,
+            },
+            600: {
+                items: 3,
+            },
+            800: {
+                items: 4,
+            },
+        },
+    });
+});
 
 $('.owl-carousel.normal').owlCarousel({
     margin: 30,
