@@ -127,7 +127,7 @@ async function searchMovie(API) {
                             <img src="${IMG_PATH + element.poster_path}"></img>
                             <div class="item-content">
                                 <div class="item-title">${nameOfMovie}</div>
-                                <div class="item-id">ID: ${nameOfMovie.length}</div>
+                                <div class="item-id">ID: ${element.id}</div>
                             </div>
                         </a>
                     </li>

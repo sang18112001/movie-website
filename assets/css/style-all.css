@@ -351,3 +351,22 @@
     transform: scale(0.9);
     filter: drop-shadow(0 0 8px var(--main-color));
 }
+
+.movie-box {
+    padding: 10px;
+    box-shadow: inset 0px 0px 7px 2px var(--main-color);
+}
+
+.logo-movie-container {
+    position: relative;
+}
+
+.logo-movie-container.active-marvel::after {
+    content: "";
+    border: 10px solid;
+    border-color: transparent transparent var(--main-color) transparent;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}

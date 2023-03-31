@@ -35,7 +35,7 @@ $('.owl-carousel.home-slider').owlCarousel({
     autoplayTimeout: 5000,
 });
 
-$('.owl-carousel.marvel').owlCarousel({
+$('.owl-carousel.type-movie').owlCarousel({
     responsive: {
         0: {
             items: 3,
@@ -45,74 +45,6 @@ $('.owl-carousel.marvel').owlCarousel({
         },
         1000: {
             items: 7,
-        },
-    },
-});
-
-$(document).ready(function () {
-    $('.owl-carousel.casts-content',).owlCarousel({
-        responsive: {
-            0: {
-                items: 2,
-            },
-            600: {
-                items: 3,
-            },
-            800: {
-                items: 4,
-            },
-            1005: {
-                items: 5,
-            },
-            1200: {
-                items: 6,
-            },
-        },
-    });
-});
-$(document).ready(function () {
-    $('.owl-carousel.recommend-main',).owlCarousel({
-        margin: 20,
-        responsive: {
-            0: {
-                items: 2,
-            },
-            600: {
-                items: 3,
-            },
-            800: {
-                items: 4,
-            },
-        },
-    });
-});
-
-$('.owl-carousel.normal').owlCarousel({
-    margin: 30,
-    responsive: {
-        0: {
-            items: 2,
-        },
-        600: {
-            items: 3,
-        },
-        1000: {
-            items: 5,
-        },
-    },
-});
-
-$('.owl-carousel.especial').owlCarousel({
-    margin: 10,
-    responsive: {
-        300: {
-            items: 1,
-        },
-        800: {
-            items: 1,
-        },
-        1000: {
-            items: 3,
         },
     },
 });

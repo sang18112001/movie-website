@@ -48,7 +48,7 @@ async function mainEmbeding() {
                 <span class="title-info">Diễn viên: </span> ${casts},...
               </div>
             </div>
-            <a href="${detailLink}">
+            <a href="#">
                 <button>
                     <i class="fa-solid fa-play"></i>
                     PLAY
@@ -65,8 +65,9 @@ async function castsEmbeding() {
     const castAPI = await fetch(ALL_CAST)
     const casts_info = await castAPI.json()
     const casts = casts_info.cast
-    const castsOwl = $(`.owl-carousel.casts-content`);
-    for (i = 0; i <= 20; i++) {
+    const castsOwl = document.querySelector('.casts-content')
+    const numCasts = casts.length < 20 ? casts.length : 20
+    for (i = 0; i < numCasts; i++) {
         const castOwl = `
             <div class="cast">
                 <div class="cast-avt">
@@ -78,10 +79,29 @@ async function castsEmbeding() {
                 </div>
             </div>
         `
-        castsOwl.owlCarousel("add", castOwl);
+        castsOwl.innerHTML += castOwl
     }
-
-    castsOwl.owlCarousel("update");
+    $(document).ready(function () {
+        $('.casts-content',).owlCarousel({
+            responsive: {
+                0: {
+                    items: 2,
+                },
+                600: {
+                    items: 3,
+                },
+                800: {
+                    items: 4,
+                },
+                1005: {
+                    items: 5,
+                },
+                1200: {
+                    items: 6,
+                },
+            },
+        });
+    });
 }
 castsEmbeding()
 // Media
@@ -104,20 +124,58 @@ changeMediaType()
 async function mediaEmbeding() {
     const mediaAPI = await fetch(ALL_IMAGES)
     const media_info = await mediaAPI.json()
-    owlMediaEmbeding('posters', media_info.posters)
-    owlMediaEmbeding('backdrops', media_info.backdrops)
+    owlMediaEmbedingPosters(media_info.posters)
+    owlMediaEmbedingBackdrops(media_info.backdrops)
 }
 mediaEmbeding()
 
-function owlMediaEmbeding(typeMedia, medias) {
-    const mediasOwl = $(`.owl-carousel.${typeMedia}`);
-    for (i = 0; i <= 20; i++) {
-        const Owl = `
+function owlMediaEmbedingPosters(medias) {
+    const numPosters = medias.length < 20 ? medias.length : 20
+    const postersOwl = document.querySelector('.posters')
+    for (i = 0; i < numPosters; i++) {
+        const posterOwl = `
             <img src="${IMG_PATH + medias[i].file_path}">
         `
-        mediasOwl.owlCarousel("add", Owl);
+        postersOwl.innerHTML += posterOwl
     }
-    mediasOwl.owlCarousel("update");
+    $('.posters').owlCarousel({
+        margin: 30,
+        responsive: {
+            0: {
+                items: 2,
+            },
+            600: {
+                items: 3,
+            },
+            1000: {
+                items: 5,
+            },
+        },
+    });
+}
+function owlMediaEmbedingBackdrops(medias) {
+    const numBackdrops = medias.length < 20 ? medias.length : 20
+    const backdropsOwl = document.querySelector('.backdrops')
+    for (i = 0; i < numBackdrops; i++) {
+        const backdropOwl = `
+            <img src="${IMG_PATH + medias[i].file_path}">
+        `
+        backdropsOwl.innerHTML += backdropOwl
+    }
+    $('.backdrops').owlCarousel({
+        margin: 10,
+        responsive: {
+            300: {
+                items: 1,
+            },
+            800: {
+                items: 1,
+            },
+            1000: {
+                items: 3,
+            },
+        },
+    });
 }
 // Comments 
 
@@ -221,20 +279,24 @@ function upCmtWithExistedID(cmt, user) {
 }
 // Recommendations
 async function recommendations() {
-    const owl_carousel = $(`.owl-carousel.recommend-main`);
+    const recommnedsOwl = document.querySelector('.recommend-main')
     const recommend = await fetch(RECOMMENDATION)
     const recommend_info = await recommend.json()
     const recommender = recommend_info.results
-    for (i = 0; i < recommender.length; i += 1) {
+    const numRecommends = recommender.length < 20 ? recommender.length : 20
+    for (i = 0; i < numRecommends; i += 1) {
         if (recommender[i].backdrop_path === null) {
             continue
         }
         const newName = recommender[i].original_title.length > 20
             ? recommender[i].original_title.slice(0, 20) + '...'
             : recommender[i].original_title
+        const newLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${recommender[i].id}`
         const recommendOwl = `
             <div class="recommend-item">
-                <img src="${IMG_PATH + recommender[i].backdrop_path}" alt="">
+                <a href="${newLink}">
+                    <img src="${IMG_PATH + recommender[i].backdrop_path}" alt="">
+                </a>
                 <div class="item-vote">
                   <span class=" icon fa fa-star checked"></span>
                   <span>${recommender[i].vote_average}</span>
@@ -242,10 +304,25 @@ async function recommendations() {
                 <div class="item-name">
                   ${newName}
                 </div>
-              </div>
+            </div>
         `
-        owl_carousel.owlCarousel("add", recommendOwl);
+        recommnedsOwl.innerHTML += recommendOwl
     }
-    owl_carousel.owlCarousel("update");
+    $(document).ready(function () {
+        $('.recommend-main',).owlCarousel({
+            margin: 20,
+            responsive: {
+                0: {
+                    items: 2,
+                },
+                600: {
+                    items: 3,
+                },
+                800: {
+                    items: 4,
+                },
+            },
+        });
+    });
 }
 recommendations()

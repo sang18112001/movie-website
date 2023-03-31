@@ -129,3 +129,41 @@ function show_movie_slider(movies) {
 
 // Search function
 
+function showBoxMovie() {
+    const collections = document.querySelectorAll('.marvel-item')
+    collections.forEach(collection => {
+        collection.addEventListener('click', (event) => {
+            event.preventDefault();
+            const collection_id = collection.getAttribute('value')
+            const collectionOwl = document.querySelector('.movie-box')
+            collectionOwl.innerHTML = ``
+            fetch(`https://api.themoviedb.org/3/collection/${collection_id}?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US`)
+                .then(res => res.json())
+                .then(data => embedCollection(data.parts))
+            function embedCollection(collectionItems) {
+                collectionItems.forEach(item => {
+                    collectionOwl.innerHTML += `
+                        <div class="box-item">
+                            <img src="${IMG_PATH + item.backdrop_path}" alt="">
+                        </div>
+                    `
+                })
+                $('.movie-box').owlCarousel({
+                    margin: 20,
+                    responsive: {
+                        0: {
+                            items: 2,
+                        },
+                        600: {
+                            items: 3,
+                        },
+                        1000: {
+                            items: 4,
+                        },
+                    },
+                });
+            }
+        })
+    })
+}
+// showBoxMovie()
