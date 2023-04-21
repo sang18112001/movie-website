@@ -13,6 +13,12 @@ const currentAPI = baseAPI + `&page=1`;
 const next_page_btn = document.querySelector(".next-page");
 const prep_page_btn = document.querySelector(".prep-page");
 
+// Change title 
+const moviesTitle = document.querySelector('.movies-title span')
+const newTitle = type_movie.split('_').join(' ').toUpperCase()
+moviesTitle.innerHTML = newTitle
+document.title = newTitle
+
 // Header navbar underline
 const navbar_list = document.querySelectorAll(".header-menu a");
 navbar_list.forEach((item) => {
@@ -20,10 +26,7 @@ navbar_list.forEach((item) => {
 });
 navbar_list[Number(index_type) + 1].classList.add("active-menu");
 
-// Change movies-title 
-const moviesTitle = document.querySelector('.movies-title span')
-const newTitle = type_movie.split('_').join(' ').toUpperCase()
-moviesTitle.innerHTML = newTitle
+
 // Get all movies
 async function getMovies(API_URL) {
   // When clicking each page number button or filter button, all movies will be removed
