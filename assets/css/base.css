@@ -127,7 +127,9 @@ header {
     padding: 0px 10%;
     transition: 0.5s;
 }
-
+.body-container {
+    padding: 30px 10%;
+  }
 header.shadow {
     background-color: var(--bg-color);
 }
@@ -543,9 +545,12 @@ header.shadow .responsive-account {
         width: 100%;
     }
 
-    header,
-    #web_body {
+    header{
         padding: 0px 5% !important;
+    }
+
+    .body-container {
+        padding: 30px 5% !important;
     }
 }
 
@@ -642,7 +647,7 @@ header.shadow .responsive-account {
 }
 
 .footer-icon {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 150px;
     display: flex;

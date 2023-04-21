@@ -4,7 +4,7 @@
     display: flex;
     margin-top: 60px;
     color: var(--bg-color);
-    background-color: var(--primary-color);
+    background-color: #282525;
     padding: 0px 10%;
     position: relative
 }
@@ -17,7 +17,6 @@
 .web-movies {
     width: 100%;
     padding: 1% 0px;
-    background-color: #151414;
 }
 
 .web-movies .movies-title {
@@ -37,18 +36,19 @@
     transform: translateY(-50%);
     height: 2px;
     width: 100%;
-    background-color: rgb(39 39 39);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .web-movies .movies-title span {
     text-align: center;
-    width: 200px;
+    min-width: 200px;
     height: 50px;
-    background-color: #151414;
+    background-color: #282525;
     z-index: 1;
     display: block;
     margin: auto;
     position: relative;
+    padding: 0px 20px;
 }
 
 /* .web-movies .movies-title a {
@@ -182,7 +182,7 @@
 .web-function {
     width: 25%;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 0.07);
     margin: 50px 20px 0px 0px;
     height: 1250px;
     transition: all ease-in-out 0.5s;
@@ -198,6 +198,12 @@
     display: flex;
     gap: 20px;
     align-items: center;
+    border-left: 4px solid var(--main-color);
+    padding-left: 10px;
+}
+.web-function .function-title h5{
+    font-size: 24px;
+    line-height: 24px;
 }
 
 .web-function .select-form {
@@ -285,7 +291,8 @@
 
 .button-filter .filter-perform {
     padding: 5px 20px;
-    background-color: green;
+    background-color: var(--main-color);
+    border-radius: 5px;
 }
 
 .button-filter .filter-remove {

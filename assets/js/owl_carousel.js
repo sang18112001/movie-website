@@ -20,7 +20,7 @@ $('.owl-carousel.movie-slider').owlCarousel({
             items: 2,
         },
         500: {
-            items: 4,
+            items: 2,
         },
         620: {
             items: 2

@@ -64,7 +64,7 @@
         </div>
         <div class="header-account account-logged active-hidden">
           <div class="account-logged-logo">
-            <img src="./assets/image/man.png" alt="" class="logged-icon">
+            <img src="https://d11a6trkgmumsb.cloudfront.net/original/3X/d/8/d8b5d0a738295345ebd8934b859fa1fca1c8c6ad.jpeg" alt="" class="logged-icon">
           </div>
           <div class="account-logged-button">
             <div class="logged-box">
@@ -116,115 +116,60 @@
         </div>
       </div>
       <div id="web_body">
-        <div class="marvel-type type">
-          <h2 class="type-title">Marvel Universe</h2>
-          <div class="type-movie owl-carousel">
-            <div value="531241" class="logo-movie-container marvel-item">
-              <img class="logo-movie" src="assets\image\marvel\spiderman1.png" alt="">
+        <!-- Top rated -->
+        <div class="body-container">
+          <div class="movies-container">
+            <div class="typeOfMovies-header">
+              TOP RATED
             </div>
-            <div value="422834" class="logo-movie-container marvel-item">
-              <img class="logo-movie" src="assets\image\marvel\ant-man.png" alt="">
-            </div>
-            <div value="86311" class="logo-movie-container marvel-item">
-              <img class="logo-movie" src="assets\image\marvel\avenger.png" alt="">
-            </div>
-            <div value="131296" class="logo-movie-container marvel-item">
-              <img class="logo-movie" src="assets\image\marvel\thor.png" alt="">
-            </div>
-            <div value="618529" class="logo-movie-container marvel-item">
-              <img class="logo-movie" src="assets\image\marvel\doctor_strange.png" alt="">
-            </div>
-            <div value="529892" class="logo-movie-container marvel-item">
-              <img class="logo-movie" src="assets\image\marvel\blackpanther.png" alt="">
-            </div>
-            <div value="131292" class="logo-movie-container marvel-item">
-              <img class="logo-movie" src="assets\image\marvel\ironman.png" alt="">
-            </div>
-            <div value="284433" class="logo-movie-container marvel-item">
-              <img class="logo-movie" src="assets\image\marvel\galaxy.png" alt="">
-            </div>
-          </div>
-          <!-- <div class="movie-box owl-carousel">
-          </div> -->
-        </div>
-        <div class="anime-type type">
-          <h2 class="type-title">Anime</h2>
-          <div class="type-movie owl-carousel">
-            <div class="logo-movie-container">
-              <img class="logo-movie" src="assets\image\anime\naruto.png" alt="">
-            </div>
-            <div class="logo-movie-container">
-              <img class="logo-movie" src="assets\image\anime\onepiece.png" alt="">
-            </div>
-            <div class="logo-movie-container">
-              <img class="logo-movie" src="assets\image\anime\dragonball.png" alt="">
-            </div>
-            <div class="logo-movie-container">
-              <img class="logo-movie" src="assets\image\anime\doraemon.png" alt="">
-            </div>
-            <div class="logo-movie-container">
-              <img class="logo-movie" src="assets\image\anime\conan.png" alt="">
-            </div>
-            <div class="logo-movie-container">
-              <img class="logo-movie" src="assets\image\anime\titan.png" alt="">
-            </div>
-            <div class="logo-movie-container">
-              <img class="logo-movie" src="assets\image\anime\pokemon.png" alt="">
+            <div class="container">
+              <div class="row top-rated-body"></div>
             </div>
           </div>
         </div>
-        <div class="movies-container">
-          <div class="typeOfMovies-header">
-            <h2 class="type-movie-title">NOW PLAYING</h2>
-            <!-- <a href="typeOfMovies.html?type=now_playing">SEE ALL</a> -->
-          </div>
-          <div class="owl-carousel movie-slider">
-          </div>
-          <div class="main-movies">
-            <img src="" alt="">
+        <!-- Popularity -->
+        <div class="body-container">
+          <div class="movies-container first">
+            <div class="typeOfMovies-header">POPULARITY</div>
+            <div class="owl-carousel movie-slider"></div>
+            <div class="main-movies">
+              <img src="" alt="">
+            </div>
           </div>
         </div>
-        <div class="typeOfMovies">
-          <div>
-            <div class="typeOfMovies-header">
-              <h2 class="type-movie-title">POPULARITY</h2>
-              <!-- <a href="typeOfMovies.html?type=popularity">SEE ALL</a> -->
-            </div>
-            <div class="container movie-type">
-              <div class="row movie-body popularity"></div>
-              <div class="load-more-btn">
-                <button id="popularity" class="load-more btn-popularity btn">
-                  Load More
-                </button>
+        <!-- Now playing -->
+        <div class="body-container">
+          <div class="movies-container">
+            <div class="typeOfMovies-header">NOW PLAYING</div>
+            <div class="movie-type">
+              <div class="movie-body nowPlaying">
+                <div class="grid-image box-nowPlaying"></div>
               </div>
             </div>
+            <a href="" id="load-more">
+              <button id="now_playing" class="load-more btn-nowPlaying">Show All</button>
+            </a>
           </div>
-          <div>
-            <div class="typeOfMovies-header">
-              <h2 class="type-movie-title">TOP-RATED</h2>
-              <!-- <a href="typeOfMovies.html?type=top_rated">SEE ALL</a> -->
-            </div>
-            <div class="container movie-type">
-              <div class="row movie-body top_rated"></div>
-              <div class="load-more-btn">
-                <button id="top_rated" class="load-more btn-top_rated btn">
-                  Load More
-                </button>
+        </div>
+        <!-- Up coming -->
+        <div class="body-container">
+          <div class="movies-container">
+            <div class="typeOfMovies-header">UP COMING</div>
+            <div class="movie-type">
+              <div class="movie-body upComing">
+                <div class="grid-image box-upComing"></div>
               </div>
             </div>
+            <a href="" id="load-more">
+              <button id="up_coming" class="load-more btn-upComing">Show All</button>
+            </a>
           </div>
-          <div>
-            <div class="typeOfMovies-header">
-              <h2 class="type-movie-title">UPCOMING</h2>
-              <!-- <a href="typeOfMovies.html?type=up_coming">SEE ALL</a> -->
-            </div>
-            <div class="container movie-type">
-              <div class="row movie-body up_coming"></div>
-              <div class="load-more-btn">
-                <button id="up_coming" class="load-more btn-up_coming btn">
-                  Load More
-                </button>
-              </div>
+        </div>
+        <div class="body-container">
+          <div class="movies-container">
+            <div class="typeOfMovies-header">GENRES</div>
+            <div class="genres-type container">
+              <div class="row"></div>
             </div>
           </div>
         </div>
