@@ -12,16 +12,14 @@ li {
     background-size: 100%;
 }
 
-.movie-container>img {
+.movie-container > img {
     width: 100%;
     max-height: 550px;
     object-position: center;
     object-fit: cover;
     z-index: -1;
     background-repeat: no-repeat;
-    animation: scale-display .5s;
     opacity: 0.5;
-    border-radius: 20px;
     overflow: hidden;
 }
 
@@ -35,7 +33,7 @@ li {
     position: relative;
     flex-shrink: 0;
     margin-right: 2.5vw;
-    background: rgba(255, 255, 255, .05);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .movie-content .poster img {
@@ -78,17 +76,17 @@ li {
 
 .movie-content .sub-title .free-icon i {
     font-size: 14px;
-    color: #fb0
+    color: #fb0;
 }
 
 .movie-content .sub-title .free {
-    color: #fb0
+    color: #fb0;
 }
 
 .movie-content .detail h2 {
-    color: #FF8040;
+    color: #ff8040;
     margin-bottom: 10px;
-    font-size: 36px
+    font-size: 36px;
 }
 
 .movie-content .detail .overview {
@@ -126,12 +124,11 @@ li {
     color: rgba(255, 255, 255, 0.6);
 }
 
-
 /* More information */
 .movie-information {
     padding: 20px 10%;
     display: flex;
-    gap: 20px
+    gap: 20px;
 }
 
 .main-info {
@@ -146,16 +143,20 @@ li {
 }
 
 .cast {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cast-avt {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     overflow: hidden;
-    position: relative;
 }
 
 .cast img {
-    border-radius: 50%;
-    width: 150px !important;
-    aspect-ratio: 1/1;
-    display: block;
-    margin: 0px auto;
+    width: 100% !important;
 }
 
 .cast-name {
@@ -165,12 +166,12 @@ li {
 
 .cast-name .original-name {
     font-weight: 900;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
 }
 
 .cast-name .character-name {
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
 }
 
@@ -212,7 +213,6 @@ li {
 /* Comment */
 .movie-comments {
     margin-top: 20px;
-    border-bottom: 1px solid #eee;
 }
 
 .comment-main {
@@ -222,11 +222,11 @@ li {
 .comment-box {
     overflow-y: auto;
     max-height: 800px;
-    padding-right: 20px
+    padding-right: 10px;
 }
 
 .comment-box::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 /* Track */
@@ -253,15 +253,13 @@ li {
 
 .comment-personal {
     margin-bottom: 30px;
-    box-shadow: inset 0px 0px 7px 2px rgba(0, 255, 255, 0.7);
-    padding: 20px 30px;
 }
 
 .comment {
     display: flex;
-    gap: 30px;
+    gap: 10px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     align-items: center;
 }
 
@@ -274,7 +272,7 @@ li {
 .comment-author {
     font-size: 21px;
     font-weight: bold;
-    color: white
+    color: white;
 }
 
 .comment-info {
@@ -290,7 +288,6 @@ li {
     text-decoration: underline;
     display: none;
 }
-
 
 /* Comment of me */
 .comment-me {
@@ -348,6 +345,7 @@ li {
 
 .movie-recommendations {
     margin-top: 20px;
+    border-bottom: 1px solid #eee;
 }
 
 .movie-recommendations .recommend-main {
@@ -372,7 +370,7 @@ li {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    color: hsl(57, 97%, 45%)
+    color: hsl(57, 97%, 45%);
 }
 
 .recommend-item .item-name {
@@ -404,10 +402,6 @@ li {
     .movie-content .detail .attributes {
         font-size: 14px;
     }
-
-    .cast img {
-        width: 100px !important;
-    }
 }
 
 @media (max-width: 990px) {
@@ -429,12 +423,11 @@ li {
     }
 
     .movie-content .detail .attributes .movie-cast {
-        width: 70%
+        width: 70%;
     }
 }
 
 @media (max-width: 800px) {
-
     .movie-content,
     .movie-information {
         padding: 3% 5%;
@@ -457,7 +450,7 @@ li {
         gap: 10px;
     }
 
-    .movie-content>img {
+    .movie-content > img {
         display: none;
     }
 
@@ -467,6 +460,26 @@ li {
 
     .movie-content .detail button {
         font-size: 14px;
+    }
+    .comment-author {
+        font-size: 18px;
+    }
+    .comment-info {
+        font-size: 10px;
+    }
+    .comment-text {
+        font-size: 12px;
+        text-align: justify;
+    }
+    .comment-me {
+        gap: 10px;
+    }
+    .comment-me img {
+        width: 40px;
+        height: 40px;
+    }
+    .comment-me .text input {
+        height: 30px;
     }
 }
 
@@ -480,22 +493,17 @@ li {
         height: 40px;
         border-radius: 50%;
     }
-
-    .comment-personal {
-        padding: 10px 15px;
-    }
 }
-
-@media (max-width: 400px) {
-    .cast img {
-        width: 80px !important;
+@media (max-width: 500px) {
+    .comment-me input {
+        padding-left: 10px;
+        font-size: 12px;
     }
-
-    .original-name {
-        font-size: 14px !important;
+    .comment-upload {
+        padding: 3px 0px;
     }
-
-    .character-name {
-        font-size: 12px !important;
+    .comment-upload button {
+        padding: 2px 5px;
+        font-size: 10px;
     }
 }

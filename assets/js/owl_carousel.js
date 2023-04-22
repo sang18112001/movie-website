@@ -23,9 +23,9 @@ $('.owl-carousel.movie-slider').owlCarousel({
             items: 2,
         },
         620: {
-            items: 2
-        }
-    }
+            items: 2,
+        },
+    },
 });
 
 $('.owl-carousel.home-slider').owlCarousel({

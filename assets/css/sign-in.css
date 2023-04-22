@@ -98,7 +98,9 @@ html {
   gap: 20px;
   margin-bottom: 30px;
 }
-
+.sign-title div:hover {
+  cursor: pointer;
+}
 .sign-in-title,
 .sign-up-title {
   font-size: 25px;
