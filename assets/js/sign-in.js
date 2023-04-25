@@ -41,7 +41,6 @@ function signInAccount() {
         event.preventDefault();
         const formData = new FormData(signInBox);
         const your_account = Object.fromEntries(formData);
-        console.log(your_account);
         async function modifyAPI() {
             const res = await fetch(
                 'https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user.json',
@@ -54,7 +53,7 @@ function signInAccount() {
                 if (valuesArr[i].email == your_account.email && valuesArr[i].password == your_account.password) {
                     check = true;
                     valuesArr[i].checkSignIn = true;
-                    document.querySelector('.successful_sign').classList.add('active-flex');
+                    // document.querySelector('.successful_sign').classList.add('active-flex');
                     document.querySelector('.sign-in-wrong-container').classList.add('active-hidden');
                     continuePage(keysArr[i]);
                     break;
