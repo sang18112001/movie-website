@@ -418,6 +418,9 @@
     .load-more {
         font-size: 20px;
     }
+    .grid-image .box .type-movie-title {
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 400px) {
