@@ -28,10 +28,7 @@ Array.from(signUptoIn).map((btn) => btn.addEventListener('click', upToIn));
 
 // Continue to the next page
 function continuePage(uid) {
-    document.querySelector('.successful_continue').addEventListener('click', (event) => {
-        event.preventDefault();
-        window.location.assign(`index.html?uid=${uid}`);
-    });
+    window.location.assign(`index.html?uid=${uid}`);
 }
 
 // Sign in and sign up account
@@ -55,6 +52,7 @@ function signInAccount() {
                     valuesArr[i].checkSignIn = true;
                     // document.querySelector('.successful_sign').classList.add('active-flex');
                     document.querySelector('.sign-in-wrong-container').classList.add('active-hidden');
+                    console.log(keysArr);
                     continuePage(keysArr[i]);
                     break;
                 }
@@ -62,6 +60,7 @@ function signInAccount() {
             if (check === false) {
                 document.querySelector('.sign-in-wrong-container').classList.remove('active-hidden');
             }
+
             fetch(
                 `https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${keysArr[i]}.json`,
                 {

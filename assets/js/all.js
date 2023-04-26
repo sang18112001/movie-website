@@ -78,7 +78,7 @@ scrollHeader();
     genres_info.forEach((genre) => {
         const newLink = !uid ? `sign-in.html` : `typeOfMovies.html?uid=${uid}&type=popularity`;
         genresContainer.innerHTML += `
-            <a href=${newLink}  class="col-6 col-md-4	col-lg-3 col-xl-2">
+            <a href=${newLink}  class="col-6 col-md-4 col-lg-3 col-xl-2">
               <div class="genre-box">
                   <img src="${genre.genre_path}" alt="">
                   <p>${genre.genre_name}</p>
