@@ -17,48 +17,50 @@ async function mainEmbeding() {
     const movie_info = await movieAPI.json();
     const castsAPI = await fetch(ALL_CAST);
     const casts_info = await castsAPI.json();
-    const genres = movie_info.genres.map((genre) => genre.name).join(', ');
-    const casts = casts_info.cast
-        .slice(0, 5)
-        .map((cast) => cast.original_name)
-        .join(', ');
-    const detailLink = !uid ? `watchingMovie.html` : `watchingMovie.html?uid=${uid}&id=${needed_id}`
+    const genres = movie_info.genres.map((genre) => genre.name).join('');
+    const detailLink = !uid ? `watchingMovie.html` : `watchingMovie.html?uid=${uid}&id=${needed_id}`;
+    let castInner = '';
+    let genreInner = movie_info.genres.map((genre) => `<p>${genre.name}</p>`).join('');
+    casts_info.cast.slice(0, 10).forEach((cast) => {
+        castInner += `
+            <div class="cast">
+                <div class="cast-avt" style="background-image: url(${IMG_PATH + cast.profile_path})"></div>
+                <div class="cast-name">
+                    <p class="original-name">${cast.original_name}</p>
+                </div>
+            </div>
+        `;
+    });
     movieContainer.innerHTML = `
-        <img src="${IMG_PATH + movie_info.backdrop_path}">
+        <div class="movie-image" style="background-image: url(${IMG_PATH + movie_info.backdrop_path})"></div>
         <div class="movie-content">
-          <img src="${IMG_PATH + movie_info.poster_path}" alt="">
-          <div class="detail">
-            <div class="sub-title">
-              <span class="free-icon">
-                <i class="fa-solid fa-chess-queen"></i>
-              </span>
-              <span class="free">Free .</span>
-              <span>Feature film .</span>
-              <span>${movie_info.release_date.slice(0, 4)} .</span>
+            <div class="image">
+                <div class="content-img" style="background-image: url(${IMG_PATH + movie_info.poster_path})"></div>
             </div>
-            <h2>${movie_info.original_title}</h2>
-            <p class="overview">
-              ${movie_info.overview}
-            </p>
-            <div class="attributes">
-              <div class="movie-info">
-                <p><span class="title-info">IMDB:</span> ${movie_info.vote_average}</p>
-                <p><span class="title-info">Time:</span> ${movie_info.runtime} minutes</p>
-                <p><span class="title-info">Genres:</span> ${genres}</p>
-              </div>
-              <div class="movie-cast">
-                <p><span class="title-info">Date:</span> ${movie_info.release_date}</p>
-                <span class="title-info">Diễn viên: </span> ${casts},...
-              </div>
+            <div class="detail">
+                <div class="sub-title">
+                    <span class="free-icon">
+                        <i class="fa-solid fa-chess-queen"></i>
+                    </span>
+                    <span class="free">Free .</span>
+                    <span>Feature film .</span>
+                    <span>${movie_info.release_date.slice(0, 4)} .</span>
+                </div>
+                <h1>${movie_info.original_title}</h1>
+                <div class="genre-names">${genreInner}</div>
+                <div class="main-item movie-casts">
+                    <p class="title-cast">CASTS</p>
+                    <div class="casts-content">
+                        ${castInner}
+                    </div>
+                </div>
+                <a href="${detailLink}">
+                    <button>
+                        <i class="fa-solid fa-play"></i>
+                        PLAY
+                    </button>
+                </a>
             </div>
-            <a href="${detailLink}">
-                <button>
-                    <i class="fa-solid fa-play"></i>
-                    PLAY
-                </button>
-            </a>
-            
-          </div>
         </div>
     `;
 }
@@ -68,10 +70,10 @@ async function castsEmbeding() {
     const castAPI = await fetch(ALL_CAST);
     const casts_info = await castAPI.json();
     const casts = casts_info.cast;
-    const castsOwl = document.querySelector('.casts-content');
+    const castsInfo = document.querySelector('.casts-content');
     const numCasts = casts.length < 20 ? casts.length : 20;
     for (i = 0; i < numCasts; i++) {
-        const castOwl = `
+        const castInfo = `
             <div class="cast">
                 <div class="cast-avt">
                     <img src="${IMG_PATH + casts[i].profile_path}" alt="">
@@ -82,29 +84,8 @@ async function castsEmbeding() {
                 </div>
             </div>
         `;
-        castsOwl.innerHTML += castOwl;
+        castsInfo.innerHTML += castInfo;
     }
-    $(document).ready(function () {
-        $('.casts-content').owlCarousel({
-            responsive: {
-                0: {
-                    items: 2,
-                },
-                480: {
-                    items: 3,
-                },
-                800: {
-                    items: 4,
-                },
-                1005: {
-                    items: 5,
-                },
-                1200: {
-                    items: 6,
-                },
-            },
-        });
-    });
 }
 castsEmbeding();
 // Media
@@ -184,7 +165,6 @@ function owlMediaEmbedingBackdrops(medias) {
 // Comments
 APIMovieUpload(needed_id, personalAPI, COMMENTS);
 
-
 // Recommendations
 async function recommendations() {
     const recommnedsOwl = document.querySelector('.recommend-main');
@@ -245,4 +225,3 @@ async function recommendations() {
     });
 }
 recommendations();
-
