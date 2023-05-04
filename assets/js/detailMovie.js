@@ -17,7 +17,6 @@ async function mainEmbeding() {
     const movie_info = await movieAPI.json();
     const castsAPI = await fetch(ALL_CAST);
     const casts_info = await castsAPI.json();
-    const genres = movie_info.genres.map((genre) => genre.name).join('');
     const detailLink = !uid ? `watchingMovie.html` : `watchingMovie.html?uid=${uid}&id=${needed_id}`;
     let castInner = '';
     let genreInner = movie_info.genres.map((genre) => `<p>${genre.name}</p>`).join('');
@@ -65,29 +64,7 @@ async function mainEmbeding() {
     `;
 }
 mainEmbeding();
-// Casts
-async function castsEmbeding() {
-    const castAPI = await fetch(ALL_CAST);
-    const casts_info = await castAPI.json();
-    const casts = casts_info.cast;
-    const castsInfo = document.querySelector('.casts-content');
-    const numCasts = casts.length < 20 ? casts.length : 20;
-    for (i = 0; i < numCasts; i++) {
-        const castInfo = `
-            <div class="cast">
-                <div class="cast-avt">
-                    <img src="${IMG_PATH + casts[i].profile_path}" alt="">
-                </div>
-                <div class="cast-name">
-                    <p class="original-name">${casts[i].original_name.split(' ').slice(0, 2).join(' ')}</p>
-                    <p class="character-name">${casts[i].character}</p>
-                </div>
-            </div>
-        `;
-        castsInfo.innerHTML += castInfo;
-    }
-}
-castsEmbeding();
+
 // Media
 const changeMediaType = () => {
     const mediaBtn = document.querySelectorAll('.button-media');

@@ -184,7 +184,7 @@ const addCmt = (user, cmt, imgPath, time) => {
                 </div>
             </div>
              <div class="comment-text">
-                ${cmt.split('.')[0] + '.'}
+                ${cmt}
             </div>
         </div>
     `;
@@ -214,8 +214,7 @@ const uploadCmtToAPI = (needed_id, personalAPI) => {
         if (data_comments != null && data_comments[needed_id] != null) {
             allComments = data_comments[needed_id].comment;
             allComments.forEach((comment) => {
-                console.log(comment.time)
-                addCmt(comment.user, comment.cmt, null, comment.time);
+                addCmt(comment.author, comment.content, null, comment.updated_at);
             });
         } else {
             allComments = [];
@@ -238,11 +237,11 @@ const uploadCmtToAPI = (needed_id, personalAPI) => {
     APILoading();
 };
 
-function upCmtWithExistedID(cmt, user, _ ,  time) {
+function upCmtWithExistedID(cmt, user, _, time) {
     newItem = {
-        user: user,
-        cmt: cmt,
-        time: time,
+        author: user,
+        content: cmt,
+        updated_at: time,
     };
     allComments.push(newItem);
     newListComments = {
@@ -256,5 +255,5 @@ function upCmtWithExistedID(cmt, user, _ ,  time) {
         },
         body: stringNewComment,
     });
-    addCmt(user, cmt, null, time);
+    addCmt(newItem.author, newItem.content, null, newItem.updated_at);
 }
