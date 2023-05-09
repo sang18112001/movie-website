@@ -340,6 +340,10 @@ header.shadow .responsive-account {
     width: 100px;
 }
 
+.web-logo:hover {
+  cursor: pointer;
+}
+
 /* Log Account  */
 .header-account.account-log {
 }

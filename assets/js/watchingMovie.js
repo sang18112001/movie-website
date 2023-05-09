@@ -47,7 +47,7 @@ const personalAPI = `https://fir-tutorial-32b97-default-rtdb.asia-southeast1.fir
                     <p class="add-text">${movie_info.vote_count} votes</p>
                 </div>
             </div>
-            <div class="content-genres">ff</div>
+            <div class="content-genres"></div>
         </div>
     `;
     const genresList = document.querySelector('.content-genres');

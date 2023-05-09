@@ -4,7 +4,7 @@
     display: flex;
     margin-top: 60px;
     color: var(--bg-color);
-    background-color: #282525;
+    background-color: #151313;
     padding: 0px 10%;
     position: relative
 }
@@ -24,8 +24,6 @@
     font-size: 30px;
     position: relative;
     display: flex;
-    /* display: flex;
-    justify-content: space-between; */
 }
 
 .web-movies .movies-title::after {
@@ -43,7 +41,7 @@
     text-align: center;
     min-width: 200px;
     height: 50px;
-    background-color: #282525;
+    background-color: #151313;
     z-index: 1;
     display: block;
     margin: auto;

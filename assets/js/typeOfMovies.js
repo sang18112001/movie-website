@@ -30,6 +30,14 @@ navbar_list[Number(index_type) + 1].classList.add('active-menu');
     });
 })();
 
+// Filter scroll
+const filterScroll = () => {
+    const scrollElement = document.querySelector('.web-function')
+    scrollElement.addEventListener('scroll', (e) => {
+        preventDefault(false)
+    })
+}
+filterScroll()
 // Get all movies
 async function getMovies(API_URL) {
     // When clicking each page number button or filter button, all movies will be removed
@@ -305,6 +313,7 @@ function sortPerforming() {
         getMovies(lastAPI);
     });
 }
+
 getMovies(currentAPI);
 numOfPages();
 changePage();
