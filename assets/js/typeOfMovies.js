@@ -243,10 +243,16 @@ function filterPerforming() {
     const checkboxes = document.querySelectorAll('.select-form input');
     const filterPerform = document.querySelector('.filter-perform');
     const filterRemove = document.querySelector('.filter-remove');
-    const filterSet = new Set();
+    const genresSet = getGenres ? getGenres.split(',').map((genre) => `genres-${genre}`) : [];
+    const languages = getLanguages ? getLanguages.split(',').map((language) => `languages-${language}`) : [];
+    const yearsSet = getYears ? getYears.split(',').map((year) => `years-${year}`) : [];
+    const filterSet = new Set([...genresSet], [...languages], [...yearsSet]);
+    const filterLink = !uid
+        ? `typeOfMovies.html?type=${type_movie}`
+        : `typeOfMovies.html?uid=${uid}&type=${type_movie}`;
     checkboxes.forEach((checkbox) => {
         checkbox.addEventListener('change', () => {
-            checkbox.checked && filterSet.add(checkbox.name);
+            checkbox.checked ? filterSet.add(checkbox.name) : filterSet.delete(checkbox.name);
         });
     });
     filterPerform.addEventListener('click', (event) => {
@@ -260,13 +266,12 @@ function filterPerforming() {
             const [prop, val] = elem.split('-');
             filterObj[prop] = filterObj[prop] ? `${filterObj[prop]},${val}` : val;
         }
-        localStorage.setItem('filter', JSON.stringify(filterObj));
-        const filterLink = !uid
-            ? `typeOfMovies.html?type=${type_movie}`
-            : `typeOfMovies.html?uid=${uid}&type=${type_movie}`;
         window.location.assign(
             `${filterLink}&genres=${filterObj.genres}&languages=${filterObj.languages}&years=${filterObj.years}`,
         );
+    });
+    filterRemove.addEventListener('click', () => {
+        window.location.assign(filterLink);
     });
 }
 

@@ -138,9 +138,28 @@ h1 {
     width: 100%;
     gap: 20px;
 }
-.movie-content .casts-content::-webkit-scrollbar {
-    display: none;
+
+.casts-content::-webkit-scrollbar {
+    height: 5px;
 }
+
+/* Track */
+.casts-content::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+.casts-content::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.casts-content::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
+
 
 .movie-casts .title-cast {
     font-size: 20px;
