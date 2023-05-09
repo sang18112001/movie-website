@@ -85,8 +85,7 @@ function signUpAccount() {
     email = document.querySelector('.email');
     checkEmail = document.querySelector('.checkEmail');
     checkAllow = document.querySelector('.checkAllow');
-    image_path = document.querySelector('.image');
-
+    
     signUpBox.addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(signUpBox);

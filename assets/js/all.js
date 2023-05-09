@@ -76,7 +76,7 @@ scrollHeader();
     const genres_info = await res.json();
     const genresContainer = document.querySelector('.genres-type .row');
     genres_info.forEach((genre) => {
-        const newLink = !uid ? `sign-in.html` : `typeOfMovies.html?uid=${uid}&type=popularity`;
+        const newLink = !uid ? `sign-in.html` : `typeOfMovies.html?uid=${uid}&type=popularity&genres=${genre.id}`;
         genresContainer.innerHTML += `
             <a href=${newLink}  class="col-6 col-md-4 col-lg-3 col-xl-2">
               <div class="genre-box">

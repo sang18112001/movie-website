@@ -2,9 +2,17 @@ const urlParams = new URLSearchParams(window.location.search);
 const type_movie = urlParams.get('type');
 const index_type = typeMovies.indexOf(type_movie);
 
+const getGenres = urlParams.get('genres') ? urlParams.get('genres') : '';
+const getLanguages = urlParams.get('languages') ? urlParams.get('languages') : '';
+const getYears = urlParams.get('years') ? urlParams.get('years') : '';
+
 const arr_typeOfmovies = ['movie/now_playing', 'discover/movie', 'movie/top_rated', 'movie/upcoming'];
 const baseAPI = `https://api.themoviedb.org/3/${arr_typeOfmovies[index_type]}?api_key=3fd2be6f0c70a2a598f084ddfb75487c&vote_average.gte=1&vote_average.lte=8.5`;
-const currentAPI = baseAPI + `&page=1`;
+const currentAPI =
+    baseAPI +
+    `&with_genres=${getGenres}` +
+    `&with_original_language=${getLanguages}` +
+    `&primary_release_year=${getYears}&page=1`;
 const next_page_btn = document.querySelector('.next-page');
 const prep_page_btn = document.querySelector('.prep-page');
 
@@ -32,17 +40,18 @@ navbar_list[Number(index_type) + 1].classList.add('active-menu');
 
 // Filter scroll
 const filterScroll = () => {
-    const scrollElement = document.querySelector('.web-function')
+    const scrollElement = document.querySelector('.web-function');
     scrollElement.addEventListener('scroll', (e) => {
-        preventDefault(false)
-    })
-}
-filterScroll()
+        preventDefault(false);
+    });
+};
+filterScroll();
 // Get all movies
 async function getMovies(API_URL) {
     // When clicking each page number button or filter button, all movies will be removed
     document.querySelector('.body-cards').innerHTML = ``;
     lastAPI = API_URL;
+    console.log(API_URL);
     const res = await fetch(API_URL);
     const data = await res.json();
     const movies_info = data;
@@ -214,103 +223,50 @@ function filterResponsive() {
     });
 }
 filterResponsive();
-// filter
-async function filterFunction() {
-    const res_all_genres = await fetch(GENRES_API);
-    const genres_movie = await res_all_genres.json();
-    const genres = await genres_movie.genres;
-    genreBtnsCreating(genres);
+
+function filterFunction() {
+    filterChangeCheckbox();
     filterPerforming();
 }
 
-// Generating genres buttons with API
-function genreBtnsCreating(genres) {
-    const genres_select = document.querySelector('.genres');
-    genres_select.innerHTML = Array.from(genres).reduce(
-        (innerHTMLGenres, genre) =>
-            innerHTMLGenres +
-            `
-      <div class="select-form">
-        <input name="genres-${genre.id}" type="checkbox" class="checkbox-round" />
-        <label>${genre.name}</label><br>
-      </div>      
-    `,
-        genres_select.innerHTML,
-    );
+function filterChangeCheckbox() {
+    const filterCheckBoxes = document.querySelectorAll('.select-form input');
+    Array.from(filterCheckBoxes).forEach((checkbox) => {
+        const item = checkbox.name.split('-')[1];
+        if (getGenres.includes(item) || getLanguages.includes(item) || getYears.includes(item)) {
+            checkbox.checked = true;
+        }
+    });
 }
 
-// Funtion that perform the filter function
 function filterPerforming() {
     const checkboxes = document.querySelectorAll('.select-form input');
-    const buttons = document.querySelectorAll('.num-page');
     const filterPerform = document.querySelector('.filter-perform');
     const filterRemove = document.querySelector('.filter-remove');
-    const all_buttons = [...buttons];
-    const typeOfFilter = {
-        genres: new Set(),
-        languages: new Set(),
-        years: new Set(),
-    };
+    const filterSet = new Set();
     checkboxes.forEach((checkbox) => {
         checkbox.addEventListener('change', () => {
-            const requiredType = checkbox.name.split('-')[0];
-            const requiredFilter = checkbox.name.split('-')[1];
-            const listFilter = typeOfFilter[requiredType];
-            checkbox.checked ? listFilter.add(requiredFilter) : listFilter.delete(requiredFilter);
+            checkbox.checked && filterSet.add(checkbox.name);
         });
     });
-
     filterPerform.addEventListener('click', (event) => {
         event.preventDefault();
-        modify_buttons(all_buttons, (required_page = 1));
-        const listGenres = [...typeOfFilter['genres']],
-            listLanguages = [...typeOfFilter['languages']],
-            listYears = [...typeOfFilter['years']];
-        const requiredGenres = listGenres.slice(0).join(','),
-            requiredLanguages = listLanguages.slice(0).join(','),
-            requiredYears = listYears.slice(0).join(',');
-        lastAPI =
-            baseAPI +
-            `&with_genres=${requiredGenres}` +
-            `&with_original_language=${requiredLanguages}` +
-            `&primary_release_year=${requiredYears}&page=1`;
-        getMovies(lastAPI);
-    });
-    filterRemove.addEventListener('click', (event) => {
-        event.preventDefault();
-        window.location.reload();
-    });
-}
-// Sort function
-function sortPerforming() {
-    const selectBtn = document.querySelector('.sort-function');
-    const buttons = document.querySelectorAll('.num-page');
-    const all_buttons = [...buttons];
-    selectBtn.addEventListener('change', () => {
-        modify_buttons(all_buttons, (required_page = 1));
-        typeOfSort = selectBtn.value.split('-').join('.');
-        const index_page = lastAPI.indexOf('&page');
-        // get link API from 0 index to index that lastAPI[index] = "page"
-        before_lastAPI = lastAPI.slice(0, index_page);
-        // Get page url => result: '&page=currentPage'
-        page = lastAPI.slice(index_page);
-        // If select default, remove "&sort_by=...."
-        if (typeOfSort === 'Default') {
-            lastAPI = before_lastAPI.replace(before_lastAPI.slice(before_lastAPI.indexOf('&sort_by=')), ``) + page;
+        const filterObj = {
+            genres: '',
+            languages: '',
+            years: '',
+        };
+        for (const elem of filterSet) {
+            const [prop, val] = elem.split('-');
+            filterObj[prop] = filterObj[prop] ? `${filterObj[prop]},${val}` : val;
         }
-        // If before_lastAPI contains 'sort_by=' => replace "sort_by= oldSelection" => "sort_by= newSelection"
-        else if (before_lastAPI.includes('sort_by=')) {
-            lastAPI =
-                before_lastAPI.replace(
-                    before_lastAPI.slice(before_lastAPI.indexOf('&sort_by=')),
-                    `&sort_by=${typeOfSort}`,
-                ) + page;
-        }
-        // If before_lastAPI doesn't contain'sort_by=' => add "sort_by= newSelection"
-        else {
-            lastAPI = before_lastAPI + `&sort_by=${typeOfSort}` + page;
-        }
-        getMovies(lastAPI);
+        localStorage.setItem('filter', JSON.stringify(filterObj));
+        const filterLink = !uid
+            ? `typeOfMovies.html?type=${type_movie}`
+            : `typeOfMovies.html?uid=${uid}&type=${type_movie}`;
+        window.location.assign(
+            `${filterLink}&genres=${filterObj.genres}&languages=${filterObj.languages}&years=${filterObj.years}`,
+        );
     });
 }
 
