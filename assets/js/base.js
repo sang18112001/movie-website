@@ -7,7 +7,9 @@ const UP_COMING_API = `https://api.themoviedb.org/3/movie/upcoming?api_key=3fd2b
 const GENRES_API = `https://api.themoviedb.org/3/genre/movie/list?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US`;
 const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=';
 const typeMovies = [`now_playing`, `popularity`, `top_rated`, `up_coming`];
-localStorage.setItem('signAccount', JSON.stringify({ uid: '' }));
+if (!localStorage.getItem('signAccount')) {
+    localStorage.setItem('signAccount', JSON.stringify({ uid: '' }));
+}
 const uid = JSON.parse(localStorage.getItem('signAccount')).uid;
 // Header scroll
 function scrollHeader() {
