@@ -9,7 +9,7 @@ scrollHeader();
     const movies = movies_info.results;
     all_movies = document.querySelector(`.top-rated-body`);
     for (i = 0; i < 8; i++) {
-        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${movies[i].id}`;
+        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?id=${movies[i].id}`;
         const movieElement = `
             <div class="col-6 col-lg-3 col-md-4 test_rated">
                 <div class="top-rated-main">
@@ -35,13 +35,11 @@ scrollHeader();
     all_movies = document.querySelector(`.box-nowPlaying`);
     for (i = 0; i < 12; i++) {
         const title = movies[i].original_title;
-        console.log(title);
-        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${movies[i].id}`;
-        const newTitle = title.length > 15 ? title.slice(0, 15) + '...' : title;
+        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?id=${movies[i].id}`;
         const movieElement = `
             <a href="${detailLink}">
                 <div class="box" style="background-image: url('${IMG_PATH + movies[i].backdrop_path}')">
-                  <div class="type-movie-title">${newTitle}</div>
+                  <div class="type-movie-title">${title}</div>
                 </div>
             </a>
         `;
@@ -56,15 +54,11 @@ scrollHeader();
     all_movies = document.querySelector(`.box-upComing`);
     for (i = 0; i < 12; i++) {
         const title = movies[i].original_title;
-        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${movies[i].id}`;
-        let newTitle = title;
-        if (i > 0) {
-            newTitle = title.length > 15 ? title.slice(0, 15) + '...' : title;
-        }
+        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?id=${movies[i].id}`;
         const movieElement = `
             <a href="${detailLink}">
                 <div class="box" style="background-image: url('${IMG_PATH + movies[i].backdrop_path}')">
-                <div class="type-movie-title">${newTitle}</div>
+                <div class="type-movie-title">${title}</div>
                 </div>
             </a>
         `;
@@ -76,7 +70,7 @@ scrollHeader();
     const genres_info = await res.json();
     const genresContainer = document.querySelector('.genres-type .row');
     genres_info.forEach((genre) => {
-        const newLink = !uid ? `sign-in.html` : `typeOfMovies.html?uid=${uid}&type=popularity&genres=${genre.id}`;
+        const newLink = !uid ? `sign-in.html` : `typeOfMovies.html?type=popularity&genres=${genre.id}`;
         genresContainer.innerHTML += `
             <a href=${newLink}  class="col-6 col-md-4 col-lg-3 col-xl-2">
               <div class="genre-box">
@@ -113,7 +107,7 @@ function show_banner(movies) {
 function show_movie_slider(movies) {
     const needed_movies = document.querySelector('.main-movies');
     movies.forEach((movie, index) => {
-        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${movie.id}`;
+        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?id=${movie.id}`;
         const movieElement = `
         <div class="movie movie-${index}">
             <div class="movie-main">
@@ -163,9 +157,7 @@ moviesBanner(POPULAR_API);
 (function () {
     const showAllButtons = document.querySelectorAll('#load-more');
     showAllButtons.forEach((button) => {
-        const newLink = !uid
-            ? `sign-in.html`
-            : `typeOfMovies.html?uid=${uid}&type=${button.querySelector('.load-more').id}`;
+        const newLink = !uid ? `sign-in.html` : `typeOfMovies.html?type=${button.querySelector('.load-more').id}`;
         button.href = newLink;
     });
 })();

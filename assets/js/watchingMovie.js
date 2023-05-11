@@ -84,7 +84,7 @@ APIMovieUpload(needed_id, personalAPI, COMMENTS);
     const movies = movie_info.results;
     const topratedContainer = document.querySelector('.topRated');
     for (i = 0; i < 5; i += 1) {
-        const detailLink = `detailMovie.html?uid=${uid}&id=${movies[i].id}`;
+        const detailLink = `detailMovie.html?id=${movies[i].id}`;
         topratedContainer.innerHTML += `
             <div class="box-content">
                 <a href="${detailLink}" class="content-img">
@@ -109,7 +109,7 @@ APIMovieUpload(needed_id, personalAPI, COMMENTS);
     const movies = movie_info.results;
     const topratedContainer = document.querySelector('.upComing');
     for (i = 0; i < 5; i += 1) {
-        const detailLink = `detailMovie.html?uid=${uid}&id=${movies[i].id}`;
+        const detailLink = `detailMovie.html?id=${movies[i].id}`;
         topratedContainer.innerHTML += `
             <div class="box-content">
                 <a href="${detailLink}" class="content-img">

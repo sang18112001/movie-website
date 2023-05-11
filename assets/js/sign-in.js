@@ -26,11 +26,6 @@ function upToIn() {
 Array.from(signIntoUp).map((btn) => btn.addEventListener('click', inToUp));
 Array.from(signUptoIn).map((btn) => btn.addEventListener('click', upToIn));
 
-// Continue to the next page
-function continuePage(uid) {
-    window.location.assign(`index.html?uid=${uid}`);
-}
-
 // Sign in and sign up account
 // sign in
 function signInAccount() {
@@ -50,97 +45,102 @@ function signInAccount() {
                 if (valuesArr[i].email == your_account.email && valuesArr[i].password == your_account.password) {
                     check = true;
                     valuesArr[i].checkSignIn = true;
-                    // document.querySelector('.successful_sign').classList.add('active-flex');
                     document.querySelector('.sign-in-wrong-container').classList.add('active-hidden');
-                    console.log(keysArr);
-                    continuePage(keysArr[i]);
+                    localStorage.setItem('signAccount', JSON.stringify({ uid: keysArr[i] }));
+                    window.location.assign(`index.html`);
                     break;
                 }
             }
             if (check === false) {
                 document.querySelector('.sign-in-wrong-container').classList.remove('active-hidden');
             }
-
-            fetch(
-                `https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${keysArr[i]}.json`,
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(valuesArr[i]),
-                },
-            );
         }
         modifyAPI();
     });
 }
 
 signInAccount();
-
-// Sign up account
-function signUpAccount() {
-    checkPassword = document.querySelector('.checkPassword');
-    retype = document.querySelector('.retype');
-    email = document.querySelector('.email');
-    checkEmail = document.querySelector('.checkEmail');
-    checkAllow = document.querySelector('.checkAllow');
-    
-    signUpBox.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const formData = new FormData(signUpBox);
-        const new_account = Object.fromEntries(formData);
-        new_account.checkSignIn = false;
-        const addNewAccount = {
-            checkSignIn: 'false',
-            email: new_account.email,
-            name: new_account.firstName + new_account.lastName,
-            password: new_account.password,
-        };
-        console.log(addNewAccount);
-        fetch('https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user.json')
-            .then((res) => res.json())
-            .then((accounts) => {
-                if (accounts) {
-                    const account = Object.values(accounts);
-                    const emails = account.map((element) => element.email);
-                    if (
-                        !emails.includes(addNewAccount.email) &&
-                        new_account.password === new_account.retype &&
-                        new_account.checkLincence === 'on'
-                    ) {
-                        email.style.border = 'none';
-                        retype.style.border = 'none';
-                        checkEmail.classList.add('active-hidden');
-                        checkPassword.classList.add('active-hidden');
-                        checkAllow.classList.add('active-hidden');
-                        uploadAccountAPI(addNewAccount);
-                        upToIn();
-                    } else if (emails.includes(addNewAccount.email)) {
-                        email.style.border = '3px solid red';
-                        checkEmail.classList.remove('active-hidden');
-                    } else if (new_account.password !== new_account.retype) {
-                        checkPassword.classList.remove('active-hidden');
-                        retype.style.border = '3px solid red';
-                    } else if (new_account.checkLincence !== 'on') {
-                        checkAllow.classList.remove('active-hidden');
-                    }
-                } else {
-                    uploadAccountAPI(addNewAccount);
-                }
-            });
-    });
+async function signUpAccountOther() {
+    const response = await fetch(
+        'https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user.json',
+    );
+    const usersList = await response.json();
+    const idsList = Object.keys(usersList);
+    const infosList = Object.values(usersList);
+    const emailsList = infosList.map((info) => info.email);
+    const submitBtn = document.querySelector('.sign-up-body button');
+    emailHandle(submitBtn, emailsList);
+    passwordHandle(submitBtn);
+    submitHandle(submitBtn, emailsList);
 }
-signUpAccount();
-const uploadAccountAPI = (addNewAccount) => {
-    fetch('https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user.json', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(addNewAccount),
-    })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
+signUpAccountOther();
+
+const submitHandle = (submitBtn, emailsList) => {
+    const licenceInput = document.querySelector('.licence input');
+    const licenceWrong = document.querySelector('.checkAllow');
+    submitBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (licenceInput.checked) {
+            licenceWrong.classList.add('active-hidden');
+            upLoadUser(emailsList);
+        } else {
+            licenceWrong.classList.remove('active-hidden');
+        }
+    });
+};
+
+const upLoadUser = (emailsList) => {
+    const formData = new FormData(signUpBox);
+    const newUser = Object.fromEntries(formData);
+    if (newUser.firstName && newUser.lastName && newUser.email && newUser.password) {
+        if (!emailsList.includes(newUser.email)) {
+            const addNewAccount = {
+                checkSignIn: 'false',
+                email: newUser.email,
+                name: newUser.firstName + ' ' + newUser.lastName,
+                password: newUser.password,
+            };
+            fetch('https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user.json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(addNewAccount),
+            }).then((response) => response.json());
+            upToIn();
+        }
+    }
+};
+
+const emailHandle = (submitBtn, emailsList) => {
+    const emailInput = document.querySelector('.sign-up-body .email');
+    const emailWrong = document.querySelector('.sign-up-body .checkEmail');
+    emailInput.addEventListener('input', () => {
+        if (emailsList.includes(emailInput.value)) {
+            emailWrong.classList.remove('active-hidden');
+            emailInput.classList.add('wrong-account');
+            submitBtn.disabled = true;
+        } else {
+            emailWrong.classList.add('active-hidden');
+            emailInput.classList.remove('wrong-account');
+            submitBtn.disabled = false;
+        }
+    });
+};
+
+const passwordHandle = (submitBtn) => {
+    const passwordInput = document.querySelector('.sign-up-body .password');
+    const re_passwordInput = document.querySelector('.sign-up-body .retype');
+    const re_passwordWrong = document.querySelector('.sign-up-body .checkPassword');
+    re_passwordInput.addEventListener('input', () => {
+        if (re_passwordInput.value === passwordInput.value) {
+            re_passwordWrong.classList.add('active-hidden');
+            re_passwordInput.classList.remove('wrong-account');
+            submitBtn.disabled = false;
+        } else {
+            re_passwordWrong.classList.remove('active-hidden');
+            re_passwordInput.classList.add('wrong-account');
+            submitBtn.disabled = false;
+        }
+    });
 };

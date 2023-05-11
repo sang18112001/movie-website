@@ -281,6 +281,10 @@ html {
   margin-bottom: 10px;
 }
 
+.wrong-account {
+  border: 3px solid red !important;
+}
+
 /* Resposive */
 @media (max-width: 600px) {
   .container_sign {

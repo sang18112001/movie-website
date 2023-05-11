@@ -7,8 +7,7 @@ const UP_COMING_API = `https://api.themoviedb.org/3/movie/upcoming?api_key=3fd2b
 const GENRES_API = `https://api.themoviedb.org/3/genre/movie/list?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US`;
 const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=';
 const typeMovies = [`now_playing`, `popularity`, `top_rated`, `up_coming`];
-const uid = new URLSearchParams(window.location.search).get('uid');
-
+const uid = JSON.parse(localStorage.getItem('signAccount')).uid;
 // Header scroll
 function scrollHeader() {
     let header = document.querySelector('header');
@@ -21,17 +20,16 @@ function scrollHeader() {
 (function changeLogoLink() {
     const web_logo = document.querySelector('.web-logo');
     web_logo.addEventListener('click', () => {
-        !uid ? window.location.assign(`index.html`) : window.location.assign(`index.html?uid=${uid}`);
+        window.location.assign(`index.html`);
     });
 })();
 
 // Menu header create
 (function menuHeaderCreate() {
     const header_menu = document.querySelector('.header-menu');
-    const homeLink = !uid ? `index.html` : `index.html?uid=${uid}`;
-    header_menu.innerHTML = `<li><a class="active-menu" href="${homeLink}">Home</a></li>`;
+    header_menu.innerHTML = `<li><a class="active-menu" href="index.html">Home</a></li>`;
     typeMovies.forEach((eachType) => {
-        const menuLink = !uid ? `typeOfMovies.html?type=${eachType}` : `typeOfMovies.html?uid=${uid}&type=${eachType}`;
+        const menuLink = `typeOfMovies.html?type=${eachType}`;
         const menuTitle = eachType.split('_').join(' ');
         header_menu.innerHTML += `<li><a href="${menuLink}">${menuTitle}</a></li>`;
     });
@@ -81,7 +79,7 @@ async function searchMovie(API) {
                     element.original_title.length > 30
                         ? element.original_title.slice(0, 30) + '...'
                         : element.original_title;
-                const detailLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${element.id}`;
+                const detailLink = !uid ? `sign-in.html` : `detailMovie.html?id=${element.id}`;
                 list_movies.innerHTML += `
                     <li class="item">
                         <a href=${detailLink}>
@@ -107,15 +105,22 @@ async function searchMovie(API) {
     const data = await res.json();
     const log_account = document.querySelector('.account-log');
     const logged_account = document.querySelector('.account-logged');
-    if (uid === null) {
+    if (uid === '') {
         log_account.classList.remove('active-hidden');
         logged_account.classList.add('active-hidden');
     } else {
-        console.log(data);
         log_account.classList.add('active-hidden');
         logged_account.classList.remove('active-hidden');
         document.querySelector('.account_name').innerHTML = data.name;
     }
+})();
+
+// Sign out account
+(function () {
+    const signOutBtn = document.querySelector('.log-out');
+    signOutBtn.addEventListener('click', () => {
+        localStorage.setItem('signAccount', JSON.stringify({ uid: '' }));
+    });
 })();
 
 // Header responsive

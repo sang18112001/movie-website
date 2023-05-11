@@ -17,7 +17,7 @@ async function mainEmbeding() {
     const movie_info = await movieAPI.json();
     const castsAPI = await fetch(ALL_CAST);
     const casts_info = await castsAPI.json();
-    const detailLink = !uid ? `watchingMovie.html` : `watchingMovie.html?uid=${uid}&id=${needed_id}`;
+    const detailLink = `watchingMovie.html?id=${needed_id}`;
     let castInner = '';
     let genreInner = movie_info.genres.map((genre) => `<p>${genre.name}</p>`).join('');
     casts_info.cast.slice(0, 10).forEach((cast) => {
@@ -163,11 +163,7 @@ async function recommendations() {
         if (recommender[i].backdrop_path === null) {
             continue;
         }
-        const newName =
-            recommender[i].original_title.length > 20
-                ? recommender[i].original_title.slice(0, 20) + '...'
-                : recommender[i].original_title;
-        const newLink = !uid ? `sign-in.html` : `detailMovie.html?uid=${uid}&id=${recommender[i].id}`;
+        const newLink = `detailMovie.html?id=${recommender[i].id}`;
         const recommendOwl = `
             <div class="recommend-item">
                 <a href="${newLink}">
@@ -178,7 +174,7 @@ async function recommendations() {
                   <span>${recommender[i].vote_average}</span>
                 </div>
                 <div class="item-name">
-                   ${newName}
+                   ${recommender[i].original_title}
                 </div>
             </div>
         `;
