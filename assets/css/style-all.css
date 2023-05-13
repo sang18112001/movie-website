@@ -145,25 +145,32 @@
 }
 
 .typeOfMovies-header {
-    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-left: 4px solid var(--main-color);
-    font-size: 30px;
-    line-height: 30px;
-    padding-left: 20px;
+    align-items: end;
+    margin-bottom: 20px;
 }
 
-.typeOfMovies-header button {
-    margin: 0px;
-    padding: 2px 10px;
-    font-size: 14px;
-    background-color: rgba( 255, 255, 255, 0.3);
-    border-radius: 8px;
+.typeOfMovies-header .type-title {
+    border-bottom: 4px solid var(--main-color);
+    font-size: 30px;
+    line-height: 30px;
 }
-.typeOfMovies-header button:hover {
-    background-color: rgba( 255, 255, 255, 0.1);
+.showmore-button {
+    text-align: right;
+    margin: 10px 0px;
+}
+#load-more button {
+    padding: 5px 20px;
+    font-size: 14px;
+    border: 1px solid white;
+    border-radius: 8px;
+    background-color: transparent;
+    transition: all ease-in 0.2s 
+}
+#load-more button:hover {
+    background-color: white;
+    color: var(--main-color)
 }
 .border-cards {
     border-radius: 10px;
@@ -263,7 +270,7 @@
 }
 
 .genre-box {
-    background-color: gray;
+    background-color: #7c7c7c33;
     padding: 10px;
     margin-bottom: 24px;
     height: 150px;
@@ -361,9 +368,6 @@
     .grid-image {
         grid-template: auto/ repeat(3, 1fr);
     }
-    .load-more {
-        font-size: 20px;
-    }
 }
 @media (max-width: 600px) {
     .movies-container {
@@ -408,11 +412,17 @@
     .top-rated-img {
         height: 120px;
     }
-    .load-more {
-        font-size: 20px;
-    }
     .grid-image .box .type-movie-title {
         font-size: 10px;
+    }
+}
+
+@media (max-width: 450px) {
+    .typeOfMovies-header .type-title {
+        font-size: 20px;
+    }
+    #load-more button {
+        padding: 0px 10px;
     }
 }
 

@@ -73,7 +73,12 @@ h5 {
 }
 
 .btn:hover {
-    background: var(--main-hover);
+    background: white;
+    color: var(--main-color)
+}
+
+.btn:hover .movie-watch {
+    border: 1px solid var(--main-color);
 }
 
 ul,
@@ -127,6 +132,34 @@ li {
 .disabled {
     background-color: gray !important;
     cursor: not-allowed !important;
+}
+
+/* Vote box */
+
+.vote-box{
+    position: relative;
+    width: 60px;
+}
+
+.circular-chart {
+    display: block;
+    width: 60px;
+    height: 60px;
+}
+
+.circle {
+    stroke: #4cc790;
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+.vote-box p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 header {

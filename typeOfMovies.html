@@ -6,17 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./assets/image/movie-icon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
-      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"
-      integrity="sha512-C8Movfk6DU/H5PzarG0+Dv9MA9IZzvmQpO/3cIlGIflmtY3vIud07myMu4M/NTPJl8jmZtt/4mC9bAioMZBBdA=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Import fontawesome -->
     <link rel="stylesheet" href="./lib/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="./lib/fontawesome/css/brands.min.css">
@@ -96,73 +85,98 @@
               Movies
             </span>
           </div>
-          <div class="movies-selection">
-            <select class="filter">
-              <option selected value="genres-default">Genres</option>
-              <option value="genres-28">Action</option>
-              <option value="genres-18">Drama</option>
-              <option value="genres-14">Fantasy</option>
-              <option value="genres-27">Horror</option>
-              <option value="genres-10402">Music</option>
-              <option value="genres-9648">Mystery</option>
-              <option value="genres-10749">Romance</option>
-              <option value="genres-878">Science Fiction</option>
-              <option value="genres-53">Thriller</option>
-              <option value="genres-10752">War</option>
-              <option value="genres-37">Western</option>
-              <option value="genres-35">Comedy</option>
-            </select>
-            <select class="filter">
-              <option selected value="languages-default">Languages</option>
-              <option value="languages-en">English</option>
-              <option value="languages-vi">Vietnam</option>
-              <option value="languages-ja">Japan</option>
-              <option value="languages-cn">China</option>
-              <option value="languages-ko">Korea</option>
-            </select>
-            <select class="filter">
-              <option selected value="years-default">Years</option>
-              <option value="years-2023">2023</option>
-              <option value="years-2022">2022</option>
-              <option value="years-2021">2021</option>
-              <option value="years-2020">2020</option>
-              <option value="years-2019">2019</option>
-              <option value="years-2018">2018</option>
-            </select>
-            <div class="button-filter">
-              <div class="filter-perform"><i class="icon fa-solid fa-filter"></i><span>Filter</span></div>
-              <div class="filter-remove"><span class="icon fa-solid fa-filter-circle-xmark"></span>Clear</div>
+          <div class="movies-more-info">
+            <span class="movies-total"></span>
+            <div class="movies-selection">
+              <select class="filter">
+                <option selected value="genres-default">Genres</option>
+                <option value="genres-28">Action</option>
+                <option value="genres-18">Drama</option>
+                <option value="genres-14">Fantasy</option>
+                <option value="genres-27">Horror</option>
+                <option value="genres-10402">Music</option>
+                <option value="genres-9648">Mystery</option>
+                <option value="genres-10749">Romance</option>
+                <option value="genres-878">Science Fiction</option>
+                <option value="genres-53">Thriller</option>
+                <option value="genres-10752">War</option>
+                <option value="genres-37">Western</option>
+                <option value="genres-35">Comedy</option>
+              </select>
+              <select class="filter">
+                <option selected value="languages-default">Languages</option>
+                <option value="languages-en">English</option>
+                <option value="languages-vi">Vietnam</option>
+                <option value="languages-ja">Japan</option>
+                <option value="languages-cn">China</option>
+                <option value="languages-ko">Korea</option>
+              </select>
+              <select class="filter">
+                <option selected value="years-default">Years</option>
+                <option value="years-2023">2023</option>
+                <option value="years-2022">2022</option>
+                <option value="years-2021">2021</option>
+                <option value="years-2020">2020</option>
+                <option value="years-2019">2019</option>
+                <option value="years-2018">2018</option>
+              </select>
+              <div class="button-filter">
+                <div class="filter-perform"><i class="icon fa-solid fa-filter"></i><span>Filter</span></div>
+                <div class="filter-remove"><span class="icon fa-solid fa-filter-circle-xmark"></span>Clear</div>
+              </div>
             </div>
+            </div>
+            </div>
+            <div id="loader">
+              <div class="lds-spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+            <div class="movie-container">
+          <div class="container movies">
+            <div class="row body-cards"></div>
           </div>
-        </div>
-        <div class="container movies">
-          <div class="row body-cards"></div>
         </div>
         <div class="all_button_pages">
           <div class="change-pages">
-            <button class="page prep-page"><i class="fa-solid fa-angles-left"></i></button>
+            <button class="page first-page"><i class="fa-solid fa-angles-left"></i></button>
+            <button class="page prep-page"><i class="fa-solid fa-angle-left"></i></button>
             <div class="number-pages"></div>
-            <button class="page next-page"><i class="fa-solid fa-angles-right"></i></button>
+            <button class="page next-page"><i class="fa-solid fa-angle-right"></i></button>
+            <button class="page last-page"><i class="fa-solid fa-angles-right"></i></button>
+            </div>
+            </div>
+            <div class="no-results">
+              <h2>No results</h2>
+              <div class="content">
+                <p>We couldn't find what you required</p>
+                <p>Try again</p>
           </div>
         </div>
       </div>
-    </div>
+      </div>
     <div class="footer-icon">
       <span class="fa-brands fa-square-facebook"></span>
       <span class="fa-brands fa-instagram"></span>
       <span class="fa-brands fa-square-twitter"></span>
       <span class="fa-brands fa-square-youtube"></span>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="/assets/js/owl_carousel.js"></script>
+    
     <script src="/assets/js/base.js"></script>
     <script src="/assets/js/typeOfMovies.js"></script>
+    <script src="/assets/js/components/filter.js"></script>
+    <script src="/assets/js/components/pagination.js"></script>
   </body>
 
 </html>

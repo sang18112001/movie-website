@@ -74,8 +74,7 @@ const personalAPI = `https://fir-tutorial-32b97-default-rtdb.asia-southeast1.fir
     overview.innerHTML = `${movie_info.overview}`;
 })();
 
-// -------------------------------------------------------------Comments------------------------------------------------
-APIMovieUpload(needed_id, personalAPI, COMMENTS);
+
 
 // -------------------------------------------------------------Toprated------------------------------------------------
 (async function toprated() {
@@ -128,3 +127,6 @@ APIMovieUpload(needed_id, personalAPI, COMMENTS);
         `;
     }
 })();
+
+// -------------------------------------------------------------Comments------------------------------------------------
+APIMovieUpload(needed_id, personalAPI, COMMENTS);

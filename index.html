@@ -18,6 +18,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"
       integrity="sha512-C8Movfk6DU/H5PzarG0+Dv9MA9IZzvmQpO/3cIlGIflmtY3vIud07myMu4M/NTPJl8jmZtt/4mC9bAioMZBBdA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Import slick carousel -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
     <!-- Import fontawesome -->
     <link rel="stylesheet" href="./lib/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="./lib/fontawesome/css/brands.min.css">
@@ -122,8 +125,10 @@
         <!-- Top rated -->
         <div class="body-container">
           <div class="movies-container">
-            <div class="typeOfMovies-header">
-              TOP RATED
+            <div class="typeOfMovies-header other-header">
+              <div class="type-title">
+                TOP RATED
+              </div>
             </div>
             <div class="container">
               <div class="row top-rated-body"></div>
@@ -133,7 +138,11 @@
         <!-- Popularity -->
         <div class="body-container">
           <div class="movies-container first">
-            <div class="typeOfMovies-header">POPULARITY</div>
+            <div class="typeOfMovies-header other-header">
+              <div class="type-title">
+                POPULARITY
+              </div>
+            </div>
             <div class="owl-carousel movie-slider"></div>
             <div class="main-movies">
               <img src="" alt="">
@@ -144,9 +153,11 @@
         <div class="body-container">
           <div class="movies-container">
             <div class="typeOfMovies-header">
-              <div class="type-title">NOW PLAYING</div>
+              <div class="type-title">
+                NOW PLAYING
+              </div>
               <a href="" id="load-more">
-                <button id="up_coming" class="load-more btn-nowPlaying">
+                <button id="now_playing" class="load-more btn-nowPlaying">
                   Show All
                   <span class="fa-solid fa-angle-right"></span>
                 </button>
@@ -163,7 +174,9 @@
         <div class="body-container">
           <div class="movies-container">
             <div class="typeOfMovies-header">
-              <div class="type-title">UP COMING</div>
+              <div class="type-title">
+                UP COMING
+              </div>
               <a href="" id="load-more">
                 <button id="up_coming" class="load-more btn-upComing">
                   Show All
@@ -180,7 +193,11 @@
         </div>
         <div class="body-container">
           <div class="movies-container">
-            <div class="typeOfMovies-header">GENRES</div>
+            <div class="typeOfMovies-header other-header">
+              <div class="type-title">
+                GENRES
+              </div>
+            </div>
             <div class="genres-type container">
               <div class="row"></div>
             </div>
@@ -203,6 +220,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
       integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="/assets/js/owl_carousel.js"></script>
     <script src="/assets/js/base.js"></script>
     <script src="/assets/js/all.js"></script>

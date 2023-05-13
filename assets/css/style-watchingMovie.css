@@ -67,7 +67,7 @@
 }
 
 .content-vote .vote-number {
-    background-color: yellowgreen;
+    background-color: #4cc790;
     padding: 5px 10px;
     font-size: 20px;
     border-radius: 5px;
@@ -192,7 +192,6 @@
 .comment-me img {
     width: 50px;
     display: block;
-    background: aqua;
     border-radius: 50%;
 }
 

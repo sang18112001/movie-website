@@ -12,16 +12,16 @@ scrollHeader();
 
 // Main information
 async function mainEmbeding() {
-    const movieContainer = document.querySelector('.movie-container');
-    const movieAPI = await fetch(API_URL);
-    const movie_info = await movieAPI.json();
-    const castsAPI = await fetch(ALL_CAST);
-    const casts_info = await castsAPI.json();
-    const detailLink = `watchingMovie.html?id=${needed_id}`;
-    let castInner = '';
-    let genreInner = movie_info.genres.map((genre) => `<p>${genre.name}</p>`).join('');
-    casts_info.cast.slice(0, 10).forEach((cast) => {
-        castInner += `
+  const movieContainer = document.querySelector('.movie-container');
+  const movieAPI = await fetch(API_URL);
+  const movie_info = await movieAPI.json();
+  const castsAPI = await fetch(ALL_CAST);
+  const casts_info = await castsAPI.json();
+  const detailLink = `watchingMovie.html?id=${needed_id}`;
+  let castInner = '';
+  let genreInner = movie_info.genres.map((genre) => `<p>${genre.name}</p>`).join('');
+  casts_info.cast.slice(0, 10).forEach((cast) => {
+    castInner += `
             <div class="cast">
                 <div class="cast-avt" style="background-image: url(${IMG_PATH + cast.profile_path})"></div>
                 <div class="cast-name">
@@ -29,8 +29,9 @@ async function mainEmbeding() {
                 </div>
             </div>
         `;
-    });
-    movieContainer.innerHTML = `
+  });
+  const votepercent = Math.round(movie_info.vote_average * 10);
+  movieContainer.innerHTML = `
         <div class="movie-image" style="background-image: url(${IMG_PATH + movie_info.backdrop_path})"></div>
         <div class="movie-content">
             <div class="image">
@@ -46,7 +47,20 @@ async function mainEmbeding() {
                     <span>${movie_info.release_date.slice(0, 4)} .</span>
                 </div>
                 <h1>${movie_info.original_title}</h1>
-                <div class="genre-names">${genreInner}</div>
+                <div class="vote-genres">
+                    <div class="vote-box">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle"
+                            stroke-dasharray="${votepercent}, 100"
+                            d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            </svg>
+                        <p>${movie_info.vote_average}</p>
+                    </div>
+                    <div class="genre-names">${genreInner}</div>
+                </div>
                 <div class="main-item movie-casts">
                     <p class="title-cast">CASTS</p>
                     <div class="casts-content">
@@ -54,7 +68,7 @@ async function mainEmbeding() {
                     </div>
                 </div>
                 <a href="${detailLink}">
-                    <button>
+                    <button class="play-btn">
                         <i class="fa-solid fa-play"></i>
                         PLAY
                     </button>
@@ -62,109 +76,131 @@ async function mainEmbeding() {
             </div>
         </div>
     `;
+  $(document).ready(function () {
+    $('.casts-content').slick({
+      dots: false,
+      slidesToShow: 5,
+      slidesToScroll: 2,
+      prevArrow: false,
+      nextArrow: false,
+      responsive: [
+        {
+          breakpoint: 700,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
+    });
+  });
 }
 mainEmbeding();
 
 // Media
 const changeMediaType = () => {
-    const mediaBtn = document.querySelectorAll('.button-media');
-    const subMediaBox = document.querySelectorAll('.sub-media');
-    mediaBtn.forEach((btn, i) => {
-        btn.addEventListener('click', () => {
-            mediaBtn.forEach((element, index) => {
-                element.classList.remove('active-media');
-                subMediaBox[index].classList.remove('active-block');
-            });
-            btn.classList.add('active-media');
-            subMediaBox[i].classList.add('active-block');
-        });
+  const mediaBtn = document.querySelectorAll('.button-media');
+  const subMediaBox = document.querySelectorAll('.sub-media');
+  mediaBtn.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      mediaBtn.forEach((element, index) => {
+        element.classList.remove('active-media');
+        subMediaBox[index].classList.remove('active-block');
+      });
+      btn.classList.add('active-media');
+      subMediaBox[i].classList.add('active-block');
     });
+  });
 };
 changeMediaType();
 
 async function mediaEmbeding() {
-    const mediaAPI = await fetch(ALL_IMAGES);
-    const media_info = await mediaAPI.json();
-    owlMediaEmbedingPosters(media_info.posters);
-    owlMediaEmbedingBackdrops(media_info.backdrops);
+  const mediaAPI = await fetch(ALL_IMAGES);
+  const media_info = await mediaAPI.json();
+  owlMediaEmbedingPosters(media_info.posters);
+  owlMediaEmbedingBackdrops(media_info.backdrops);
 }
 mediaEmbeding();
 
 function owlMediaEmbedingPosters(medias) {
-    const numPosters = medias.length < 20 ? medias.length : 20;
-    const postersOwl = document.querySelector('.posters');
-    for (i = 0; i < numPosters; i++) {
-        const posterOwl = `
+  const numPosters = medias.length < 20 ? medias.length : 20;
+  const postersOwl = document.querySelector('.posters');
+  for (i = 0; i < numPosters; i++) {
+    const posterOwl = `
             <img src="${IMG_PATH + medias[i].file_path}">
         `;
-        postersOwl.innerHTML += posterOwl;
-    }
-    $('.posters').owlCarousel({
-        margin: 30,
-        responsive: {
-            0: {
-                items: 2,
-            },
-            600: {
-                items: 3,
-            },
-            1000: {
-                items: 5,
-            },
-        },
-    });
+    postersOwl.innerHTML += posterOwl;
+  }
+  $('.posters').owlCarousel({
+    margin: 30,
+    responsive: {
+      0: {
+        items: 2,
+      },
+      600: {
+        items: 3,
+      },
+      1000: {
+        items: 5,
+      },
+    },
+  });
 }
 
 function owlMediaEmbedingBackdrops(medias) {
-    const numBackdrops = medias.length < 20 ? medias.length : 20;
-    const backdropsOwl = document.querySelector('.backdrops');
-    for (i = 0; i < numBackdrops; i++) {
-        const backdropOwl = `
+  const numBackdrops = medias.length < 20 ? medias.length : 20;
+  const backdropsOwl = document.querySelector('.backdrops');
+  for (i = 0; i < numBackdrops; i++) {
+    const backdropOwl = `
             <img src="${IMG_PATH + medias[i].file_path}">
         `;
-        backdropsOwl.innerHTML += backdropOwl;
-    }
-    $('.backdrops').owlCarousel({
-        margin: 10,
-        responsive: {
-            300: {
-                items: 1,
-            },
-            800: {
-                items: 1,
-            },
-            1000: {
-                items: 3,
-            },
+    backdropsOwl.innerHTML += backdropOwl;
+  }
+  $(document).ready(function () {
+    $('.backdrops').slick({
+      dots: false,
+      prevArrow: false,
+      nextArrow: false,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 700,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
         },
+      ],
     });
+  });
 }
 // Comments
 APIMovieUpload(needed_id, personalAPI, COMMENTS);
 
 // Recommendations
 async function recommendations() {
-    const recommnedsOwl = document.querySelector('.recommend-main');
-    const recommend = await fetch(RECOMMENDATION);
-    const recommend_info = await recommend.json();
-    const mainRecommend = recommend_info.results;
-    const recommendRandom = await fetch(POPULAR_API);
-    const recommendRandom_info = await recommendRandom.json();
-    const secondRecommend = recommendRandom_info.results;
-    let numRecommends, recommender;
-    if (mainRecommend.length != 0) {
-        numRecommends = mainRecommend.length < 20 ? mainRecommend.length : 20;
-        recommender = mainRecommend;
-    } else {
-        numRecommends = secondRecommend.length;
-        recommender = secondRecommend;
+  const recommnedsOwl = document.querySelector('.recommend-main');
+  const recommend = await fetch(RECOMMENDATION);
+  const recommend_info = await recommend.json();
+  const mainRecommend = recommend_info.results;
+  const recommendRandom = await fetch(POPULAR_API);
+  const recommendRandom_info = await recommendRandom.json();
+  const secondRecommend = recommendRandom_info.results;
+  let numRecommends, recommender;
+  if (mainRecommend.length != 0) {
+    numRecommends = mainRecommend.length < 20 ? mainRecommend.length : 20;
+    recommender = mainRecommend;
+  } else {
+    numRecommends = secondRecommend.length;
+    recommender = secondRecommend;
+  }
+  for (i = 0; i < numRecommends; i += 1) {
+    if (recommender[i].backdrop_path === null) {
+      continue;
     }
-    for (i = 0; i < numRecommends; i += 1) {
-        if (recommender[i].backdrop_path === null) {
-            continue;
-        }
-        const newLink = `detailMovie.html?id=${recommender[i].id}`;
-        const recommendOwl = `
+    const newLink = `detailMovie.html?id=${recommender[i].id}`;
+    const recommendOwl = `
             <div class="recommend-item">
                 <a href="${newLink}">
                     <img src="${IMG_PATH + recommender[i].backdrop_path}" alt="">
@@ -178,23 +214,30 @@ async function recommendations() {
                 </div>
             </div>
         `;
-        recommnedsOwl.innerHTML += recommendOwl;
-    }
-    $(document).ready(function () {
-        $('.recommend-main').owlCarousel({
-            margin: 20,
-            responsive: {
-                0: {
-                    items: 2,
-                },
-                600: {
-                    items: 3,
-                },
-                800: {
-                    items: 4,
-                },
-            },
-        });
+    recommnedsOwl.innerHTML += recommendOwl;
+  }
+  $(document).ready(function () {
+    $('.recommend-main').slick({
+      dots: false,
+      prevArrow: false,
+      nextArrow: false,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 700,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          },
+          breakpoint: 500,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          },
+        },
+      ],
     });
+  });
 }
 recommendations();
