@@ -5,11 +5,9 @@ const last_page_btn = document.querySelector('.last-page');
 // Handle enable and disable buttons
 const handleBtns = {
   disabled: (btn) => {
-    btn.classList.add('disabled');
     btn.disabled = true;
   },
   enabled: (btn) => {
-    btn.classList.remove('disabled');
     btn.disabled = false;
   },
 };

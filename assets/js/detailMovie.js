@@ -76,24 +76,6 @@ async function mainEmbeding() {
             </div>
         </div>
     `;
-  $(document).ready(function () {
-    $('.casts-content').slick({
-      dots: false,
-      slidesToShow: 5,
-      slidesToScroll: 2,
-      prevArrow: false,
-      nextArrow: false,
-      responsive: [
-        {
-          breakpoint: 700,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-      ],
-    });
-  });
 }
 mainEmbeding();
 

@@ -133,7 +133,7 @@ html {
 }
 
 .sign-in-body .anotherSignIn::before {
-  content: "";
+  content: '';
   display: block;
   width: 100%;
   height: 0.5px;
@@ -174,7 +174,7 @@ html {
 }
 
 .sign-converting span::after {
-  content: "";
+  content: '';
   display: block;
   width: 100%;
   height: 0.5px;
@@ -199,60 +199,62 @@ html {
   height: 500px;
   background-color: white;
   display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 50px;
-	border-radius: 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  border-radius: 30px;
 }
 
 .successful_main {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
 }
 
 .successful_main .check-box {
-	width: 80px;
-	height: 80px;
-	background-color: green;
-	border-radius: 50%;
-	display: flex;
+  width: 80px;
+  height: 80px;
+  background-color: green;
+  border-radius: 50%;
+  display: flex;
 }
 .successful_main .check-box i {
-	margin :auto;
-	font-size: 40px;
-	color: white;
+  margin: auto;
+  font-size: 40px;
+  color: white;
 }
 .successful_main {
-	font-size: 40px;
+  font-size: 40px;
 }
 
 .successful_continue {
-	padding: 10px 20px;
+  padding: 10px 20px;
 }
 /* Sign-up */
-
+.sign-up-body button[disabled] {
+  background-color: var(--main-color)!important;
+  cursor: pointer!important;
+}
 .sign-up-body label {
   margin-bottom: 5px;
   display: block;
 }
 
-.sign-up-body .avt_choosing {
+.avatar-container {
   display: flex;
-  justify-content: space-between;
+  gap: 5px;
   align-items: center;
-  gap: 20px;
 }
-
-.sign-up-body .avt_choosing input {
-  height: auto;
-  line-height: 20px;
+.avatar-container input {
+  width: 100px;
   padding: 0px;
   margin: 0px;
-  flex: 20%;
-  text-align: right;
+  height: auto;
+}
+.avatar-container {
+  display: flex;
 }
 
 .sign-up-body .licence {
@@ -261,7 +263,7 @@ html {
   gap: 10px;
 }
 
-.sign-up-body input[type="checkbox"] {
+.sign-up-body input[type='checkbox'] {
   padding: 0px;
   margin: 0px;
   width: 18px;
@@ -300,10 +302,9 @@ html {
     margin-top: 50px;
   }
   .successful_sign {
-	padding: 0px 30px
+    padding: 0px 30px;
   }
   .successful_box {
-	width: 100%;
+    width: 100%;
   }
-  
 }
