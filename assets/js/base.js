@@ -43,6 +43,8 @@ function scrollHeader() {
 // Search function for header
 (function search_box() {
   const search = document.querySelector('.header-search input');
+  const btnSearch = document.querySelector('.header-search button');
+  let querySearch = '';
   search.addEventListener('input', (element) => {
     element.preventDefault();
     const box = document.querySelector('.header-search-items');
@@ -62,6 +64,7 @@ function scrollHeader() {
       }
     });
     box.style.display = search.value === '' ? 'none' : 'block';
+    querySearch = search.value;
     const new_api = SEARCH_API + search.value;
     searchMovie(new_api);
   });
@@ -116,7 +119,8 @@ async function searchMovie(API) {
     logged_account.classList.remove('active-hidden');
     document.querySelector('.account_name').innerHTML = data.name;
     document.querySelector('.account-logged img').src = data.avatar || nonAvatar;
-    document.querySelector('.comment-me img').src = data.avatar || nonAvatar
+    if (document.querySelector('.comment-me img'))
+      document.querySelector('.comment-me img').src = data.avatar || nonAvatar;
   }
 })();
 

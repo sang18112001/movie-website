@@ -130,11 +130,6 @@ li {
   border-left: 5px solid var(--main-color);
 }
 
-button[disabled] {
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  cursor: not-allowed !important;
-}
-
 /* Vote box */
 
 .vote-box {
