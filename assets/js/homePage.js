@@ -1,0 +1,157 @@
+// Header scroll
+scrollHeader();
+
+/**
+==============================================================Body function====================================================================
+ */
+// Home slider
+$('.owl-carousel.home-slider').owlCarousel({
+  margin: 15,
+  items: 1,
+});
+
+// Get components
+getAPI.getMovies('top_rated').then((data) => {
+  const movies = data.results;
+  const all_movies = document.querySelector(`.top-rated-body`);
+  for (i = 0; i < 8; i++) {
+    const movieElement = `
+            <div class="col-6 col-lg-3 col-md-4 test_rated">
+                <div class="top-rated-main">
+                    <div class="top-rated_box">
+                        <div class="top-rated-num">${i + 1}</div>
+                        <div class="top-rated-img">
+                            <a href="detailMovie.html?id=${movies[i].id}">
+                                <img src="${IMG_PATH + movies[i].poster_path}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    all_movies.innerHTML += movieElement;
+  }
+});
+
+getAPI.getMovies('now_playing').then((data) => {
+  const movies = data.results;
+  const all_movies = document.querySelector(`.box-nowPlaying`);
+  for (i = 0; i < 12; i++) {
+    const title = movies[i].original_title;
+    const movieElement = `
+            <a href="detailMovie.html?id=${movies[i].id}">
+                <div class="box" style="background-image: url('${IMG_PATH + movies[i].backdrop_path}')">
+                  <div class="type-movie-title">${title}</div>
+                </div>
+            </a>
+        `;
+    all_movies.innerHTML += movieElement;
+  }
+});
+
+getAPI.getMovies('up_coming').then((data) => {
+  const movies = data.results;
+  const all_movies = document.querySelector(`.box-upComing`);
+  for (i = 0; i < 12; i++) {
+    const title = movies[i].original_title;
+    const movieElement = `
+            <a href="detailMovie.html?id=${movies[i].id}">
+                <div class="box" style="background-image: url('${IMG_PATH + movies[i].backdrop_path}')">
+                <div class="type-movie-title">${title}</div>
+                </div>
+            </a>
+        `;
+    all_movies.innerHTML += movieElement;
+  }
+});
+
+getAPI.getMyGenres().then((data) => {
+  const genres_info = data;
+  const genresContainer = document.querySelector('.genres-type .row');
+  genres_info.forEach((genre) => {
+    const newLink = `typeOfMovies.html?type=popularity&genres=${genre.id}`;
+    genresContainer.innerHTML += `
+            <a href=${newLink}  class="col-6 col-md-4 col-lg-3 col-xl-2">
+              <div class="genre-box">
+                  <img src="${genre.genre_path}" alt="">
+                  <p>${genre.genre_name}</p>
+              </div>
+            </a>
+        `;
+  });
+});
+
+getAPI.getMovies('popularity').then((data) => {
+  show_banner(data.results);
+  show_movie_slider(data.results);
+});
+
+function show_banner(movies) {
+  const owl_carousel = document.querySelector('.movie-slider');
+  movies.forEach((movie) => {
+    owl_carousel.innerHTML += `
+            <div class="slider-item">
+                <img class="border-cards image-banner opacity-image" src="${IMG_PATH + movie.poster_path}" alt="">
+            </div>
+        `;
+  });
+  $('.owl-carousel.movie-slider').owlCarousel({
+    margin: 15,
+    responsive: {
+      300: {
+        items: 2,
+      },
+      500: {
+        items: 2,
+      },
+      620: {
+        items: 2,
+      },
+    },
+  });
+}
+
+function show_movie_slider(movies) {
+  const needed_movies = document.querySelector('.main-movies');
+  movies.forEach((movie, index) => {
+    needed_movies.innerHTML += `
+        <div class="movie movie-${index}">
+            <div class="movie-main">
+                <h2 class="movie-title">${movie.original_title}</h2>
+                <div class="movie-year-vote">
+                    <span class="movie-year">${movie.release_date}</span>
+                    <span class="movie-vote">${movie.vote_average}</span>
+                </div>
+                <div class="movie-detail">
+                    <a href="detailMovie.html?id=${movie.id}">
+                        <button class="btn">
+                            <span class="movie-watch"><i class="fa-solid fa-caret-right"></i></span>
+                            <span>Watch Now</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        `;
+  });
+  const background_movies = document.querySelector(`.main-movies img`);
+  background_movies.src = `${IMG_PATH + movies[0].backdrop_path}`;
+  const all_image_banner = document.querySelectorAll('.image-banner');
+  all_image_banner[0].classList.remove('opacity-image');
+  const nth_movies = document.querySelectorAll(`.movie`);
+  nth_movies[0].classList.add('active');
+
+  all_image_banner.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      background_movies.src = `${IMG_PATH + movies[index].backdrop_path}`;
+      all_image_banner.forEach((banner_element) => {
+        banner_element.classList.add('opacity-image');
+      });
+      img.classList.remove('opacity-image');
+      nth_movies.forEach((movie_element) => {
+        movie_element.classList.remove('active');
+      });
+      document.querySelector(`.movie-${index}`).classList.add('active');
+    });
+  });
+}

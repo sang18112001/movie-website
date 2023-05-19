@@ -122,7 +122,21 @@ li {
 .active-black {
   color: black !important;
 }
+.checkPassword,
+.checkEmail,
+.checkAllow {
+  color: red;
+  font-size: 13px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
 
+.wrong-account {
+  border: 3px solid red !important;
+}
+.active-wishList {
+  color: var(--main-color) !important;
+}
 .content-title {
   font-size: 24px;
   line-height: 24px;
@@ -279,7 +293,6 @@ header.shadow .responsive-account {
   max-height: 300px;
   color: var(--shadow-color);
   overflow-y: scroll;
-  display: none;
 }
 
 .header-search-items .item {
@@ -308,8 +321,16 @@ header.shadow .responsive-account {
   object-fit: cover;
 }
 
+.header-search-items .item-content {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .header-search-items .item .item-title {
   color: var(--main-color);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .header-search-items .item .item-id {
@@ -413,9 +434,13 @@ header.shadow .responsive-account {
   width: 100%;
 }
 
+.account_avt {
+  border-radius: 50%;
+}
+
 .account-logged-button {
   padding: 10px;
-  width: 200px;
+  min-width: 300px;
   background-color: white;
   border-radius: 10px;
   border: 1px solid #d3d3d3;
@@ -429,10 +454,6 @@ header.shadow .responsive-account {
   display: none;
 }
 
-.account-logged .log-out {
-  width: 100%;
-}
-
 .logged-box .logged_account {
   display: flex;
   color: var(--main-color);
@@ -444,7 +465,29 @@ header.shadow .responsive-account {
   align-items: center;
   gap: 15px;
 }
+.logged-box .logged_dashboard {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 20px;
+}
+.logged-box .logged_dashboard a {
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+.logged-box .logged_dashboard a.log-out {
+  width: 100%;
+  color: white;
+  border: 1px solid var(--main-color);
+}
+.logged-box .logged_dashboard a:hover {
+  color: var(--main-color);
+}
 .icon-search {
   width: 30px;
   height: 30px;
@@ -639,6 +682,9 @@ header.shadow .responsive-account {
 
   .body-container {
     padding: 30px 5% !important;
+  }
+  #web_body_dashboard {
+    padding: 0px 5% 0px 5% !important;
   }
   .header-search-items .item img {
     width: 50px;

@@ -94,14 +94,9 @@ function firstLastPage(total) {
     nextPageLink(total);
   });
 }
-
-const pagination = async () => {
-  const res = await fetch(currentAPI);
-  const moviesInfo = await res.json();
-  const totalPages = moviesInfo.total_pages;
+getAPI.getMovies(type, currentPage, filterObj.genres, filterObj.languages, filterObj.years).then((data) => {
+  const totalPages = data.total_pages;
   numOfPages(totalPages);
   changePage(totalPages);
   firstLastPage(totalPages);
-};
-
-pagination();
+});

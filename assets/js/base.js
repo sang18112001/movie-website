@@ -1,18 +1,9 @@
-const IMG_PATH = `https://image.tmdb.org/t/p/w1280`;
-const NOW_PLAYING = 'https://api.themoviedb.org/3/movie/now_playing?api_key=3fd2be6f0c70a2a598f084ddfb75487c';
-const POPULAR_API = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=`;
-const TOP_RATED_API = `https://api.themoviedb.org/3/movie/top_rated?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US&page=`;
-const UP_COMING_API = `https://api.themoviedb.org/3/movie/upcoming?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US&page=`;
-
-const GENRES_API = `https://api.themoviedb.org/3/genre/movie/list?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US`;
-const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=';
-const typeMovies = [`now_playing`, `popularity`, `top_rated`, `up_coming`];
-const nonAvatar = `https://d11a6trkgmumsb.cloudfront.net/original/3X/d/8/d8b5d0a738295345ebd8934b859fa1fca1c8c6ad.jpeg`;
-
 if (!localStorage.getItem('signAccount')) {
   localStorage.setItem('signAccount', JSON.stringify({ uid: '' }));
 }
 const uid = JSON.parse(localStorage.getItem('signAccount')).uid;
+// Save current link
+!uid && localStorage.setItem('currentPage', String(window.location.href));
 // Header scroll
 function scrollHeader() {
   let header = document.querySelector('header');
@@ -21,94 +12,47 @@ function scrollHeader() {
   });
 }
 
-// Creating logo button
-(function changeLogoLink() {
-  const web_logo = document.querySelector('.web-logo');
-  web_logo.addEventListener('click', () => {
-    window.location.assign(`index.html`);
-  });
-})();
-
-// Menu header create
-(function menuHeaderCreate() {
-  const header_menu = document.querySelector('.header-menu');
-  header_menu.innerHTML = `<li><a class="active-menu" href="index.html">Home</a></li>`;
-  typeMovies.forEach((eachType) => {
-    const menuLink = `typeOfMovies.html?type=${eachType}`;
-    const menuTitle = eachType.split('_').join(' ');
-    header_menu.innerHTML += `<li><a href="${menuLink}">${menuTitle}</a></li>`;
-  });
-})();
-
 // Search function for header
-(function search_box() {
+(search_box = () =>  {
   const search = document.querySelector('.header-search input');
   const btnSearch = document.querySelector('.header-search button');
-  let querySearch = '';
   search.addEventListener('input', (element) => {
     element.preventDefault();
     const box = document.querySelector('.header-search-items');
     box.innerHTML = '';
-    // Add event listener to the document object for mousedown event
-    document.addEventListener('mousedown', function (event) {
-      // Check if the target of the event is outside of the box
-      if (!box.contains(event.target)) {
-        // If it is, hide the box
-        box.style.display = 'none';
-      }
-    });
-    // Add event listener to the input element for focusin event
-    search.addEventListener('focusin', function (event) {
-      if (search.value != '') {
-        box.style.display = 'block';
-      }
-    });
-    box.style.display = search.value === '' ? 'none' : 'block';
-    querySearch = search.value;
-    const new_api = SEARCH_API + search.value;
-    searchMovie(new_api);
+    document.addEventListener(
+      'mousedown',
+      (event) => !box.contains(event.target) && box.classList.add('active-hidden'),
+    );
+    search.addEventListener('focusin', () => search.value != '' && box.classList.remove('active-hidden'));
+    search.value === '' ? box.classList.add('active-hidden') : box.classList.remove('active-hidden');
+    getAPI.getSearchMovies(search.value).then((data) => showSearch(data));
   });
 })();
 
-async function searchMovie(API) {
-  const res = await fetch(API);
-  const search_movie = await res.json();
-  // Show search movie
-  function showSearch(search_movie) {
-    const api_movies = search_movie.results;
-    const list_movies = document.querySelector('.header-search-items');
-    if (api_movies.length === 0) {
-      list_movies.innerHTML += `
-                  <p class="no_results">Don't have results</p>
-              `;
-    } else {
-      api_movies.forEach((element) => {
-        const nameOfMovie =
-          element.original_title.length > 30 ? element.original_title.slice(0, 30) + '...' : element.original_title;
-        const detailLink = !uid ? `sign-in.html` : `detailMovie.html?id=${element.id}`;
+const showSearch = (search_movie) => {
+  const api_movies = search_movie.results;
+  const list_movies = document.querySelector('.header-search-items');
+  api_movies.length === 0
+    ? (list_movies.innerHTML = `<p class="no_results">Don't have results</p>`)
+    : api_movies.forEach((element) => {
         list_movies.innerHTML += `
-                    <li class="item">
-                        <a href=${detailLink}>
-                            <img src="${IMG_PATH + element.poster_path}"></img>
-                            <div class="item-content">
-                                <div class="item-title">${nameOfMovie}</div>
-                                <div class="item-id">ID: ${element.id}</div>
-                            </div>
-                        </a>
-                    </li>
-                `;
+          <li class="item">
+              <a href="detailMovie.html?id=${element.id}">
+                  <img src="${IMG_PATH + element.poster_path}"></img>
+                  <div class="item-content">
+                      <div class="item-title">${element.original_title}</div>
+                      <div class="item-id">ID: ${element.id}</div>
+                  </div>
+              </a>
+          </li>
+      `;
       });
-    }
-  }
-  showSearch(search_movie);
 }
 
 // Modify account
-(async function your_account_modify() {
-  const res = await fetch(
-    `https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${uid}.json`,
-  );
-  const data = await res.json();
+getAPI.getInfoUser(uid).then((data) => {
+  console.log(data);
   const log_account = document.querySelector('.account-log');
   const logged_account = document.querySelector('.account-logged');
   if (uid === '') {
@@ -117,18 +61,22 @@ async function searchMovie(API) {
   } else {
     log_account.classList.add('active-hidden');
     logged_account.classList.remove('active-hidden');
-    document.querySelector('.account_name').innerHTML = data.name;
+    document.querySelectorAll('.account_name').forEach((nameUser) => (nameUser.innerHTML = data.name));
+    document.querySelector('.account_avt').src = data.avatar || nonAvatar;
     document.querySelector('.account-logged img').src = data.avatar || nonAvatar;
+    document.querySelectorAll('.account_avt').forEach((avtImg) => {
+      avtImg.src = data.avatar || nonAvatar;
+    });
     if (document.querySelector('.comment-me img'))
       document.querySelector('.comment-me img').src = data.avatar || nonAvatar;
   }
-})();
+});
 
 // Sign out account
 (function () {
-  const signOutBtn = document.querySelector('.log-out');
-  signOutBtn.addEventListener('click', () => {
-    localStorage.setItem('signAccount', JSON.stringify({ uid: '' }));
+  const signOutBtns = document.querySelectorAll('.log-out');
+  signOutBtns.forEach(function (signOutBtn) {
+    signOutBtn.addEventListener('click', () => localStorage.setItem('signAccount', JSON.stringify({ uid: '' })));
   });
 })();
 

@@ -1,27 +1,17 @@
 // Body function
 const urlParams = new URLSearchParams(window.location.search);
 const needed_id = urlParams.get('id');
-const API_URL = `https://api.themoviedb.org/3/movie/${needed_id}?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US`;
-const ALL_IMAGES = `https://api.themoviedb.org/3/movie/${needed_id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`;
-const ALL_CAST = `https://api.themoviedb.org/3/movie/${needed_id}/credits?api_key=3fd2be6f0c70a2a598f084ddfb75487c`;
-const RECOMMENDATION = `https://api.themoviedb.org/3/movie/${needed_id}/recommendations?api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=en-US&page=1`;
-const COMMENTS = `https://api.themoviedb.org/3/movie/${needed_id}/reviews?api_key=3fd2be6f0c70a2a598f084ddfb75487c`;
-const personalAPI = `https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app`;
+
 scrollHeader();
 // Embed information-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-// Main information
-async function mainEmbeding() {
-  const movieContainer = document.querySelector('.movie-container');
-  const movieAPI = await fetch(API_URL);
-  const movie_info = await movieAPI.json();
-  const castsAPI = await fetch(ALL_CAST);
-  const casts_info = await castsAPI.json();
-  const detailLink = `watchingMovie.html?id=${needed_id}`;
-  let castInner = '';
-  let genreInner = movie_info.genres.map((genre) => `<p>${genre.name}</p>`).join('');
-  casts_info.cast.slice(0, 10).forEach((cast) => {
-    castInner += `
+getAPI.getInfoDetail(needed_id, '').then((movie_info) => {
+  getAPI.getInfoDetail(needed_id, '/credits').then((casts_info) => {
+    const movieContainer = document.querySelector('.movie-container');
+    const detailLink = !uid ? `sign-in.html` : `watchingMovie.html?id=${needed_id}`;
+    let castInner = '';
+    let genreInner = movie_info.genres.map((genre) => `<p>${genre.name}</p>`).join('');
+    casts_info.cast.slice(0, 10).forEach((cast) => {
+      castInner += `
             <div class="cast">
                 <div class="cast-avt" style="background-image: url(${IMG_PATH + cast.profile_path})"></div>
                 <div class="cast-name">
@@ -29,9 +19,9 @@ async function mainEmbeding() {
                 </div>
             </div>
         `;
-  });
-  const votepercent = Math.round(movie_info.vote_average * 10);
-  movieContainer.innerHTML = `
+    });
+    const votepercent = Math.round(movie_info.vote_average * 10);
+    movieContainer.innerHTML = `
         <div class="movie-image" style="background-image: url(${IMG_PATH + movie_info.backdrop_path})"></div>
         <div class="movie-content">
             <div class="image">
@@ -57,7 +47,7 @@ async function mainEmbeding() {
                                 a 15.9155 15.9155 0 0 1 0 -31.831"
                             />
                             </svg>
-                        <p>${movie_info.vote_average}</p>
+                        <p>${movie_info.vote_average.toFixed(1)}</p>
                     </div>
                     <div class="genre-names">${genreInner}</div>
                 </div>
@@ -76,8 +66,9 @@ async function mainEmbeding() {
             </div>
         </div>
     `;
-}
-mainEmbeding();
+  });
+});
+// Main information
 
 // Media
 const changeMediaType = () => {
@@ -96,132 +87,84 @@ const changeMediaType = () => {
 };
 changeMediaType();
 
-async function mediaEmbeding() {
-  const mediaAPI = await fetch(ALL_IMAGES);
-  const media_info = await mediaAPI.json();
-  owlMediaEmbedingPosters(media_info.posters);
-  owlMediaEmbedingBackdrops(media_info.backdrops);
-}
-mediaEmbeding();
+getAPI.getInfoDetail(needed_id, '/images').then((media_info) => {
+  embedPerform(media_info.posters, '.posters', 2, 3, 5);
+  embedPerform(media_info.backdrops, '.backdrops', 1, 2, 2);
+});
 
-function owlMediaEmbedingPosters(medias) {
-  const numPosters = medias.length < 20 ? medias.length : 20;
-  const postersOwl = document.querySelector('.posters');
-  for (i = 0; i < numPosters; i++) {
-    const posterOwl = `
-            <img src="${IMG_PATH + medias[i].file_path}">
-        `;
-    postersOwl.innerHTML += posterOwl;
+function embedPerform(medias, media_class, items_0, items_1, items_2) {
+  const numMedias = medias.length < 20 ? medias.length : 20;
+  const mediasOwl = document.querySelector(media_class);
+  for (i = 0; i < numMedias; i++) {
+    mediasOwl.innerHTML += `<img src="${IMG_PATH + medias[i].file_path}">`;
   }
-  $('.posters').owlCarousel({
-    margin: 30,
+  $(mediasOwl).owlCarousel({
+    margin: 15,
     responsive: {
       0: {
-        items: 2,
+        items: items_0,
       },
       600: {
-        items: 3,
+        items: items_1,
       },
       1000: {
-        items: 5,
+        items: items_2,
       },
     },
   });
 }
 
-function owlMediaEmbedingBackdrops(medias) {
-  const numBackdrops = medias.length < 20 ? medias.length : 20;
-  const backdropsOwl = document.querySelector('.backdrops');
-  for (i = 0; i < numBackdrops; i++) {
-    const backdropOwl = `
-            <img src="${IMG_PATH + medias[i].file_path}">
-        `;
-    backdropsOwl.innerHTML += backdropOwl;
-  }
-  $(document).ready(function () {
-    $('.backdrops').slick({
-      dots: false,
-      prevArrow: false,
-      nextArrow: false,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 700,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-      ],
-    });
-  });
-}
 // Comments
-APIMovieUpload(needed_id, personalAPI, COMMENTS);
+APIMovieUpload(needed_id);
 
 // Recommendations
-async function recommendations() {
-  const recommnedsOwl = document.querySelector('.recommend-main');
-  const recommend = await fetch(RECOMMENDATION);
-  const recommend_info = await recommend.json();
-  const mainRecommend = recommend_info.results;
-  const recommendRandom = await fetch(POPULAR_API);
-  const recommendRandom_info = await recommendRandom.json();
-  const secondRecommend = recommendRandom_info.results;
-  let numRecommends, recommender;
-  if (mainRecommend.length != 0) {
-    numRecommends = mainRecommend.length < 20 ? mainRecommend.length : 20;
-    recommender = mainRecommend;
-  } else {
-    numRecommends = secondRecommend.length;
-    recommender = secondRecommend;
-  }
-  for (i = 0; i < numRecommends; i += 1) {
-    if (recommender[i].backdrop_path === null) {
-      continue;
+getAPI.getInfoDetail(needed_id, '/recommendations').then((recommend_info) => {
+  getAPI.getMovies().then((recommendRandom_info) => {
+    const mainRecommend = recommend_info.results;
+    const secondRecommend = recommendRandom_info.results;
+    const recommendations = document.querySelector('.recommend-main');
+    let numRecommends, recommender;
+    if (mainRecommend.length != 0) {
+      numRecommends = mainRecommend.length < 20 ? mainRecommend.length : 20;
+      recommender = mainRecommend;
+    } else {
+      numRecommends = secondRecommend.length;
+      recommender = secondRecommend;
     }
-    const newLink = `detailMovie.html?id=${recommender[i].id}`;
-    const recommendOwl = `
-            <div class="recommend-item">
-                <a href="${newLink}">
-                    <img src="${IMG_PATH + recommender[i].backdrop_path}" alt="">
-                </a>
-                <div class="item-vote">
-                  <span class=" icon fa fa-star checked"></span>
-                  <span>${recommender[i].vote_average}</span>
-                </div>
-                <div class="item-name">
-                   ${recommender[i].original_title}
-                </div>
-            </div>
-        `;
-    recommnedsOwl.innerHTML += recommendOwl;
-  }
-  $(document).ready(function () {
-    $('.recommend-main').slick({
-      dots: false,
-      prevArrow: false,
-      nextArrow: false,
-      slidesToShow: 4,
-      slidesToScroll: 1,
+    for (i = 0; i < numRecommends; i += 1) {
+      if (recommender[i].backdrop_path === null) {
+        continue;
+      }
+      recommendations.innerHTML += `
+              <div class="recommend-item">
+                  <a href="detailMovie.html?id=${recommender[i].id}">
+                      <img src="${IMG_PATH + recommender[i].backdrop_path}" alt="">
+                  </a>
+                  <div class="item-vote">
+                    <span class=" icon fa fa-star checked"></span>
+                    <span>${recommender[i].vote_average.toFixed(1)}</span>
+                  </div>
+                  <div class="item-name">
+                     ${recommender[i].original_title}
+                  </div>
+              </div>
+          `;
+    }
+    $('.recommend-main').owlCarousel({
+      margin: 30,
       autoplay: true,
-      autoplaySpeed: 2000,
-      responsive: [
-        {
-          breakpoint: 700,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-          },
-          breakpoint: 500,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-          },
+      autoplayTimeout: 2000,
+      responsive: {
+        0: {
+          items: 2,
         },
-      ],
+        600: {
+          items: 3,
+        },
+        1000: {
+          items: 4,
+        },
+      },
     });
   });
-}
-recommendations();
+});

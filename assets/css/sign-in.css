@@ -271,18 +271,7 @@ html {
   width: 100%;
 }
 
-.sign-up-body .checkPassword,
-.sign-up-body .checkEmail,
-.sign-up-body .checkAllow {
-  color: red;
-  font-size: 13px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
 
-.wrong-account {
-  border: 3px solid red !important;
-}
 
 /* Resposive */
 @media (max-width: 600px) {

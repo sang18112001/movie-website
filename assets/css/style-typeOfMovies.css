@@ -253,6 +253,16 @@
   opacity: 0;
   transition: all ease-in-out 0.3s;
 }
+
+.addWishList {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 111;
+}
+
 .vote-box {
   width: 50px;
 }
@@ -272,6 +282,7 @@
 .body-card:hover .card-play {
   opacity: 1;
 }
+
 
 .card-play:hover {
   background-color: rgb(178, 0, 0);
@@ -318,7 +329,7 @@
   display: flex;
 }
 
-.change-pages .page.first-page, 
+.change-pages .page.first-page,
 .change-pages .page.last-page {
   margin: 0px;
 }
@@ -387,7 +398,8 @@ body.resultsNotExist .footer-icon {
   .web-movies .movies-title span {
     padding: 0px;
   }
-  .container, .container-sm {
+  .container,
+  .container-sm {
     max-width: 1000px !important;
   }
 }

@@ -8,14 +8,7 @@ const filterObj = {
   years: getQuery.years || '',
 };
 const currentPage = Number(getQuery.page) || 1;
-const index_type = typeMovies.indexOf(type);
-const arr_typeOfmovies = ['movie/now_playing', 'discover/movie', 'movie/top_rated', 'movie/upcoming'];
-const baseAPI = `https://api.themoviedb.org/3/${arr_typeOfmovies[index_type]}?api_key=3fd2be6f0c70a2a598f084ddfb75487c&vote_average.gte=1&vote_average.lte=8.5`;
-const currentAPI =
-  baseAPI +
-  `&with_genres=${filterObj.genres}` +
-  `&with_original_language=${filterObj.languages}` +
-  `&primary_release_year=${filterObj.years}&page=${currentPage}`;
+
 const loaderDiv = document.getElementById('loader');
 
 // Change title
@@ -28,35 +21,53 @@ document.title = newTitle;
 const navbar_list = document.querySelectorAll('.header-menu a');
 navbar_list.forEach((item) => {
   item.classList.remove('active-menu');
+  const newNavbar = item.innerHTML.split(' ').join('_').toLowerCase();
+  type === newNavbar && item.classList.add('active-menu');
 });
-navbar_list[Number(index_type) + 1].classList.add('active-menu');
 
-// Get all movies
-async function getMovies(API_URL) {
-  loaderDiv.classList.remove('hidden');
-  const res = await fetch(API_URL);
-  const data = await res.json();
-  loaderDiv.classList.add('hidden');
-  const movies_info = data;
-  show_movies(movies_info);
-}
+// Add wishlist and remove
+const addWishListHandler = (wishListBtns, userInfo) => {
+  wishListBtns.forEach((wishListBtn) => {
+    wishListBtn.addEventListener('click', () => {
+      if (uid) {
+        wishListBtn.classList.toggle('active-wishList');
+        wishListBtn.classList.contains('active-wishList')
+          ? (userInfo.wishList = userInfo.wishList ? [...userInfo.wishList, wishListBtn.id] : [wishListBtn.id])
+          : (userInfo.wishList = userInfo.wishList.filter((item) => item !== wishListBtn.id));
+
+        fetch(`https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${uid}.json`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userInfo),
+        });
+      } else {
+        alert('You have to sign in');
+      }
+    });
+  });
+};
 
 // Show movies
-function show_movies(movies_info) {
+function show_movies(movies_info, userInfo) {
   const movies = movies_info.results;
   const all_cards = document.querySelector('.body-cards');
   document.querySelector('.movies-total').innerHTML = `Total: ${movies_info.total_results} movies`;
   movies.forEach((movie) => {
+    checkWishtList = userInfo.wishList && userInfo.wishList.includes(String(movie.id));
     all_cards.innerHTML += `
       <div class="each-col col-6 col-md-4 col-xl-3">
-        <a href="${!uid ? `sign-in.html` : `detailMovie.html?id=${movie.id}`}">
           <div class="body-card" style="background-image: url(${
             IMG_PATH + movie.poster_path ||
             'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/495px-No-Image-Placeholder.svg.png?20200912122019'
           })">
-            <button class="card-play">
-              <i class="fa-solid fa-play"></i>
-            </button>
+            <a href="detailMovie.html?id=${movie.id}">
+              <button class="card-play">
+                <i class="fa-solid fa-play"></i>
+              </button>
+            </a>
+            <i id="${movie.id}" class="addWishList fa-solid fa-heart ${checkWishtList ? 'active-wishList' : ''}"></i>
             <div class="card-shadow"></div>
             <div class="card-content">
               <div class="vote-box">
@@ -74,17 +85,24 @@ function show_movies(movies_info) {
               <div class="content-name">${movie.title}</div>
             </div>
           </div>
-        </a>
       </div>
     `;
   });
   movies_info.results.length === 0
     ? document.body.classList.add('resultsNotExist')
     : document.body.classList.remove('resultsNotExist');
+  const wishListBtns = document.querySelectorAll('.addWishList');
+  addWishListHandler(wishListBtns, userInfo);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   window.onload = () => {
-    getMovies(currentAPI);
+    loaderDiv.classList.remove('hidden');
+    getAPI.getMovies(type, currentPage, filterObj.genres, filterObj.languages, filterObj.years).then((movies) => {
+      getAPI.getInfoUser(uid).then((userInfo) => {
+        show_movies(movies, userInfo);
+      });
+    });
+    loaderDiv.classList.add('hidden');
   };
 });

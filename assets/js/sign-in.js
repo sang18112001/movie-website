@@ -1,3 +1,5 @@
+// Get current page
+const currentPage = localStorage.getItem('currentPage');
 // Transission sign in and sign up
 const signInBox = document.querySelector('.sign-in-body');
 const signUpBox = document.querySelector('.sign-up-body');
@@ -42,10 +44,10 @@ function signInAccount() {
       for (i = 0; i < valuesArr.length; i++) {
         if (valuesArr[i].email == your_account.email && valuesArr[i].password == your_account.password) {
           check = true;
-          valuesArr[i].checkSignIn = true;
           document.querySelector('.sign-in-wrong-container').classList.add('active-hidden');
           localStorage.setItem('signAccount', JSON.stringify({ uid: keysArr[i] }));
-          window.location.assign(`index.html`);
+          window.location.assign(currentPage);
+          localStorage.setItem('currentPage', '');
           break;
         }
       }
@@ -96,7 +98,6 @@ const upLoadUser = (emailsList) => {
     if (!emailsList.includes(newUser.email)) {
       const avatar = localStorage.getItem('thumbnail');
       const addNewAccount = {
-        checkSignIn: 'false',
         email: newUser.email,
         name: newUser.firstName + ' ' + newUser.lastName,
         password: newUser.password,
