@@ -43,6 +43,7 @@ function signInAccount() {
       let check = false;
       for (i = 0; i < valuesArr.length; i++) {
         if (valuesArr[i].email == your_account.email && valuesArr[i].password == your_account.password) {
+          console.log(valuesArr[i].email);
           check = true;
           document.querySelector('.sign-in-wrong-container').classList.add('active-hidden');
           localStorage.setItem('signAccount', JSON.stringify({ uid: keysArr[i] }));
@@ -65,7 +66,6 @@ async function signUpAccountOther() {
     'https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user.json',
   );
   const usersList = await response.json();
-  const idsList = Object.keys(usersList);
   const infosList = Object.values(usersList);
   const emailsList = infosList.map((info) => info.email);
   const submitBtn = document.querySelector('.sign-up-body button');
@@ -94,12 +94,12 @@ const submitHandle = (submitBtn, emailsList) => {
 const upLoadUser = (emailsList) => {
   const formData = new FormData(signUpBox);
   const newUser = Object.fromEntries(formData);
-  if (newUser.firstName && newUser.lastName && newUser.email && newUser.password) {
+  if (newUser.myName && newUser.email && newUser.password) {
     if (!emailsList.includes(newUser.email)) {
       const avatar = localStorage.getItem('thumbnail');
       const addNewAccount = {
         email: newUser.email,
-        name: newUser.firstName + ' ' + newUser.lastName,
+        name: newUser.myName,
         password: newUser.password,
         avatar,
       };
@@ -111,6 +111,7 @@ const upLoadUser = (emailsList) => {
         body: JSON.stringify(addNewAccount),
       }).then((response) => response.json());
       upToIn();
+      toast();
     }
   }
 };
@@ -160,3 +161,4 @@ const avatarHandle = () => {
     });
   });
 };
+

@@ -28,7 +28,7 @@
   overflow: hidden;
 }
 .dashboard-header {
-  min-width: 20%;
+  min-width: 25%;
   display: flex;
   flex-direction: column;
 }
@@ -145,6 +145,7 @@
 
 .wishListClass {
   overflow: auto;
+  height: 600px;
 }
 
 .wishListClass::-webkit-scrollbar {
@@ -193,7 +194,6 @@
 }
 
 .wishlistEmpty-box {
-  min-width: 300px;
   max-width: 500px;
   display: flex;
   flex-direction: column;
@@ -213,13 +213,76 @@
   width: 150px;
   margin: 0px auto;
 }
-.wishlistEmpty-btn button{
+.wishlistEmpty-btn button {
   background-color: rgb(0, 132, 255);
   color: white;
   width: 100%;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 10px;
+}
+* Block */ .btn-toast {
+  display: inline-block;
+  color: #fff;
+  padding: 12px 48px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  background-color: #71be34;
+}
+
+.btn-toast:hover {
+  opacity: 0.8;
+}
+
+#toast {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 999999;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 20px 0;
+  border-left: 4px solid;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+  animation: slideInLeft ease 0.3s, fadeOut linear 1s 1s forwards;
+  border-color: #47d864;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(calc(100% + 32px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.toast__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.toast__msg {
+  font-size: 14px;
+  color: #888;
+  margin-top: 6px;
+  line-height: 1.5;
 }
 @media (max-width: 850px) {
   .dashboard-main {
@@ -233,7 +296,7 @@
   }
   .active-dashboard {
     border: none;
-    border-bottom: 3px solid var(--main-color)
+    border-bottom: 3px solid var(--main-color);
   }
 }
 @media (max-width: 500px) {
@@ -244,7 +307,7 @@
   .dashboard-box button {
     width: 100%;
   }
-  .dashboard-menu a{
+                                .dashboard-menu a {
     font-size: 14px;
     padding: 5px 10px;
   }

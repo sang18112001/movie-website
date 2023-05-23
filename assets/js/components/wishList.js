@@ -1,7 +1,6 @@
 const wishListHandler = (wishList) => {
   const dashboardBox = document.querySelector('.dashboard-box');
   dashboardBox.classList.add('wishListClass');
-  console.log(wishList);
   if (!wishList || wishList.length === 0) {
     dashboardBox.innerHTML = `
       <div class="wishlistEmpty-box">

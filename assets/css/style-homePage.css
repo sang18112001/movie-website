@@ -82,6 +82,7 @@
     animation: scale-display 0.5s;
     border-radius: 20px;
     overflow: hidden;
+    opacity: 0.5;
 }
 
 @keyframes scale-display {

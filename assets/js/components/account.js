@@ -51,21 +51,25 @@ const accountDashboardPerform = () => {
   const confirmPass = document.querySelector('input[name="confirm_password"]');
   const submitBtn = document.querySelector('.dashboard-submit');
   const wrongBox = document.querySelectorAll('.checkPassword');
+
   getAPI.getInfoUser(uid).then((userInfo) => {
-    handleOldPassword(oldPass, wrongBox, userInfo);
+    submitBtn.disabled = userInfo.password != oldPass.value;
+    handleOldPassword(oldPass, wrongBox, userInfo, submitBtn);
     handleConfirmPassword(confirmPass, wrongBox, passBtn);
     handleSubmit(avtarBtn, nameBtn, passBtn, avtBox, submitBtn, userInfo);
   });
 };
 
-const handleOldPassword = (oldPass, wrongBox, userInfo) => {
+const handleOldPassword = (oldPass, wrongBox, userInfo, submitBtn) => {
   oldPass.addEventListener('input', (e) => {
     if (e.target.value != userInfo.password) {
       wrongBox[0].classList.remove('active-hidden');
       oldPass.classList.add('wrong-account');
+      submitBtn.disabled = true;
     } else {
       wrongBox[0].classList.add('active-hidden');
       oldPass.classList.remove('wrong-account');
+      submitBtn.disabled = false;
     }
   });
 };

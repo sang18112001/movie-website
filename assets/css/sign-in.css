@@ -270,8 +270,86 @@ html {
 .sign-up-body button {
   width: 100%;
 }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
+/* Block */
+.btn-toast {
+  display: inline-block;
+  color: #fff;
+  padding: 12px 48px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  background-color: #71be34;
+}
 
+.btn-toast:hover {
+  opacity: 0.8;
+}
+
+#toast {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 999999;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 20px 0;
+  border-left: 4px solid;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+  animation: slideInLeft ease 0.3s, fadeOut linear 1s 1s forwards;
+  border-color: #47d864;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(calc(100% + 32px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.toast__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.toast__msg {
+  font-size: 14px;
+  color: #888;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.back {
+  position: absolute;
+  font-size: 20px;
+  display: flex;
+  gap: 20px;
+  top: 20px;
+  left: 10px;
+  z-index: 111;
+}
 
 /* Resposive */
 @media (max-width: 600px) {

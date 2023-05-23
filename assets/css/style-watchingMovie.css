@@ -26,9 +26,11 @@
 .watching-content {
     display: flex;
 }
+
 .content-image {
     width: 250px;
 }
+
 .content-image img {
     width: 100%;
     object-fit: cover;
