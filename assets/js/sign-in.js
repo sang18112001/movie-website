@@ -15,7 +15,7 @@ function inToUp() {
   signUpBox.classList.remove('active-hidden');
   signInTitle.classList.add('active-sign');
   signUpTitle.classList.remove('active-sign');
-  document.querySelector('.sign-in-wrong').classList.add('active-hidden');
+  document.querySelector('.sign-in-wrong-container').classList.add('active-hidden');
 }
 
 function upToIn() {
@@ -53,6 +53,8 @@ function signInAccount() {
         }
       }
       if (check === false) {
+        console.log('sai pass')
+        console.log(document.querySelector('.sign-in-wrong-container'))
         document.querySelector('.sign-in-wrong-container').classList.remove('active-hidden');
       }
     }

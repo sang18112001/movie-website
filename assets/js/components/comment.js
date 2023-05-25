@@ -40,7 +40,7 @@ const APIMovieUpload = async (needed_id) => {
     });
   });
   getAPI.getInfoComments().then((data_comments) => {
-    getAPI.getInfoUser(uid).then((data_accounts) => {
+    getAPI.getInfoUser('').then((data_accounts) => {
       updateCmt(data_comments, data_accounts);
     });
   });
@@ -52,11 +52,14 @@ const updateCmt = (data_comments, data_accounts) => {
   if (data_comments != null && data_comments[needed_id] != null) {
     allComments = data_comments[needed_id].comment;
     allComments.forEach((comment) => {
-      addCmt(comment.author, comment.content, comment.avatar, comment.updated_at);
+      const userAvatar = Object.keys(data_accounts).includes(comment.userId) && data_accounts[comment.userId].avatar;
+      console.log(userAvatar);
+      addCmt(comment.author, comment.content, userAvatar, comment.updated_at);
     });
   } else {
     allComments = [];
   }
+
   submitForm.addEventListener('submit', (e) => {
     e.preventDefault();
     !uid && alert('Sign in before comment');
@@ -65,15 +68,15 @@ const updateCmt = (data_comments, data_accounts) => {
       date.getMonth() + 1
     } - ${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     const new_comment = commentType.value;
-    new_comment != '' && upCmtWithExistedID(new_comment, data_accounts.name, data_accounts.avatar, time);
+    new_comment != '' && upCmtWithExistedID(new_comment, data_accounts, uid, time);
     commentType.value = '';
   });
 };
 
-function upCmtWithExistedID(cmt, user, avatar, time) {
+function upCmtWithExistedID(cmt, infoUser, uid, time) {
   newItem = {
-    author: user,
-    avatar: avatar,
+    author: infoUser[uid].name,
+    userId: uid,
     content: cmt,
     updated_at: time,
   };
@@ -89,5 +92,5 @@ function upCmtWithExistedID(cmt, user, avatar, time) {
     },
     body: stringNewComment,
   });
-  addCmt(newItem.author, newItem.content, newItem.avatar, newItem.updated_at);
+  addCmt(newItem.author, newItem.content, infoUser[uid].avatar, newItem.updated_at);
 }

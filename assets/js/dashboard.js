@@ -5,5 +5,6 @@ dashboardHeader.classList.add('active-dashboard');
 
 const dashboardPerform = () => {
   queryDashboard === 'account' ? accountDashboardPerform() : wishListDashboardPerform();
+  document.title = queryDashboard === 'account' ? 'My account' : 'My wishlist';
 };
 dashboardPerform();

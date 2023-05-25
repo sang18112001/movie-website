@@ -71,22 +71,6 @@ getAPI.getInfoDetail(needed_id, '').then((movie_info) => {
 // Main information
 
 // Media
-const changeMediaType = () => {
-  const mediaBtn = document.querySelectorAll('.button-media');
-  const subMediaBox = document.querySelectorAll('.sub-media');
-  mediaBtn.forEach((btn, i) => {
-    btn.addEventListener('click', () => {
-      mediaBtn.forEach((element, index) => {
-        element.classList.remove('active-media');
-        subMediaBox[index].classList.remove('active-block');
-      });
-      btn.classList.add('active-media');
-      subMediaBox[i].classList.add('active-block');
-    });
-  });
-};
-changeMediaType();
-
 getAPI.getInfoDetail(needed_id, '/images').then((media_info) => {
   embedPerform(media_info.posters, '.posters', 2, 3, 5);
   embedPerform(media_info.backdrops, '.backdrops', 1, 2, 2);

@@ -101,11 +101,26 @@ function show_banner(movies) {
       300: {
         items: 2,
       },
-      500: {
-        items: 2,
+      450: {
+        items: 3,
       },
-      620: {
-        items: 2,
+      500: {
+        items: 4,
+      },
+      700: {
+        items: 5,
+      },
+      900: {
+        items: 6,
+      },
+      1000: {
+        items: 7,
+      },
+      1100: {
+        items: 8,
+      },
+      1200: {
+        items: 9,
       },
     },
   });
@@ -114,19 +129,37 @@ function show_banner(movies) {
 function show_movie_slider(movies) {
   const needed_movies = document.querySelector('.main-movies');
   movies.forEach((movie, index) => {
+    let color =
+      movie.vote_average >= 8
+        ? 'rgb(76 199 144)'
+        : movie.vote_average >= 6
+        ? 'rgb(253 255 0)'
+        : movie.vote_average >= 4
+        ? 'orange'
+        : 'red';
     needed_movies.innerHTML += `
         <div class="movie movie-${index}">
             <div class="movie-main">
                 <h2 class="movie-title">${movie.original_title}</h2>
                 <div class="movie-year-vote">
+                    <div class="vote-box">
+                      <svg viewBox="0 0 36 36" class="circular-chart" >
+                        <path class="circle" style="stroke: ${color}"
+                        stroke-dasharray="${Math.round(movie.vote_average * 10)}, 100"
+                        d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                      </svg>
+                      <p>${movie.vote_average}</p>
+                    </div>
                     <span class="movie-year">${movie.release_date}</span>
-                    <span class="movie-vote">${movie.vote_average}</span>
                 </div>
                 <div class="movie-detail">
                     <a href="detailMovie.html?id=${movie.id}">
                         <button class="btn">
-                            <span class="movie-watch"><i class="fa-solid fa-caret-right"></i></span>
-                            <span>Watch Now</span>
+                            <i class="fa-solid fa-caret-right"></i>
+                            <span>WATCH NOW</span>
                         </button>
                     </a>
                 </div>

@@ -56,6 +56,14 @@ function show_movies(movies_info, userInfo) {
   document.querySelector('.movies-total').innerHTML = `Total: ${movies_info.total_results} movies`;
   movies.forEach((movie) => {
     checkWishtList = userInfo.wishList && userInfo.wishList.includes(String(movie.id));
+    let color =
+      movie.vote_average >= 8
+        ? 'rgb(76 199 144)'
+        : movie.vote_average >= 6
+        ? 'rgb(253 255 0)'
+        : movie.vote_average >= 4
+        ? 'orange'
+        : 'red';
     all_cards.innerHTML += `
       <div class="each-col col-6 col-md-4 col-xl-3">
           <div class="body-card" style="background-image: url(${
@@ -71,8 +79,8 @@ function show_movies(movies_info, userInfo) {
             <div class="card-shadow"></div>
             <div class="card-content">
               <div class="vote-box">
-                <svg viewBox="0 0 36 36" class="circular-chart" >
-                  <path class="circle"
+                <svg viewBox="0 0 36 36" class="circular-chart">
+                  <path class="circle" style="stroke: ${color}"
                   stroke-dasharray="${Math.round(movie.vote_average * 10)}, 100"
                   d="M18 2.0845
                       a 15.9155 15.9155 0 0 1 0 31.831

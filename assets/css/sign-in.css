@@ -361,6 +361,7 @@ html {
     right: 0px;
     transform: none;
     min-width: 300px;
+    padding: 80px 50px
   }
   .sign-title {
     margin-top: 50px;
