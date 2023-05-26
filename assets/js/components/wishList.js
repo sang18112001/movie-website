@@ -64,22 +64,12 @@ const showWishListMovie = (posterPaths, wishList, dashboardBox) => {
       wishListHandler(newWishList);
       getAPI.getInfoUser(uid).then((userInfo) => {
         userInfo.wishList = newWishList;
-        fetch(`https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${uid}.json`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userInfo),
-        });
+        getAPI.changeUserInfo(userInfo);
       });
     });
   });
 };
 
 const wishListDashboardPerform = () => {
-  fetch(`https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${uid}.json`)
-    .then((res) => res.json())
-    .then((movie) => {
-      wishListHandler(movie.wishList);
-    });
+  getAPI.getInfoUser(uid).then((userInfo) => wishListHandler(userInfo.wishList));
 };

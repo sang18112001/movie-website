@@ -34,14 +34,7 @@ const addWishListHandler = (wishListBtns, userInfo) => {
         wishListBtn.classList.contains('active-wishList')
           ? (userInfo.wishList = userInfo.wishList ? [...userInfo.wishList, wishListBtn.id] : [wishListBtn.id])
           : (userInfo.wishList = userInfo.wishList.filter((item) => item !== wishListBtn.id));
-
-        fetch(`https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${uid}.json`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userInfo),
-        });
+        getAPI.changeUserInfo(userInfo);
       } else {
         alert('You have to sign in');
       }

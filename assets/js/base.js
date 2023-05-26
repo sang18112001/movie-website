@@ -15,7 +15,6 @@ function scrollHeader() {
 // Search function for header
 (search_box = () =>  {
   const search = document.querySelector('.header-search input');
-  const btnSearch = document.querySelector('.header-search button');
   search.addEventListener('input', (element) => {
     element.preventDefault();
     const box = document.querySelector('.header-search-items');
@@ -52,7 +51,6 @@ const showSearch = (search_movie) => {
 
 // Modify account
 getAPI.getInfoUser(uid).then((data) => {
-  console.log(data);
   const log_account = document.querySelector('.account-log');
   const logged_account = document.querySelector('.account-logged');
   if (uid === '') {

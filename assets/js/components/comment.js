@@ -53,7 +53,6 @@ const updateCmt = (data_comments, data_accounts) => {
     allComments = data_comments[needed_id].comment;
     allComments.forEach((comment) => {
       const userAvatar = Object.keys(data_accounts).includes(comment.userId) && data_accounts[comment.userId].avatar;
-      console.log(userAvatar);
       addCmt(comment.author, comment.content, userAvatar, comment.updated_at);
     });
   } else {

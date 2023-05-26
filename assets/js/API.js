@@ -21,16 +21,16 @@ const getAPI = {
   getInfoDetail: async (id, typeDetail = '') =>
     (await fetch(`${API_URL}/movie/${id}${typeDetail}?api_key=${API_KEY}`)).json(),
   getSearchMovies: async (querySearch) =>
-    (
-      await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=${querySearch}`,
-      )
-    ).json(),
+    (await fetch(`${API_URL}/search/movie?api_key=${API_KEY}&query=${querySearch}`)).json(),
   getMyGenres: async () => (await fetch(`https://new-api-three.vercel.app/genres`)).json(),
-  getInfoUser: async (idUser) =>
-    (
-      await fetch(`https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${idUser}.json`)
-    ).json(),
-  getInfoComments: async () =>
-    (await fetch(`https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/comments.json`)).json(),
+  getInfoUser: async (idUser) => (await fetch(`${personalAPI}/user/${idUser}.json`)).json(),
+  getInfoComments: async () => (await fetch(`${personalAPI}/comments.json`)).json(),
+  changeUserInfo: async (userInfo) =>
+    await fetch(`${personalAPI}/user/${uid}.json`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInfo),
+    }),
 };

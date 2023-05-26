@@ -43,24 +43,26 @@ const accountDashboardPerform = () => {
       </div>
       <button class="btn dashboard-submit">Save</button>
      `;
-  const avtBox = document.querySelector('.dashboard-box-main .account_avt');
-  const avtarBtn = document.querySelector('input[name="avatar"]');
-  const nameBtn = document.querySelector('input[name="username"]');
-  const passBtn = document.querySelector('input[name="password"]');
-  const oldPass = document.querySelector('input[name="old_password"]');
-  const confirmPass = document.querySelector('input[name="confirm_password"]');
-  const submitBtn = document.querySelector('.dashboard-submit');
-  const wrongBox = document.querySelectorAll('.checkPassword');
+  const accountObj = {
+    avtBox: document.querySelector('.dashboard-box-main .account_avt'),
+    avtarBtn: document.querySelector('input[name="avatar"]'),
+    nameBtn: document.querySelector('input[name="username"]'),
+    passBtn: document.querySelector('input[name="password"]'),
+    oldPass: document.querySelector('input[name="old_password"]'),
+    confirmPass: document.querySelector('input[name="confirm_password"]'),
+    submitBtn: document.querySelector('.dashboard-submit'),
+    wrongBox: document.querySelectorAll('.checkPassword'),
+  };
 
   getAPI.getInfoUser(uid).then((userInfo) => {
-    submitBtn.disabled = userInfo.password != oldPass.value;
-    handleOldPassword(oldPass, wrongBox, userInfo, submitBtn);
-    handleConfirmPassword(confirmPass, wrongBox, passBtn);
-    handleSubmit(avtarBtn, nameBtn, passBtn, avtBox, submitBtn, userInfo);
+    accountObj.submitBtn.disabled = userInfo.password != accountObj.oldPass.value;
+    handleOldPassword(accountObj, userInfo);
+    handleConfirmPassword(accountObj);
+    handleSubmit(accountObj, userInfo);
   });
 };
 
-const handleOldPassword = (oldPass, wrongBox, userInfo, submitBtn) => {
+const handleOldPassword = ({ oldPass, wrongBox, submitBtn }, userInfo) => {
   oldPass.addEventListener('input', (e) => {
     if (e.target.value != userInfo.password) {
       wrongBox[0].classList.remove('active-hidden');
@@ -74,7 +76,7 @@ const handleOldPassword = (oldPass, wrongBox, userInfo, submitBtn) => {
   });
 };
 
-const handleConfirmPassword = (confirmPass, wrongBox, passBtn) => {
+const handleConfirmPassword = ({ confirmPass, wrongBox, passBtn }) => {
   confirmPass.addEventListener('input', (e) => {
     if (e.target.value != passBtn.value) {
       wrongBox[1].classList.remove('active-hidden');
@@ -86,7 +88,7 @@ const handleConfirmPassword = (confirmPass, wrongBox, passBtn) => {
   });
 };
 
-const handleSubmit = (avtarBtn, nameBtn, passBtn, avtBox, submitBtn, userInfo) => {
+const handleSubmit = ({ avtarBtn, nameBtn, passBtn, avtBox, submitBtn }, userInfo) => {
   let newAvatarUrl = '';
   avtarBtn.addEventListener('change', (event) => {
     const image = event.target.files[0];
@@ -99,19 +101,13 @@ const handleSubmit = (avtarBtn, nameBtn, passBtn, avtBox, submitBtn, userInfo) =
   });
   submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const newObject = {
+    const newUserInfo = {
       avatar: newAvatarUrl ? newAvatarUrl.result : userInfo.avatar,
       email: userInfo.email,
       name: nameBtn.value || userInfo.name,
       password: passBtn.value || userInfo.password,
     };
-    fetch(`https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user/${uid}.json`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newObject),
-    });
+    getAPI.changeUserInfo(newUserInfo);
     alert('Success');
     window.location.reload();
   });
