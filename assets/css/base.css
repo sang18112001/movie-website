@@ -119,9 +119,11 @@ li {
 .active-white {
   background-color: white !important;
 }
+
 .active-black {
   color: black !important;
 }
+
 .checkPassword,
 .checkEmail,
 .checkAllow {
@@ -134,9 +136,11 @@ li {
 .wrong-account {
   border: 3px solid red !important;
 }
+
 .active-wishList {
   color: var(--main-color) !important;
 }
+
 .content-title {
   font-size: 24px;
   line-height: 24px;
@@ -185,9 +189,11 @@ header {
   padding: 0px 10%;
   transition: 0.5s;
 }
+
 .body-container {
   padding: 30px 10% 0px 10%;
 }
+
 header.shadow {
   background-color: var(--bg-color);
 }
@@ -273,6 +279,7 @@ header.shadow .responsive-account {
   opacity: 0.8;
   outline: none;
   border: 1px solid #d3d3d3;
+  background-color: white;
 }
 
 .header-search i {
@@ -396,8 +403,7 @@ header.shadow .responsive-account {
 }
 
 /* Log Account  */
-.header-account.account-log {
-}
+.header-account.account-log {}
 
 .account-log-logo {
   border: 2px solid #ccc;
@@ -416,8 +422,7 @@ header.shadow .responsive-account {
 }
 
 /* Logged Account */
-.header-account.account-logged {
-}
+.header-account.account-logged {}
 
 .account-logged-logo {
   width: 30px;
@@ -465,6 +470,7 @@ header.shadow .responsive-account {
   align-items: center;
   gap: 15px;
 }
+
 .logged-box .logged_dashboard {
   color: black;
   display: flex;
@@ -472,6 +478,7 @@ header.shadow .responsive-account {
   gap: 20px;
   font-size: 20px;
 }
+
 .logged-box .logged_dashboard a {
   color: inherit;
   cursor: pointer;
@@ -485,9 +492,11 @@ header.shadow .responsive-account {
   color: white;
   border: 1px solid var(--main-color);
 }
+
 .logged-box .logged_dashboard a:hover {
   color: var(--main-color);
 }
+
 .icon-search {
   width: 30px;
   height: 30px;
@@ -504,9 +513,11 @@ header.shadow .responsive-account {
   .header-navbar li {
     margin-right: 0px !important;
   }
+
   .header-search-items .item img {
     width: 50px;
   }
+
   .header-search-items .item-title {
     font-size: 12px;
   }
@@ -556,6 +567,10 @@ header.shadow .responsive-account {
     width: 30px !important;
   }
 
+  .active-header-menu .account-icon {
+    color: black;
+  }
+
   .active-header-menu .header-menu {
     top: 0px !important;
     background-color: white;
@@ -581,6 +596,10 @@ header.shadow .responsive-account {
   }
 
   .active-header-search .header-menu {
+    display: none;
+  }
+
+  .active-header-search .web-logo {
     display: none;
   }
 
@@ -652,6 +671,7 @@ header.shadow .responsive-account {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
   .active-header-search .web-logo {
     display: none;
   }
@@ -683,12 +703,15 @@ header.shadow .responsive-account {
   .body-container {
     padding: 30px 5% !important;
   }
+
   #web_body_dashboard {
     padding: 0px 5% 0px 5% !important;
   }
+
   .header-search-items .item img {
     width: 50px;
   }
+
   .header-search-items .item-title {
     font-size: 12px;
   }
@@ -764,8 +787,7 @@ header.shadow .responsive-account {
 }
 
 /* Footer */
-#web_footer {
-}
+#web_footer {}
 
 .footer-icon {
   background-color: var(--shadow-color);
