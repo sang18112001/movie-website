@@ -2,9 +2,8 @@ function toast() {
   const main = document.getElementById('toast');
   // Auto remove toast
   setTimeout(function () {
-    //  main.removeChild(toast);
     main.style.display = 'none';
-  }, 2000);
+  }, 3000);
   main.innerHTML = `
          <div class="toast">
             <div class="toast__icon" style="font-size: 24px; padding: 0px 16px">
@@ -18,3 +17,5 @@ function toast() {
    `;
   main.style.display = 'block';
 }
+
+export default toast

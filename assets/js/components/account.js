@@ -1,3 +1,4 @@
+import {getAPI, uid} from '../API.js'
 const accountDashboardPerform = () => {
   const dashboardBox = document.querySelector('.dashboard-box');
   dashboardBox.classList.remove('wishListClass');
@@ -112,3 +113,6 @@ const handleSubmit = ({ avtarBtn, nameBtn, passBtn, avtBox, submitBtn }, userInf
     window.location.reload();
   });
 };
+
+
+export default accountDashboardPerform

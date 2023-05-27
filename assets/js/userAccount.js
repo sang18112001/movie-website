@@ -1,4 +1,6 @@
 // Get current page
+import {getAPI} from './API.js';
+import toast from './components/toastMessage.js';
 const currentPage = localStorage.getItem('currentPage');
 // Transission sign in and sign up
 const signInBox = document.querySelector('.sign-in-body');
@@ -35,53 +37,39 @@ function signInAccount() {
     event.preventDefault();
     const formData = new FormData(signInBox);
     const your_account = Object.fromEntries(formData);
-    async function modifyAPI() {
-      const res = await fetch('https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user.json');
-      const data = await res.json();
-      const keysArr = Object.keys(data);
-      const valuesArr = Object.values(data);
-      let check = false;
-      for (i = 0; i < valuesArr.length; i++) {
-        if (valuesArr[i].email == your_account.email && valuesArr[i].password == your_account.password) {
-          console.log(valuesArr[i].email);
-          check = true;
-          document.querySelector('.sign-in-wrong-container').classList.add('active-hidden');
-          localStorage.setItem('signAccount', JSON.stringify({ uid: keysArr[i] }));
-          window.location.assign(currentPage);
-          localStorage.setItem('currentPage', '');
-          break;
-        }
-      }
-      if (check === false) {
-        console.log('sai pass')
-        console.log(document.querySelector('.sign-in-wrong-container'))
+    getAPI.getInfoUser('').then((userInfo) => {
+      const listUid = Object.keys(userInfo);
+      const listUserInfo = Object.values(userInfo);
+      const index = listUserInfo.findIndex(
+        (value) => value.email == your_account.email && value.password == your_account.password,
+      );
+      if (index !== -1) {
+        document.querySelector('.sign-in-wrong-container').classList.add('active-hidden');
+        localStorage.setItem('signAccount', JSON.stringify({ uid: listUid[index] }));
+        window.location.assign(currentPage);
+        localStorage.setItem('currentPage', '');
+      } else {
         document.querySelector('.sign-in-wrong-container').classList.remove('active-hidden');
       }
-    }
-    modifyAPI();
+    });
   });
 }
 
 signInAccount();
-async function signUpAccountOther() {
-  const response = await fetch(
-    'https://fir-tutorial-32b97-default-rtdb.asia-southeast1.firebasedatabase.app/user.json',
-  );
-  const usersList = await response.json();
-  const infosList = Object.values(usersList);
+
+getAPI.getInfoUser('').then((userInfo)=> {
+  const infosList = Object.values(userInfo);
   const emailsList = infosList.map((info) => info.email);
   const submitBtn = document.querySelector('.sign-up-body button');
   emailHandle(submitBtn, emailsList);
   passwordHandle(submitBtn);
   avatarHandle();
   submitHandle(submitBtn, emailsList);
-}
-signUpAccountOther();
+})
 
 const submitHandle = (submitBtn, emailsList) => {
   const licenceInput = document.querySelector('.licence input');
   const licenceWrong = document.querySelector('.checkAllow');
-
   submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     if (licenceInput.checked) {
@@ -163,4 +151,3 @@ const avatarHandle = () => {
     });
   });
 };
-

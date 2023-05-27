@@ -1,11 +1,11 @@
+import { IMG_PATH, getAPI, uid } from './API.js';
 if (!localStorage.getItem('signAccount')) {
   localStorage.setItem('signAccount', JSON.stringify({ uid: '' }));
 }
-const uid = JSON.parse(localStorage.getItem('signAccount')).uid;
 // Save current link
 !uid && localStorage.setItem('currentPage', String(window.location.href));
 // Header scroll
-function scrollHeader() {
+export function scrollHeader() {
   let header = document.querySelector('header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('shadow', window.scrollY > 0);
@@ -13,7 +13,7 @@ function scrollHeader() {
 }
 
 // Search function for header
-(search_box = () =>  {
+const search_box = () => {
   const search = document.querySelector('.header-search input');
   search.addEventListener('input', (element) => {
     element.preventDefault();
@@ -27,8 +27,7 @@ function scrollHeader() {
     search.value === '' ? box.classList.add('active-hidden') : box.classList.remove('active-hidden');
     getAPI.getSearchMovies(search.value).then((data) => showSearch(data));
   });
-})();
-
+};
 const showSearch = (search_movie) => {
   const api_movies = search_movie.results;
   const list_movies = document.querySelector('.header-search-items');
@@ -46,8 +45,9 @@ const showSearch = (search_movie) => {
               </a>
           </li>
       `;
-      });
-}
+  });
+};
+search_box();
 
 // Modify account
 getAPI.getInfoUser(uid).then((data) => {

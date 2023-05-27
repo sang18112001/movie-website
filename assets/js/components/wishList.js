@@ -1,3 +1,5 @@
+import { IMG_PATH, getAPI, uid } from "../API.js";
+
 const wishListHandler = (wishList) => {
   const dashboardBox = document.querySelector('.dashboard-box');
   dashboardBox.classList.add('wishListClass');
@@ -39,7 +41,6 @@ const wishListHandler = (wishList) => {
 
 const showWishListMovie = (posterPaths, wishList, dashboardBox) => {
   let innerWishList = '';
-
   for (const item of posterPaths) {
     innerWishList += `<div class="wishList-item col-4 col-md-4 col-xl-3">
             <div class="wishList-sub-item">
@@ -51,7 +52,7 @@ const showWishListMovie = (posterPaths, wishList, dashboardBox) => {
             </div>`;
   }
   dashboardBox.innerHTML = `
-          <h4 class="wishList-header"><span>Your favourite</span></h4>
+          <h4 class="wishList-header"><span>My favourite</span></h4>
           <div class="wishList-box container">
             <div class="row">${innerWishList}</div>
           </div>
@@ -73,3 +74,5 @@ const showWishListMovie = (posterPaths, wishList, dashboardBox) => {
 const wishListDashboardPerform = () => {
   getAPI.getInfoUser(uid).then((userInfo) => wishListHandler(userInfo.wishList));
 };
+
+export default wishListDashboardPerform

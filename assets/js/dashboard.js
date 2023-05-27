@@ -1,5 +1,9 @@
-const getQueryDashboard = new URLSearchParams(window.location.search);
-const queryDashboard = Object.fromEntries(getQueryDashboard.entries()).queryDashboard;
+import accountDashboardPerform from './components/account.js';
+import wishListDashboardPerform from './components/wishList.js';
+
+const paramsDashboard = new URLSearchParams(window.location.search);
+console.log(paramsDashboard);
+const queryDashboard = paramsDashboard.get('queryDashboard');
 const dashboardHeader = document.querySelector(`.dashboard-${queryDashboard}`);
 dashboardHeader.classList.add('active-dashboard');
 

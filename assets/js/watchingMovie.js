@@ -1,3 +1,6 @@
+import { IMG_PATH, getAPI } from "./API.js";
+import APIMovieUpload from "./components/comment.js";
+
 const urlParams = new URLSearchParams(window.location.search);
 const needed_id = urlParams.get('id');
 
@@ -21,7 +24,7 @@ getAPI.getInfoDetail(needed_id).then((movie_info) => {
         : `<i class="fa-regular fa-star"></i>`;
     innerStars += innerStar;
   });
-  genresList = movie_info.genres.map((genre) => `<div class="genre">${genre.name}</div>`);
+  let genresList = movie_info.genres.map((genre) => `<div class="genre">${genre.name}</div>`);
   innerGenres = genresList.join('');
   movieContainer.innerHTML = `
         <div class="content-image">
@@ -63,7 +66,7 @@ getAPI.getMovies('up_coming').then((movie_info) => {
 });
 
 const subMoviesShow = (movies, movieContainer) => {
-  for (i = 0; i < 5; i += 1) {
+  for (let i = 0; i < 5; i += 1) {
     const detailLink = `detailMovie.html?id=${movies[i].id}`;
     movieContainer.innerHTML += `
         <div class="box-content">

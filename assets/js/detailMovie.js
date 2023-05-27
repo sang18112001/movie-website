@@ -1,26 +1,28 @@
+import { IMG_PATH, getAPI, uid } from "./API.js";
+import { scrollHeader } from "./base.js";
+import APIMovieUpload from "./components/comment.js";
+
 // Body function
 const urlParams = new URLSearchParams(window.location.search);
-const needed_id = urlParams.get('id');
+const movie_id = urlParams.get('id');
 
 scrollHeader();
 // Embed information-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-getAPI.getInfoDetail(needed_id, '').then((movie_info) => {
-  getAPI.getInfoDetail(needed_id, '/credits').then((casts_info) => {
+getAPI.getInfoDetail(movie_id, '').then((movie_info) => {
+  getAPI.getInfoDetail(movie_id, '/credits').then((casts_info) => {
     const movieContainer = document.querySelector('.movie-container');
-    const detailLink = !uid ? `sign-in.html` : `watchingMovie.html?id=${needed_id}`;
-    let castInner = '';
+    let castInner = casts_info.cast.slice(0, 10).map(
+      (cast) => `
+          <div class="cast">
+              <div class="cast-avt" style="background-image: url(${IMG_PATH + cast.profile_path})"></div>
+              <div class="cast-name">
+                  <p class="original-name">${cast.original_name}</p>
+              </div>
+          </div>
+    `,
+    ).join('');
     let genreInner = movie_info.genres.map((genre) => `<p>${genre.name}</p>`).join('');
-    casts_info.cast.slice(0, 10).forEach((cast) => {
-      castInner += `
-            <div class="cast">
-                <div class="cast-avt" style="background-image: url(${IMG_PATH + cast.profile_path})"></div>
-                <div class="cast-name">
-                    <p class="original-name">${cast.original_name}</p>
-                </div>
-            </div>
-        `;
-    });
-    const votepercent = Math.round(movie_info.vote_average * 10);
+    const votePercent = Math.round(movie_info.vote_average * 10);
     movieContainer.innerHTML = `
         <div class="movie-image" style="background-image: url(${IMG_PATH + movie_info.backdrop_path})"></div>
         <div class="movie-content">
@@ -41,7 +43,7 @@ getAPI.getInfoDetail(needed_id, '').then((movie_info) => {
                     <div class="vote-box">
                         <svg viewBox="0 0 36 36" class="circular-chart">
                             <path class="circle"
-                            stroke-dasharray="${votepercent}, 100"
+                            stroke-dasharray="${votePercent}, 100"
                             d="M18 2.0845
                                 a 15.9155 15.9155 0 0 1 0 31.831
                                 a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -57,7 +59,7 @@ getAPI.getInfoDetail(needed_id, '').then((movie_info) => {
                         ${castInner}
                     </div>
                 </div>
-                <a href="${detailLink}">
+                <a href="${!uid ? `sign-in.html` : `watchingMovie.html?id=${movie_id}`}">
                     <button class="play-btn">
                         <i class="fa-solid fa-play"></i>
                         PLAY
@@ -71,7 +73,7 @@ getAPI.getInfoDetail(needed_id, '').then((movie_info) => {
 // Main information
 
 // Media
-getAPI.getInfoDetail(needed_id, '/images').then((media_info) => {
+getAPI.getInfoDetail(movie_id, '/images').then((media_info) => {
   embedPerform(media_info.posters, '.posters', 2, 3, 5);
   embedPerform(media_info.backdrops, '.backdrops', 1, 2, 2);
 });
@@ -79,7 +81,7 @@ getAPI.getInfoDetail(needed_id, '/images').then((media_info) => {
 function embedPerform(medias, media_class, items_0, items_1, items_2) {
   const numMedias = medias.length < 20 ? medias.length : 20;
   const mediasOwl = document.querySelector(media_class);
-  for (i = 0; i < numMedias; i++) {
+  for (let i = 0; i < numMedias; i++) {
     mediasOwl.innerHTML += `<img src="${IMG_PATH + medias[i].file_path}">`;
   }
   $(mediasOwl).owlCarousel({
@@ -99,10 +101,10 @@ function embedPerform(medias, media_class, items_0, items_1, items_2) {
 }
 
 // Comments
-APIMovieUpload(needed_id);
+APIMovieUpload(movie_id);
 
 // Recommendations
-getAPI.getInfoDetail(needed_id, '/recommendations').then((recommend_info) => {
+getAPI.getInfoDetail(movie_id, '/recommendations').then((recommend_info) => {
   getAPI.getMovies().then((recommendRandom_info) => {
     const mainRecommend = recommend_info.results;
     const secondRecommend = recommendRandom_info.results;
@@ -115,7 +117,7 @@ getAPI.getInfoDetail(needed_id, '/recommendations').then((recommend_info) => {
       numRecommends = secondRecommend.length;
       recommender = secondRecommend;
     }
-    for (i = 0; i < numRecommends; i += 1) {
+    for (let i = 0; i < numRecommends; i += 1) {
       if (recommender[i].backdrop_path === null) {
         continue;
       }

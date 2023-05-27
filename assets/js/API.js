@@ -1,3 +1,5 @@
+const uid = JSON.parse(localStorage.getItem('signAccount')).uid;
+
 const IMG_PATH = `https://image.tmdb.org/t/p/w1280`;
 const API_URL = `https://api.themoviedb.org/3`;
 const API_KEY = `3fd2be6f0c70a2a598f084ddfb75487c`;
@@ -34,3 +36,5 @@ const getAPI = {
       body: JSON.stringify(userInfo),
     }),
 };
+
+export {getAPI, IMG_PATH, uid, personalAPI}

@@ -1,3 +1,5 @@
+import { getAPI } from "../API.js";
+
 const next_page_btn = document.querySelector('.next-page');
 const prep_page_btn = document.querySelector('.prep-page');
 const first_page_btn = document.querySelector('.first-page');
@@ -12,7 +14,7 @@ const handleBtns = {
   },
 };
 // Check endable and disabled state
-const checkButton = (afterBtn, beforeBtn, total) => {
+const checkButton = (afterBtn, beforeBtn, total, currentPage) => {
   if (currentPage == 1) {
     handleBtns.disabled(afterBtn);
     handleBtns.enabled(beforeBtn);
@@ -35,30 +37,27 @@ const checkButton = (afterBtn, beforeBtn, total) => {
 const pageNumbers = (total, max, current) => {
   const half = Math.floor(max / 2);
   let to = max;
-
   if (current + half >= total) {
     to = total;
   } else if (current > half) {
     to = current + half;
   }
-
   let from = Math.max(to - max, 0);
-
   return Array.from({ length: Math.min(total, max) }, (_, i) => i + 1 + from);
 };
 
-function nextPageLink(required_page) {
+function moveToRequiredPage(required_page) {
   const newURL = new URL(window.location.href);
   newURL.searchParams.set('page', required_page);
   window.location.assign(newURL);
 }
 
 // Create button
-function numOfPages(total) {
+function numOfPages(total, currentPage) {
   const num_buttons = document.querySelector('.number-pages');
   const pageList = pageNumbers(total, 5, currentPage);
   pageList.forEach((page) => {
-    button_number = `<button id = "${page}" class="show_button num-page ${
+    let button_number = `<button id = "${page}" class="show_button num-page ${
       page == currentPage ? 'active_button' : ''
     }">${page}</button>`;
     num_buttons.innerHTML += button_number;
@@ -67,36 +66,33 @@ function numOfPages(total) {
   all_buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
       event.preventDefault();
-      required_page = Number(button.id);
-      nextPageLink(required_page);
+      let required_page = Number(button.id);
+      moveToRequiredPage(required_page);
     });
   });
 }
 
 // Change page: Next page and Prev page
-function changePage(total) {
-  checkButton(prep_page_btn, next_page_btn, total);
-  prep_page_btn.addEventListener('click', () => {
-    nextPageLink(currentPage - 1);
-  });
-  next_page_btn.addEventListener('click', () => {
-    nextPageLink(currentPage + 1);
-  });
+function preNextPage(total, currentPage) {
+  checkButton(prep_page_btn, next_page_btn, total, currentPage);
+  prep_page_btn.addEventListener('click', () => moveToRequiredPage(currentPage - 1));
+  next_page_btn.addEventListener('click', () => moveToRequiredPage(currentPage + 1));
 }
 
 // Change page: first page and last page
-function firstLastPage(total) {
-  checkButton(first_page_btn, last_page_btn, total);
-  first_page_btn.addEventListener('click', () => {
-    nextPageLink(1);
-  });
-  last_page_btn.addEventListener('click', () => {
-    nextPageLink(total);
+function firstLastPage(total, currentPage) {
+  checkButton(first_page_btn, last_page_btn, total, currentPage);
+  first_page_btn.addEventListener('click', () => moveToRequiredPage(1));
+  last_page_btn.addEventListener('click', () => moveToRequiredPage(total));
+}
+
+const paginationFunction = (filterObj, type, currentPage) => {
+  getAPI.getMovies(type, currentPage, filterObj.genres, filterObj.languages, filterObj.years).then((data) => {
+    const totalPages = data.total_pages;
+    numOfPages(totalPages, currentPage);
+    preNextPage(totalPages, currentPage);
+    firstLastPage(totalPages, currentPage);
   });
 }
-getAPI.getMovies(type, currentPage, filterObj.genres, filterObj.languages, filterObj.years).then((data) => {
-  const totalPages = data.total_pages;
-  numOfPages(totalPages);
-  changePage(totalPages);
-  firstLastPage(totalPages);
-});
+
+export default paginationFunction

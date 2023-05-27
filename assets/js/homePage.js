@@ -1,21 +1,18 @@
+import { getAPI, IMG_PATH } from "./API.js"; 
+import { scrollHeader } from "./base.js";
 // Header scroll
 scrollHeader();
 
 /**
 ==============================================================Body function====================================================================
  */
-// Home slider
-$('.owl-carousel.home-slider').owlCarousel({
-  margin: 15,
-  items: 1,
-});
 
 // Get components
 getAPI.getMovies('top_rated').then((data) => {
   const movies = data.results;
   const all_movies = document.querySelector(`.top-rated-body`);
-  for (i = 0; i < 8; i++) {
-    const movieElement = `
+  for (let i = 0; i < 8; i++) {
+    all_movies.innerHTML += `
             <div class="col-6 col-lg-3 col-md-4 test_rated">
                 <div class="top-rated-main">
                     <div class="top-rated_box">
@@ -29,49 +26,42 @@ getAPI.getMovies('top_rated').then((data) => {
                 </div>
             </div>
         `;
-    all_movies.innerHTML += movieElement;
   }
 });
 
 getAPI.getMovies('now_playing').then((data) => {
   const movies = data.results;
   const all_movies = document.querySelector(`.box-nowPlaying`);
-  for (i = 0; i < 12; i++) {
-    const title = movies[i].original_title;
-    const movieElement = `
+  for (let i = 0; i < 12; i++) {
+    all_movies.innerHTML += `
             <a href="detailMovie.html?id=${movies[i].id}">
                 <div class="box" style="background-image: url('${IMG_PATH + movies[i].backdrop_path}')">
-                  <div class="type-movie-title">${title}</div>
+                  <div class="type-movie-title">${movies[i].original_title}</div>
                 </div>
             </a>
         `;
-    all_movies.innerHTML += movieElement;
   }
 });
 
 getAPI.getMovies('up_coming').then((data) => {
   const movies = data.results;
   const all_movies = document.querySelector(`.box-upComing`);
-  for (i = 0; i < 12; i++) {
-    const title = movies[i].original_title;
-    const movieElement = `
+  for (let i = 0; i < 12; i++) {
+    all_movies.innerHTML += `
             <a href="detailMovie.html?id=${movies[i].id}">
                 <div class="box" style="background-image: url('${IMG_PATH + movies[i].backdrop_path}')">
-                <div class="type-movie-title">${title}</div>
+                <div class="type-movie-title">${movies[i].original_title}</div>
                 </div>
             </a>
         `;
-    all_movies.innerHTML += movieElement;
   }
 });
 
-getAPI.getMyGenres().then((data) => {
-  const genres_info = data;
+getAPI.getMyGenres().then((genres_info) => {
   const genresContainer = document.querySelector('.genres-type .row');
   genres_info.forEach((genre) => {
-    const newLink = `typeOfMovies.html?type=popularity&genres=${genre.id}`;
     genresContainer.innerHTML += `
-            <a href=${newLink}  class="col-6 col-md-4 col-lg-3 col-xl-2">
+            <a href="typeOfMovies.html?type=popularity&genres=${genre.id}"  class="col-6 col-md-4 col-lg-3 col-xl-2">
               <div class="genre-box">
                   <img src="${genre.genre_path}" alt="">
                   <p>${genre.genre_name}</p>
@@ -173,7 +163,6 @@ function show_movie_slider(movies) {
   all_image_banner[0].classList.remove('opacity-image');
   const nth_movies = document.querySelectorAll(`.movie`);
   nth_movies[0].classList.add('active');
-
   all_image_banner.forEach((img, index) => {
     img.addEventListener('click', () => {
       background_movies.src = `${IMG_PATH + movies[index].backdrop_path}`;

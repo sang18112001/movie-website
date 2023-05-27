@@ -1,3 +1,7 @@
+import { IMG_PATH, getAPI, uid} from "./API.js";
+import filterFunction from "./components/filter.js"
+import paginationFunction from "./components/pagination.js";
+import addWishListHandler from "./components/wishListType.js";
 const urlParams = new URLSearchParams(window.location.search);
 const getQuery = Object.fromEntries(urlParams.entries());
 
@@ -25,30 +29,13 @@ navbar_list.forEach((item) => {
   type === newNavbar && item.classList.add('active-menu');
 });
 
-// Add wishlist and remove
-const addWishListHandler = (wishListBtns, userInfo) => {
-  wishListBtns.forEach((wishListBtn) => {
-    wishListBtn.addEventListener('click', () => {
-      if (uid) {
-        wishListBtn.classList.toggle('active-wishList');
-        wishListBtn.classList.contains('active-wishList')
-          ? (userInfo.wishList = userInfo.wishList ? [...userInfo.wishList, wishListBtn.id] : [wishListBtn.id])
-          : (userInfo.wishList = userInfo.wishList.filter((item) => item !== wishListBtn.id));
-        getAPI.changeUserInfo(userInfo);
-      } else {
-        alert('You have to sign in');
-      }
-    });
-  });
-};
-
 // Show movies
 function show_movies(movies_info, userInfo) {
   const movies = movies_info.results;
   const all_cards = document.querySelector('.body-cards');
   document.querySelector('.movies-total').innerHTML = `Total: ${movies_info.total_results} movies`;
   movies.forEach((movie) => {
-    checkWishtList = userInfo.wishList && userInfo.wishList.includes(String(movie.id));
+    let checkWishtList = userInfo.wishList && userInfo.wishList.includes(String(movie.id));
     let color =
       movie.vote_average >= 8
         ? 'rgb(76 199 144)'
@@ -95,15 +82,13 @@ function show_movies(movies_info, userInfo) {
   const wishListBtns = document.querySelectorAll('.addWishList');
   addWishListHandler(wishListBtns, userInfo);
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  window.onload = () => {
-    loaderDiv.classList.remove('hidden');
-    getAPI.getMovies(type, currentPage, filterObj.genres, filterObj.languages, filterObj.years).then((movies) => {
-      getAPI.getInfoUser(uid).then((userInfo) => {
-        show_movies(movies, userInfo);
-      });
-    });
+loaderDiv.classList.remove('hidden');
+getAPI.getMovies(type, currentPage, filterObj.genres, filterObj.languages, filterObj.years).then((movies) => {
+  getAPI.getInfoUser(uid).then((userInfo) => {
+    show_movies(movies, userInfo);
     loaderDiv.classList.add('hidden');
-  };
+  });
 });
+
+filterFunction(filterObj, getQuery, type)
+paginationFunction(filterObj, type, currentPage)

@@ -1,17 +1,15 @@
-function filterChangeSelection() {
+function filterChangeSelection(filterObj) {
   const filterOptions = document.querySelectorAll('option');
   Array.from(filterOptions).forEach((option) => {
     if (option.value != 'default') {
       const typeFilter = option.value.split('-')[0];
       const idFilter = option.value.split('-')[1];
-      if (filterObj[typeFilter] === idFilter) {
-        option.setAttribute('selected', true);
-      }
+      filterObj[typeFilter] === idFilter && option.setAttribute('selected', true);
     }
   });
 }
 
-function filterPerforming() {
+function filterPerforming(filterObj, getQuery, type) {
   const filterOptions = document.querySelectorAll('select');
   const filterPerform = document.querySelector('.filter-perform');
   const filterRemove = document.querySelector('.filter-remove');
@@ -36,14 +34,12 @@ function filterPerforming() {
         `${filterLink}&genres=${newFilterObj.genres}&languages=${newFilterObj.languages}&years=${newFilterObj.years}&page=1`,
       );
   });
-  filterRemove.addEventListener('click', () => {
-    window.location.assign(filterLink);
-  });
+  filterRemove.addEventListener('click', () => window.location.assign(filterLink));
 }
 
-function filterFunction() {
-  filterChangeSelection();
-  filterPerforming();
+function filterFunction(filterObj, getQuery, type) {
+  filterChangeSelection(filterObj);
+  filterPerforming(filterObj, getQuery, type);
 }
 
-filterFunction();
+export default filterFunction
