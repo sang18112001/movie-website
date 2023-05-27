@@ -1,7 +1,5 @@
 import { IMG_PATH, getAPI, uid } from './API.js';
-if (!localStorage.getItem('signAccount')) {
-  localStorage.setItem('signAccount', JSON.stringify({ uid: '' }));
-}
+
 // Save current link
 !uid && localStorage.setItem('currentPage', String(window.location.href));
 // Header scroll

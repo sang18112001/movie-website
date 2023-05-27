@@ -1,3 +1,6 @@
+if (!localStorage.getItem('signAccount')) {
+  localStorage.setItem('signAccount', JSON.stringify({ uid: '' }));
+}
 const uid = JSON.parse(localStorage.getItem('signAccount')).uid;
 
 const IMG_PATH = `https://image.tmdb.org/t/p/w1280`;
