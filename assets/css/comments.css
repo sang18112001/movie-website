@@ -1,0 +1,282 @@
+/* Comment */
+.movie-comments {
+  margin-top: 20px;
+}
+
+.comment-main {
+  padding: 20px 0px;
+}
+
+.comment-box {
+  overflow-y: auto;
+  max-height: 800px;
+}
+
+.comment-box::-webkit-scrollbar {
+  width: 5px;
+}
+
+.comment-box::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+.comment-box::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 10px;
+}
+
+.comment-box::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-personal {
+  margin-bottom: 30px;
+}
+
+.comment {
+  justify-content: space-between;
+  align-items: start;
+  position: relative;
+}
+
+.comment-info {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.comment img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.comment-author {
+  font-size: 21px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 5px;
+}
+
+.comment-identity {
+  font-size: 14px;
+  padding: 5px 10px;
+  background-color: #4cc790;
+  border-radius: 5px;
+}
+
+.comment-time {
+  font-size: 13px;
+}
+
+.comment-text {
+  font-size: 16px;
+}
+
+.comment-features {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.comment-features > div {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.comment-features span {
+  font-size: 16px;
+}
+
+.comment-features .comment-delete {
+  color: #ed6368;
+}
+
+.comment-features .comment-delete:hover {
+  color: #ffb8bb;
+}
+
+.comment-features .comment-edit {
+  color: #5357b6;
+}
+
+.comment-features .comment-edit:hover {
+  color: #c5c6ef;
+}
+
+/* Comment of me */
+.comment-me {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.comment-me img {
+  width: 50px;
+  display: block;
+  border-radius: 50%;
+}
+
+.comment-me .text {
+  flex: 1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.comment-me .text input {
+  height: 50px;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 20px;
+  font-size: 15px;
+}
+
+.comment-upload {
+  width: 100%;
+  background-color: #eee;
+  text-align: right;
+  padding: 5px 0px;
+}
+
+.comment-upload button {
+  background-color: var(--main-color);
+  padding: 5px 10px;
+  margin-right: 10px;
+  color: white;
+  border-radius: 5px;
+}
+
+.active-inline {
+  display: inline !important;
+}
+
+.commentEditBox {
+  padding-left: 50px;
+}
+
+.commentEditBox p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.commentContainer {
+  display: flex;
+}
+
+.commentContainer button {
+  height: 40px;
+  width: 100px;
+}
+
+.comment-input {
+  outline: none;
+  flex: 1;
+  height: 40px !important;
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 1px solid var(--light-gray);
+  border-radius: 5px;
+  resize: none;
+}
+
+
+/* Responsive */
+
+@media (max-width: 685px) {
+  .comment-author {
+    font-size: 18px;
+  }
+
+  .comment-info {
+    font-size: 10px;
+  }
+
+  .comment-text {
+    font-size: 14px;
+    text-align: justify;
+  }
+
+  .comment-me {
+    gap: 10px;
+  }
+
+  .comment-me img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .comment-me .text input {
+    height: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .comment {
+    gap: 10px;
+  }
+
+  .comment img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 500px) {
+  .comment-me input {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+
+  .comment-upload {
+    padding: 3px 0px;
+  }
+
+  .comment-upload button {
+    padding: 2px 5px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .commentContainer {
+    flex-direction: column;
+    align-items: end;
+  }
+
+  .commentContainer button {
+    float: right;
+  }
+  .comment-author {
+    gap: 10px;
+  }
+  .comment-features {
+    top: auto;
+    bottom: -20px;
+  }
+  .comment-features > div {
+    font-size: 12px;
+  }
+  .comment-identity {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+}

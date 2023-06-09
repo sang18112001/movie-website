@@ -124,6 +124,18 @@ li {
   color: black !important;
 }
 
+.slick-dots {
+  display: none!important;
+}
+
+.slick-slide {
+  margin: 0 5px;
+}
+
+/* the parent */
+.slick-list {
+  margin: 0 -5px;
+}
 .checkPassword,
 .checkEmail,
 .checkAllow {
@@ -175,7 +187,28 @@ li {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+#preloader {
+  background: black url('../image/loader.gif') no-repeat center center;
+  background-size: 5%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 100;
+}
 
+.loadingAPI {
+  background: black url('../image/loaderAPI.gif') no-repeat center center;
+  background-size: 60%;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 1000;
+}
 header {
   position: fixed;
   width: 100%;
@@ -288,6 +321,12 @@ header.shadow .responsive-account {
   top: 50%;
   transform: translateY(-50%);
   color: var(--shadow-color);
+}
+
+.existBox img {
+  width: 150px;
+  display: block;
+  margin: 0px auto;
 }
 
 .header-search-items {
@@ -599,10 +638,6 @@ header.shadow .responsive-account {
     display: none;
   }
 
-  .active-header-search .web-logo {
-    display: none;
-  }
-
   .active-header-search .header-search {
     display: block;
   }
@@ -787,8 +822,6 @@ header.shadow .responsive-account {
 }
 
 /* Footer */
-#web_footer {}
-
 .footer-icon {
   background-color: var(--shadow-color);
   width: 100%;
