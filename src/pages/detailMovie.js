@@ -1,5 +1,5 @@
 import { scrollHeader } from '../utils/utils.js';
-import APIMovieUpload from '../components/common/comment.js';
+import commentsMovies from '../components/common/comment.js';
 import recommendations from '../components/detail/recommendations.js';
 import medias from '../components/detail/medias.js';
 import mainDetail from '../components/detail/mainDetail.js';
@@ -18,7 +18,7 @@ mainDetail(movie_id)
 medias(movie_id);
 
 // Comments
-APIMovieUpload(movie_id);
+commentsMovies(movie_id);
 
 // Recommendations
 recommendations(movie_id)

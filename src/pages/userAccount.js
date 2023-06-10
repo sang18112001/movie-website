@@ -28,9 +28,5 @@ function upToIn() {
 Array.from(signIntoUp).map((btn) => btn.addEventListener('click', inToUp));
 Array.from(signUptoIn).map((btn) => btn.addEventListener('click', upToIn));
 
-// Sign in and sign up account
-// sign in
-
-
 signInAccount(signInBox, currentPage);
 signUpAccount(signUpBox, upToIn)

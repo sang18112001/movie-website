@@ -50,7 +50,6 @@ const showCommentBox = (listComments, movie_id) => {
 };
 
 const commentHandler = (data_comments, data_accounts, movie_id) => {
-  // If data_comments and data_comments[movie_id] are not null, I will get array of all comments from API and show them
   const submitForm = document.querySelector('.comment-me form');
   if (data_comments) {
     const valuesComment = Object.values(data_comments);
@@ -66,7 +65,7 @@ const commentHandler = (data_comments, data_accounts, movie_id) => {
   }
   submitForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    !uid && alert('You have to sign in first');
+    !uid && alert('You have to sign in');
     if (commentType.value) {
       const newCmt = {
         author: data_accounts[uid].name,
@@ -85,7 +84,7 @@ const commentHandler = (data_comments, data_accounts, movie_id) => {
 };
 
 // Movie API on website
-const APIMovieUpload = async (movie_id) => {
+const commentsMovies = async (movie_id) => {
   getAPI.getInfoComments(movie_id).then((data_comments) => {
     getAPI.getInfoUser('').then((data_accounts) => {
       commentHandler(data_comments, data_accounts, movie_id);
@@ -93,4 +92,4 @@ const APIMovieUpload = async (movie_id) => {
   });
 };
 
-export default APIMovieUpload;
+export default commentsMovies;

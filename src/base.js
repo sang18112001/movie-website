@@ -4,14 +4,12 @@ import footer from './components/common/footer.js';
 header();
 
 // Loaders
-var loader = document.getElementById('preloader');
 window.addEventListener('load', () => {
-  loader.style.display = 'none';
+  document.getElementById('preloader').style.display = 'none';
 });
 
 // Log out account
-const signOutBtns = document.querySelectorAll('.log-out');
-signOutBtns.forEach((signOutBtn) => {
+document.querySelectorAll('.log-out').forEach((signOutBtn) => {
   signOutBtn.addEventListener('click', () => localStorage.setItem('signAccount', JSON.stringify({ uid: '' })));
 });
 

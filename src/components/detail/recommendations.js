@@ -20,19 +20,19 @@ export default (movie_id) => {
           continue;
         }
         recommendations.innerHTML += `
-                  <div class="recommend-item">
-                      <a href="detailMovie.html?id=${recommender[i].id}">
-                          <img src="${IMG_PATH + recommender[i].backdrop_path}" alt="">
-                      </a>
-                      <div class="item-vote">
-                        <span class=" icon fa fa-star checked"></span>
-                        <span>${recommender[i].vote_average.toFixed(1)}</span>
-                      </div>
-                      <div class="item-name">
-                         ${recommender[i].original_title}
-                      </div>
-                  </div>
-              `;
+          <div class="recommend-item">
+            <a href="detailMovie.html?id=${recommender[i].id}">
+              <img src="${IMG_PATH + recommender[i].backdrop_path}" alt="">
+            </a>
+            <div class="item-vote">
+              <span class=" icon fa fa-star checked"></span>
+              <span>${recommender[i].vote_average.toFixed(1)}</span>
+            </div>
+            <div class="item-name">
+              ${recommender[i].original_title}
+            </div>
+          </div>
+        `;
       }
       $('.recommend-main').slick({
         infinite: true,

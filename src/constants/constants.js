@@ -17,4 +17,6 @@ const nonAvatar = `https://d11a6trkgmumsb.cloudfront.net/original/3X/d/8/d8b5d0a
 const nonImage =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/495px-No-Image-Placeholder.svg.png?20200912122019';
 
-export { API_URL, API_KEY, moviesType, IMG_PATH, uid, personalAPI, nonAvatar, nonImage };
+const COLOR_VOTE = (voteScore) =>
+  voteScore >= 8 ? 'rgb(76 199 144)' : voteScore >= 6 ? 'rgb(253 255 0)' : voteScore >= 4 ? 'orange' : 'red';
+export { API_URL, API_KEY, moviesType, IMG_PATH, uid, personalAPI, nonAvatar, nonImage, COLOR_VOTE };

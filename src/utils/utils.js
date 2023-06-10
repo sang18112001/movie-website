@@ -18,6 +18,7 @@ export const getTime = () => {
   return time;
 };
 
+// Underline header
 export const navBarUnderline = (type) => {
   const navbar_list = document.querySelectorAll('.header-menu a');
   navbar_list.forEach((item) => {
@@ -27,6 +28,7 @@ export const navBarUnderline = (type) => {
   });
 };
 
+// Change title
 export const changeTitleMovie = (type) => {
   const moviesTitle = document.querySelector('.movies-title span');
   const newTitle = type.split('_').join(' ').toUpperCase();

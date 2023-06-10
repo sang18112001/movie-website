@@ -187,7 +187,7 @@
 }
 
 /* Responsive */
-@media (min-width: 1000px) and (max-width: 1150px), (max-width: 700px) {
+@media (min-width: 1100px) and (max-width: 1200px), (max-width: 700px) {
     .content-main .content-name {
         font-size: 24px;
     }
@@ -226,9 +226,12 @@
         font-size: 14px;
     }
 }
-@media (max-width: 1000px) {
+@media (max-width: 1100px){
     #web-watching-body {
         flex-direction: column;
+    }    
+    iframe {
+        height: 500px;
     }
     .watching-right {
         display: flex;
@@ -247,9 +250,6 @@
 }
 
 @media (max-width: 850px) {
-    #web-watching-body {
-        padding: 50px 5%;
-    }
     .content-main {
         gap: 30px;
     }
@@ -276,6 +276,9 @@
     }
     .content-main {
         gap: 20px;
+    }
+    iframe {
+        height: 300px;
     }
 }
 
