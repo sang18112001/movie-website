@@ -11,5 +11,5 @@ homePopularity();
 homeToprated()
 homeGrid('now_playing')
 homeGrid('up_coming')
-homeGenres();
+// homeGenres();
 
